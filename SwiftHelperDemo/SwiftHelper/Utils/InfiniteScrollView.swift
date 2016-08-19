@@ -2,7 +2,7 @@
 //  LCInfiniteView.swift
 //
 //  Created by LiuChang on 16/8/13.
-//
+//  无限滚动试图
 
 import UIKit
 import Kingfisher
