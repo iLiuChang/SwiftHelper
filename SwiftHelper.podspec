@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.author             = { "liuchang" => "iosliuchang@163.com" }
   s.platform     = :ios, "8.0"
   s.source       = { :git => "https://github.com/LiuChang712/SwiftHelper.git", :tag => "0.0.1" }
-  s.source_files  = "SwiftHelper/**/*.{swift}"
+  s.source_files  = "SwiftHelper", "SwiftHelper/**/*.{swift}"
   s.framework  = "UIKit"
   s.requires_arc = true
   s.dependency "Kingfisher"
