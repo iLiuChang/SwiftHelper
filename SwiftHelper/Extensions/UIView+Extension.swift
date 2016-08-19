@@ -90,7 +90,7 @@ extension UIView {
 // layer
 extension UIView {
     
-    @IBInspectable var cornerRadius: CGFloat {
+    public var cornerRadius: CGFloat {
         get {
             return layer.cornerRadius
         }
@@ -100,7 +100,7 @@ extension UIView {
         }
     }
     
-    @IBInspectable var borderWidth: CGFloat {
+    public var borderWidth: CGFloat {
         get {
             return layer.borderWidth
         }
@@ -109,7 +109,7 @@ extension UIView {
         }
     }
     
-    @IBInspectable var borderColor: UIColor? {
+    public var borderColor: UIColor? {
         get {
             return UIColor(CGColor: layer.borderColor!)
         }
@@ -118,7 +118,7 @@ extension UIView {
         }
     }
     
-    @IBInspectable var leftBorderWidth: CGFloat {
+    public var leftBorderWidth: CGFloat {
         get {
             return 0.0   // Just to satisfy property
         }
@@ -135,7 +135,7 @@ extension UIView {
         }
     }
     
-    @IBInspectable var topBorderWidth: CGFloat {
+    public var topBorderWidth: CGFloat {
         get {
             return 0.0   // Just to satisfy property
         }
@@ -152,7 +152,7 @@ extension UIView {
         }
     }
     
-    @IBInspectable var rightBorderWidth: CGFloat {
+    public var rightBorderWidth: CGFloat {
         get {
             return 0.0   // Just to satisfy property
         }
@@ -168,7 +168,7 @@ extension UIView {
             addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[line]|", options: [], metrics: nil, views: views))
         }
     }
-    @IBInspectable var bottomBorderWidth: CGFloat {
+    public var bottomBorderWidth: CGFloat {
         get {
             return 0.0   // Just to satisfy property
         }

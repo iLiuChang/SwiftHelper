@@ -7,34 +7,34 @@
 import UIKit
 import Kingfisher
 
-class InfiniteScrollView: UIView {
+public class InfiniteScrollView: UIView {
     
     // 当页指示器颜色
-    var currentPageIndicatorTineColor: UIColor? {
+    public var currentPageIndicatorTineColor: UIColor? {
         didSet {
             iPageControl.currentPageIndicatorTintColor = currentPageIndicatorTineColor
         }
     }
     
     // 每页指示器颜色
-    var pageIndicatorTineColor: UIColor? {
+    public var pageIndicatorTineColor: UIColor? {
         didSet {
             iPageControl.pageIndicatorTintColor = pageIndicatorTineColor
         }
     }
     
     // 是否显示指示器
-    var pageControlHidden: Bool = false {
+    public var pageControlHidden: Bool = false {
         didSet {
             iPageControl.hidden = pageControlHidden
         }
     }
     
     // 页码指示器的位置
-    var pageControlEdgeInsets: UIEdgeInsets = UIEdgeInsetsZero
+    public var pageControlEdgeInsets: UIEdgeInsets = UIEdgeInsetsZero
     
-    /// 定时器时间间隔，默认2.0s
-    var timeInterval: Double = 2.0 {
+    // 定时器时间间隔，默认2.0s
+    public var timeInterval: Double = 2.0 {
         didSet {
             removeTimer()
             addTimer()
@@ -42,7 +42,7 @@ class InfiniteScrollView: UIView {
     }
     
     // 是否开启定时器，默认开启
-    var allowsTimer: Bool? {
+    public var allowsTimer: Bool? {
         didSet {
             if allowsTimer == true {
                 addTimer()
@@ -53,7 +53,7 @@ class InfiniteScrollView: UIView {
     }
     
     // 标题字体颜色
-    var titleTextColor: UIColor? {
+    public var titleTextColor: UIColor? {
         didSet {
             iCenterCell.titleTextColor = titleTextColor
             iReusableCell.titleTextColor = titleTextColor
@@ -61,7 +61,7 @@ class InfiniteScrollView: UIView {
     }
     
     // 标题背景颜色
-    var titleBackgroundColor: UIColor? {
+    public var titleBackgroundColor: UIColor? {
         didSet {
             iCenterCell.titleBackgroundColor = titleBackgroundColor
             iReusableCell.titleBackgroundColor = titleBackgroundColor
@@ -69,10 +69,10 @@ class InfiniteScrollView: UIView {
     }
     
     // 代理
-    weak var delegate: InfiniteScrollViewDelegate?
+    public weak var delegate: InfiniteScrollViewDelegate?
     
     // 数据源
-    weak var dataSource: InfiniteScrollViewDataSource? {
+    public weak var dataSource: InfiniteScrollViewDataSource? {
         didSet {
             iPageControl.numberOfPages = allCount()
             setupInfiniteCell(iCenterCell, currentIndex: 0)
@@ -112,11 +112,10 @@ class InfiniteScrollView: UIView {
         self.addSubview(iScrollView)
         iScrollView.addSubview(iCenterCell)
         self.addSubview(iPageControl)
-        
         addTimer()
     }
     
-    override func layoutSubviews() {
+    override public func layoutSubviews() {
         let W = self.frame.width
         let H = self.frame.height
         iReusableCell.frame = self.bounds
@@ -131,7 +130,7 @@ class InfiniteScrollView: UIView {
 
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -249,16 +248,16 @@ extension InfiniteScrollView: InfiniteCellDelegate {
 
 extension InfiniteScrollView: UIScrollViewDelegate {
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    public func scrollViewDidScroll(scrollView: UIScrollView) {
         let offsetX = scrollView.contentOffset.x
         changeFrame(offsetX)
     }
     
-    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+    public func scrollViewWillBeginDragging(scrollView: UIScrollView) {
         self.removeTimer()
     }
     
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    public func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if allowsTimer != false {
             self.addTimer()
         }
@@ -345,14 +344,13 @@ extension InfiniteCell {
     }
 }
 
-
-@objc protocol InfiniteScrollViewDelegate: NSObjectProtocol {
+@objc public protocol InfiniteScrollViewDelegate: NSObjectProtocol {
     
     // 选中的下标
     optional func infiniteScrollView(infiniteScrollView: InfiniteScrollView, didSelectedAtIndex index: Int)
 }
 
-@objc protocol InfiniteScrollViewDataSource: NSObjectProtocol {
+@objc public protocol InfiniteScrollViewDataSource: NSObjectProtocol {
     
     // 总数
     func numberOfItemsAtInfiniteScrollView(infiniteScrollView: InfiniteScrollView) -> Int

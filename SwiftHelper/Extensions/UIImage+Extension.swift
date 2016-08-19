@@ -14,7 +14,7 @@ extension UIImage {
      *
      * @aImage: 一般是使用CoreGraphics获取的图片
      */
-    class func fixOrientation(aImage: UIImage) -> UIImage {
+    public class func fixOrientation(aImage: UIImage) -> UIImage {
         if (aImage.imageOrientation == .Up){
             return aImage
         }
@@ -59,7 +59,7 @@ extension UIImage {
      *  截屏
      *  @view: 要截屏的视图
      */
-    class func imageWithCaptureView(view: UIView) -> UIImage {
+    public class func imageWithCaptureView(view: UIView) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(view.bounds.size, false, 0)
         let context = UIGraphicsGetCurrentContext()
         view.layer.renderInContext(context!)
@@ -70,7 +70,7 @@ extension UIImage {
     /**
      *  裁剪为圆形的图片
      */
-    class func circleImageWithName(name: String) -> UIImage {
+    public class func circleImageWithName(name: String) -> UIImage {
         let oldImage = UIImage(named: name)
         let imageW = oldImage?.size.width
         let imageH = oldImage?.size.height
@@ -88,7 +88,7 @@ extension UIImage {
      *  裁剪为圆形带边框的图片
      *  @border: 圆环的宽度
      */
-    class func circleImageWithName(name: String, border: CGFloat, borderColor: UIColor) -> UIImage {
+    public class func circleImageWithName(name: String, border: CGFloat, borderColor: UIColor) -> UIImage {
         let oldImage = UIImage(named: name)
         let imageW = oldImage?.size.width
         let imageH = oldImage?.size.height
@@ -110,7 +110,7 @@ extension UIImage {
     /**
      * 裁剪图片
      */
-    class func cropImageWithName(name: String, cropRect: CGRect) -> UIImage {
+    public class func cropImageWithName(name: String, cropRect: CGRect) -> UIImage {
         let oldImage = UIImage(named: name)
         let subImageRef = CGImageCreateWithImageInRect(oldImage!.CGImage, cropRect)
         UIGraphicsBeginImageContext(cropRect.size)
@@ -123,7 +123,7 @@ extension UIImage {
     /**
      *  根据颜色生成图片
      */
-    class func imageWithColor(color: UIColor, size: CGSize) -> UIImage {
+    public class func imageWithColor(color: UIColor, size: CGSize) -> UIImage {
         let rect = CGRectMake(0, 0, size.width, size.height)
         UIGraphicsBeginImageContext(rect.size)
         let context = UIGraphicsGetCurrentContext()
@@ -139,7 +139,7 @@ extension UIImage {
      *  @point: 在图片大小范围内
      *  @atts: 属性配置，比如颜色、字体大小等
      */
-    class func watermarkImageWithName(name: String, text: String, point: CGPoint, atts: [String: AnyObject]) -> UIImage {
+    public class func watermarkImageWithName(name: String, text: String, point: CGPoint, atts: [String: AnyObject]) -> UIImage {
         
         let oldImage = UIImage(named: name)
         let size = oldImage!.size

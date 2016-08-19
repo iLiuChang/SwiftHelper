@@ -8,16 +8,16 @@
 
 import UIKit
 
-class KeyboardManager: NSObject {
+public class KeyboardManager: NSObject {
     // 距离监听视图的间隔，默认为10
-    var interval: CGFloat = 10
+    public var interval: CGFloat = 10
     
     private var frame: CGRect!
     private var changeView: UIView!
     private static var keyboardManager: KeyboardManager?
     private static var onceToken: dispatch_once_t = 0
     
-    class var shareInstance: KeyboardManager {
+    public class var shareInstance: KeyboardManager {
         if keyboardManager == nil {
             dispatch_once(&onceToken) {
                keyboardManager = KeyboardManager()
@@ -27,7 +27,7 @@ class KeyboardManager: NSObject {
     }
     
     /**
-     监听键盘
+     添加监听键盘
      
      @warning: 如果在view上监听多个视图，必须在开始编辑的时候监听
      @example:
@@ -38,16 +38,22 @@ class KeyboardManager: NSObject {
      - parameter rect: 需要监听视图的frame
      - parameter view: 要改变frame的视图
      */
-    func addKeyboardObserver(rect: CGRect, toView view: UIView) {
+    public func addKeyboardObserver(rect: CGRect, toView view: UIView) {
         removeKeyboardObserver()
         addKeyboardObserver()
         self.frame = rect
         self.changeView = view
     }
     
-    deinit {
-        removeKeyboardObserver()
+    /**
+     删除
+     */
+    public func removeKeyboardObserver() {
+        let center = NSNotificationCenter.defaultCenter()
+        center.removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+        center.removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
     }
+
 }
 
 private extension KeyboardManager {
@@ -83,9 +89,4 @@ private extension KeyboardManager {
         }
     }
     
-    func removeKeyboardObserver() {
-        let center = NSNotificationCenter.defaultCenter()
-        center.removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
-        center.removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
-    }
 }

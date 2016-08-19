@@ -16,7 +16,7 @@ extension Array {
      * let array = [23,23,4,5,67,7]
      * print(array[safe: 50])
      */
-    subscript (safe index: Int) -> Element? {
+    public subscript (safe index: Int) -> Element? {
         return (0..<count).contains(index) ? self[index] : nil
     }
     
@@ -26,7 +26,7 @@ extension Array {
      * let array = [23,23,4,5,67,7]
      * print(array[3,2,1])
      */
-    subscript(i1: Int, i2: Int, rest: Int...) -> [Element] {
+    public subscript(i1: Int, i2: Int, rest: Int...) -> [Element] {
         //通过实现get方法，获取数组中相应的值
         get {
             var result: [Element] = [self[i1], self[i2]]
