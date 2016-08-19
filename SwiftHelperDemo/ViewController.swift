@@ -35,10 +35,6 @@ class ViewController: UIViewController, InfiniteScrollViewDelegate, InfiniteScro
         return images[index]
     }
     
-    func infiniteScrollView(infiniteScrollView: InfiniteScrollView, placeholderImageAtIndex index: Int) -> UIImage {
-        return UIImage(named: "huli.jpg")!
-    }
-    
     func infiniteScrollView(infiniteScrollView: InfiniteScrollView, didSelectedAtIndex index: Int) {
         print(index)
     }

@@ -163,13 +163,6 @@ private extension InfiniteScrollView {
         }
     }
     
-    func configPageControl() {
-        iPageControl.numberOfPages = self.allCount()
-        iPageControl.currentPageIndicatorTintColor = self.currentPageIndicatorTineColor
-        iPageControl.pageIndicatorTintColor = self.pageIndicatorTineColor
-        iPageControl.hidden = self.pageControlHidden
-    }
-    
     func allCount() -> Int {
         var aCount = 0
         if dataSource != nil {
