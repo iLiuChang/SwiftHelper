@@ -13,9 +13,16 @@ extension UIViewController {
     /**
      显示
      */
-    public func showAlertController(title: String, message: String, preferredStyle: UIAlertControllerStyle = .Alert) -> UIAlertController {
+    public func showAlertController(title: String, titltAtt: NSAttributedString? = nil, message: String, messageAtt: NSAttributedString? = nil, preferredStyle: UIAlertControllerStyle = .Alert) -> UIAlertController {
         let alertVC = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
+        if let aTitleAtt = titltAtt {
+            alertVC.setValue(aTitleAtt, forKey: "attributedTitle")
+        }
+        if let aMessageAtt = messageAtt {
+            alertVC.setValue(aMessageAtt, forKey: "attributedMessage")
+        }
         self.presentViewController(alertVC, animated: true, completion: nil)
+        
         return alertVC
     }
     
@@ -43,14 +50,16 @@ extension UIAlertController {
     /**
      添加action
      */
-    public func addAction(title: String, titleColor: UIColor = UIColor.blueColor(), completionHandler: (() -> Void)?) -> UIAlertController {
+    public func addAction(title: String, titleColor: UIColor? = nil, completionHandler: (() -> Void)?) -> UIAlertController {
         
         let action = UIAlertAction(title: title, style: .Default) { (aAction) in
             if completionHandler != nil {
                 completionHandler!()
             }
         }
-        action.setValue(titleColor, forKey: "titleTextColor")
+        if let aTitleColor = titleColor {
+            action.setValue(aTitleColor, forKey: "titleTextColor")
+        }
         self.addAction(action)
         return self
     }

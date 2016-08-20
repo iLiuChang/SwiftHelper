@@ -217,13 +217,9 @@ private extension InfiniteScrollView {
             infiniteCell.title = aDataSource.infiniteScrollView!(self, titleAtIndex: index)
         }
         
-        if let aDataSource = dataSource where aDataSource.respondsToSelector(#selector(InfiniteScrollViewDataSource.infiniteScrollView(_:imageURLPathAtIndex:))) {
-            let path = aDataSource.infiniteScrollView!(self, imageURLPathAtIndex: index)
-            var pImage: UIImage? = nil
-            if aDataSource.respondsToSelector(#selector(InfiniteScrollViewDataSource.infiniteScrollView(_:placeholderImageAtIndex:))) {
-                pImage = aDataSource.infiniteScrollView!(self, placeholderImageAtIndex: index)
-            }
-            infiniteCell.setupImageWithURLPath(path, placeholderImage: pImage)
+        if let aDataSource = dataSource where aDataSource.respondsToSelector(#selector(InfiniteScrollViewDataSource.infiniteScrollView(_:imageURLStringAtIndex:))) {
+            let path = aDataSource.infiniteScrollView!(self, imageURLStringAtIndex: index)
+            infiniteCell.setupImageWithURLPath(path, placeholderImage: aDataSource.placeholderImage)
         }
     }
 
@@ -345,6 +341,9 @@ extension InfiniteCell {
 
 @objc public protocol InfiniteScrollViewDataSource: NSObjectProtocol {
     
+    // 占位图片
+    optional var placeholderImage: UIImage { get }
+    
     // 总数
     func numberOfItemsAtInfiniteScrollView(infiniteScrollView: InfiniteScrollView) -> Int
     
@@ -352,13 +351,10 @@ extension InfiniteCell {
     optional func infiniteScrollView(infiniteScrollView: InfiniteScrollView, titleAtIndex index: Int) -> String
     
     // 指定下标的图片url路径
-    optional func infiniteScrollView(infiniteScrollView: InfiniteScrollView, imageURLPathAtIndex index: Int) -> String
+    optional func infiniteScrollView(infiniteScrollView: InfiniteScrollView, imageURLStringAtIndex index: Int) -> String
     
     // 指定下标的图片
     optional func infiniteScrollView(infiniteScrollView: InfiniteScrollView, imageAtIndex index: Int) -> UIImage
-    
-    // 指定下标的占位图片
-    optional func infiniteScrollView(infiniteScrollView: InfiniteScrollView, placeholderImageAtIndex index: Int) -> UIImage
     
 }
 

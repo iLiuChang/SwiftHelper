@@ -24,20 +24,30 @@ class ViewController: UIViewController, InfiniteScrollViewDelegate, InfiniteScro
         view.frame = CGRectMake(0, 20, self.view.frame.width, 200)
         view.delegate = self
         self.view.addSubview(view)
+        
+
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
     
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let title = "提示"
+        let att = NSMutableAttributedString(string: title)
+        att.addAttribute(NSForegroundColorAttributeName, value: UIColor.redColor(), range: NSMakeRange(0, 2))
+        self.showAlertController(title,titltAtt: att, message: title, messageAtt: att).dismissAfter()
+    }
     func numberOfItemsAtInfiniteScrollView(infiniteScrollView: InfiniteScrollView) -> Int {
         return images.count
     }
     
-    func infiniteScrollView(infiniteScrollView: InfiniteScrollView, imageURLPathAtIndex index: Int) -> String {
+    func infiniteScrollView(infiniteScrollView: InfiniteScrollView, imageURLStringAtIndex index: Int) -> String {
         return images[index]
     }
     
     func infiniteScrollView(infiniteScrollView: InfiniteScrollView, didSelectedAtIndex index: Int) {
         print(index)
     }
+ 
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
