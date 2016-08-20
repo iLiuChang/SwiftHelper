@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension Array {
+public extension Array {
     
     /**
      * 防止数组越界

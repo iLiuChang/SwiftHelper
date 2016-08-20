@@ -10,31 +10,31 @@ import Kingfisher
 
 public class InfiniteScrollView: UIView {
     
-    // 当页指示器颜色
+    /// 当页指示器颜色
     public var currentPageIndicatorTineColor: UIColor? {
         didSet {
             iPageControl.currentPageIndicatorTintColor = currentPageIndicatorTineColor
         }
     }
     
-    // 每页指示器颜色
+    /// 每页指示器颜色
     public var pageIndicatorTineColor: UIColor? {
         didSet {
             iPageControl.pageIndicatorTintColor = pageIndicatorTineColor
         }
     }
     
-    // 是否显示指示器
+    /// 是否显示指示器
     public var pageControlHidden: Bool = false {
         didSet {
             iPageControl.hidden = pageControlHidden
         }
     }
     
-    // 页码指示器的位置
+    /// 页码指示器的位置
     public var pageControlEdgeInsets: UIEdgeInsets = UIEdgeInsetsZero
     
-    // 定时器时间间隔，默认2.0s
+    /// 定时器时间间隔，默认2.0s
     public var timeInterval: Double = 2.0 {
         didSet {
             removeTimer()
@@ -42,7 +42,7 @@ public class InfiniteScrollView: UIView {
         }
     }
     
-    // 是否开启定时器，默认开启
+    /// 是否开启定时器，默认开启
     public var allowsTimer: Bool? {
         didSet {
             if allowsTimer == true {
@@ -53,7 +53,7 @@ public class InfiniteScrollView: UIView {
         }
     }
     
-    // 标题字体颜色
+    /// 标题字体颜色
     public var titleTextColor: UIColor? {
         didSet {
             iCenterCell.titleTextColor = titleTextColor
@@ -61,7 +61,7 @@ public class InfiniteScrollView: UIView {
         }
     }
     
-    // 标题背景颜色
+    /// 标题背景颜色
     public var titleBackgroundColor: UIColor? {
         didSet {
             iCenterCell.titleBackgroundColor = titleBackgroundColor
@@ -69,10 +69,10 @@ public class InfiniteScrollView: UIView {
         }
     }
     
-    // 代理
+    /// 代理
     public weak var delegate: InfiniteScrollViewDelegate?
     
-    // 数据源
+    /// 数据源
     public weak var dataSource: InfiniteScrollViewDataSource? {
         didSet {
             iPageControl.numberOfPages = allCount()
@@ -336,25 +336,25 @@ extension InfiniteCell {
 
 @objc public protocol InfiniteScrollViewDelegate: NSObjectProtocol {
     
-    // 选中的下标
+    /// 选中的下标
     optional func infiniteScrollView(infiniteScrollView: InfiniteScrollView, didSelectedAtIndex index: Int)
 }
 
 @objc public protocol InfiniteScrollViewDataSource: NSObjectProtocol {
     
-    // 占位图片
+    /// 占位图片
     optional var placeholderImage: UIImage { get }
     
-    // 总数
+    /// 总数
     func numberOfItemsAtInfiniteScrollView(infiniteScrollView: InfiniteScrollView) -> Int
     
-    // 指定下标的标题，如果不实现该方法就不显示标题试图
+    /// 指定下标的标题，如果不实现该方法就不显示标题试图
     optional func infiniteScrollView(infiniteScrollView: InfiniteScrollView, titleAtIndex index: Int) -> String
     
-    // 指定下标的图片url路径
+    /// 指定下标的图片url路径
     optional func infiniteScrollView(infiniteScrollView: InfiniteScrollView, imageURLStringAtIndex index: Int) -> String
     
-    // 指定下标的图片
+    /// 指定下标的图片
     optional func infiniteScrollView(infiniteScrollView: InfiniteScrollView, imageAtIndex index: Int) -> UIImage
     
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 class ViewController: UIViewController, InfiniteScrollViewDelegate, InfiniteScrollViewDataSource {
     
     var images: [String]!
@@ -19,12 +20,12 @@ class ViewController: UIViewController, InfiniteScrollViewDelegate, InfiniteScro
         view.dataSource = self
         view.currentPageIndicatorTineColor = UIColor.blueColor()
         view.pageIndicatorTineColor = UIColor.orangeColor()
+    
         //        view.titleTextColor = UIColor.yellowColor()
         view.frame = CGRectMake(0, 20, self.view.frame.width, 200)
         view.delegate = self
         self.view.addSubview(view)
         
-
         let date = NSDate() + 60
         print(date)
         
@@ -38,9 +39,8 @@ class ViewController: UIViewController, InfiniteScrollViewDelegate, InfiniteScro
         label.text = "nihaosdfasdfasdfasdfasdfasdfasdfasdfasdfasdfaff"
         self.view.addSubview(label)
         
+
         
-        
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -60,6 +60,8 @@ class ViewController: UIViewController, InfiniteScrollViewDelegate, InfiniteScro
     func infiniteScrollView(infiniteScrollView: InfiniteScrollView, didSelectedAtIndex index: Int) {
         print(index)
     }
+    
+    
  
     
     override func didReceiveMemoryWarning() {

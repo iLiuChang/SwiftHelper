@@ -12,15 +12,15 @@ import UIKit
     
 public class AttributLabel: UILabel {
     
-    // 左右间距
-    public var kerning: CGFloat = 0 {
+    /// 左右间距
+    public var kerningValue: CGFloat = 0 {
         didSet {
             refreshAttributes()
         }
     }
     
-    // 上下间距
-    public var interlineSpacing: CGFloat = 0 {
+    /// 上下间距
+    public var interlineSpacingValue: CGFloat = 0 {
         didSet {
             refreshAttributes()
         }
@@ -46,13 +46,13 @@ public class AttributLabel: UILabel {
     private func refreshAttributes() {
         var attributes: [String: AnyObject] = [:]
         attributes[NSFontAttributeName] = font
-        if kerning > 0 {
-            attributes[NSKernAttributeName] = kerning
+        if kerningValue > 0 {
+            attributes[NSKernAttributeName] = kerningValue
         }
-        if interlineSpacing > 0 {
+        if interlineSpacingValue > 0 {
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.alignment = textAlignment
-            paragraphStyle.lineSpacing = CGFloat(interlineSpacing)
+            paragraphStyle.lineSpacing = CGFloat(interlineSpacingValue)
             attributes[NSParagraphStyleAttributeName] = paragraphStyle
         }
         attributedText = NSAttributedString(string: text ?? "", attributes: attributes)

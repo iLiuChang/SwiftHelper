@@ -9,8 +9,8 @@
 import UIKit
 
 public class KeyboardManager: NSObject {
-    // 距离监听视图的间隔，默认为10
-    public var interval: CGFloat = 10
+    /// 距离底部的间隔，默认为10
+    public var bottomInterval: CGFloat = 10
     
     private var frame: CGRect!
     private var changeView: UIView!
@@ -74,7 +74,7 @@ private extension KeyboardManager {
         }
         UIView.animateWithDuration(duration!) { () -> Void in
             if (telMaxY > keyboardY) {
-                self.changeView.transform = CGAffineTransformMakeTranslation(0, keyboardY - telMaxY - self.interval)
+                self.changeView.transform = CGAffineTransformMakeTranslation(0, keyboardY - telMaxY - self.bottomInterval)
             }else{
                 self.changeView.transform = CGAffineTransformIdentity
             }

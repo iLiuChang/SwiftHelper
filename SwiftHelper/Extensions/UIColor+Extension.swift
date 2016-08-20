@@ -51,7 +51,7 @@ public extension UIColor {
                 blue  = CGFloat((hexValue & 0x0000FF00) >> 8)  / 255.0
                 alpha = CGFloat(hexValue & 0x000000FF)         / 255.0
             default:
-                print("Invalid RGB string, number of characters after '#' should be either 3, 4, 6 or 8", terminator: "")
+                print("Invalid RGB string")
             }
         } else {
             print("Scan hex error")
