@@ -4,3 +4,7 @@ Swift中常用的工具类和Extension
 ```
 pod 'SwiftHelper'
 ```
+###【使用】
+```
+import SwiftHelper
+```
