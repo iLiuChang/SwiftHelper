@@ -3,6 +3,7 @@
 //
 //  Created by LiuChang on 16/8/13.
 //  无限滚动试图
+#if os(iOS)
 
 import UIKit
 import Kingfisher
@@ -363,3 +364,5 @@ protocol InfiniteCellDelegate: NSObjectProtocol {
      func selectedAtInfiniteCell(infiniteCell: InfiniteCell)
     
 }
+
+#endif

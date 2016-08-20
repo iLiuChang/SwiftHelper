@@ -8,6 +8,46 @@
 
 import UIKit
 
+public func > (lhs: NSDate, rhs: NSDate) -> Bool {
+    return lhs.compare(rhs) == .OrderedDescending
+}
+
+public func < (lhs: NSDate, rhs: NSDate) -> Bool {
+    return lhs.compare(rhs) == .OrderedAscending
+}
+
+public func == (lhs: NSDate, rhs: NSDate) -> Bool {
+    return lhs.compare(rhs) == .OrderedSame
+}
+
+public func != (lhs: NSDate, rhs: NSDate) -> Bool {
+    return lhs.compare(rhs) != .OrderedSame
+}
+
+public func >= (lhs: NSDate, rhs: NSDate) -> Bool {
+    return lhs > rhs || lhs == rhs
+}
+
+public func <= (lhs: NSDate, rhs: NSDate) -> Bool {
+    return lhs < rhs || lhs == rhs
+}
+
+public func + (lhs: NSDate, rhs: NSTimeInterval) -> NSDate {
+    return lhs.dateByAddingTimeInterval(rhs)
+}
+
+public func - (lhs: NSDate, rhs: NSTimeInterval) -> NSDate {
+    return lhs.dateByAddingTimeInterval(-rhs)
+}
+
+public func += (inout lhs: NSDate, rhs: NSTimeInterval) {
+    lhs = lhs + rhs
+}
+
+public func -= (inout lhs: NSDate, rhs: NSTimeInterval) {
+    lhs = lhs - rhs
+}
+
 extension NSDate {
     
     public var year: Int {
@@ -98,7 +138,7 @@ extension NSDate {
 
 // add
 extension NSDate {
-    
+
     public func dateByAddingYears(years: Int) -> NSDate {
         let calender = NSCalendar.currentCalendar()
         let components = NSDateComponents()

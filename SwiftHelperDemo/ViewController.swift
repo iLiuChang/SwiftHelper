@@ -7,7 +7,6 @@
 //
 
 import UIKit
-
 class ViewController: UIViewController, InfiniteScrollViewDelegate, InfiniteScrollViewDataSource {
     
     var images: [String]!
@@ -26,6 +25,20 @@ class ViewController: UIViewController, InfiniteScrollViewDelegate, InfiniteScro
         self.view.addSubview(view)
         
 
+        let date = NSDate() + 60
+        print(date)
+        
+        
+        let label = AttributLabel()
+        label.numberOfLines = 10
+//        label.kerning = 2
+        label.interlineSpacing = 10
+        label.frame = CGRect(x: 0, y: 300, width: 100, height: 150)
+        label.backgroundColor = UIColor.redColor()
+        label.text = "nihaosdfasdfasdfasdfasdfasdfasdfasdfasdfasdfaff"
+        self.view.addSubview(label)
+        
+        
         
         // Do any additional setup after loading the view, typically from a nib.
     }
