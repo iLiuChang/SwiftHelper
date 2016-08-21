@@ -22,10 +22,12 @@
 		24DC3B451D67145E0042657E /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DC3B3C1D67145E0042657E /* UIViewController+Alert.swift */; };
 		24DC3B461D67145E0042657E /* InfiniteScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DC3B3E1D67145E0042657E /* InfiniteScrollView.swift */; };
 		24DC3B471D67145E0042657E /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DC3B3F1D67145E0042657E /* KeyboardManager.swift */; };
+		58DB8D961D69436E0097AC58 /* ImageCropViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DB8D951D69436E0097AC58 /* ImageCropViewController.swift */; };
 		58FE87761D6818FD000BAD14 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FE87751D6818FD000BAD14 /* UIColor+Extension.swift */; };
 		58FE87781D681E5A000BAD14 /* AttributLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FE87771D681E5A000BAD14 /* AttributLabel.swift */; };
 		58FE877B1D684450000BAD14 /* AttributLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FE87771D681E5A000BAD14 /* AttributLabel.swift */; };
 		58FE877D1D68474C000BAD14 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FE877C1D68474C000BAD14 /* String+Extension.swift */; };
+		58FE87811D68600F000BAD14 /* HeadImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FE87801D68600F000BAD14 /* HeadImagePickerController.swift */; };
 		6D2060064F34E20B806E894B /* Pods_SwiftHelperDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAA4542F9A6961F9DC06F9E9 /* Pods_SwiftHelperDemoUITests.framework */; };
 		96BC1F0F684996C9A918A868 /* Pods_SwiftHelperDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DC954D7928E64926537B591 /* Pods_SwiftHelperDemoTests.framework */; };
 		BCD204C6092DA206B5E5F4E6 /* Pods_SwiftHelperDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DDFFCAD97B488FE4DAC8B70 /* Pods_SwiftHelperDemo.framework */; };
@@ -74,9 +76,11 @@
 		2DDFFCAD97B488FE4DAC8B70 /* Pods_SwiftHelperDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftHelperDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		33433E1051A9226DEE5EE262 /* Pods-SwiftHelperDemoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftHelperDemoUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftHelperDemoUITests/Pods-SwiftHelperDemoUITests.release.xcconfig"; sourceTree = "<group>"; };
 		3DC954D7928E64926537B591 /* Pods_SwiftHelperDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftHelperDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		58DB8D951D69436E0097AC58 /* ImageCropViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCropViewController.swift; sourceTree = "<group>"; };
 		58FE87751D6818FD000BAD14 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		58FE87771D681E5A000BAD14 /* AttributLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributLabel.swift; sourceTree = "<group>"; };
 		58FE877C1D68474C000BAD14 /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		58FE87801D68600F000BAD14 /* HeadImagePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadImagePickerController.swift; sourceTree = "<group>"; };
 		65B0B48E8A1E05C9755C8EB3 /* Pods-SwiftHelperDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftHelperDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftHelperDemo/Pods-SwiftHelperDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		BADFD574561150CCE6656A21 /* Pods-SwiftHelperDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftHelperDemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftHelperDemoTests/Pods-SwiftHelperDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DAA4542F9A6961F9DC06F9E9 /* Pods_SwiftHelperDemoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftHelperDemoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -206,6 +210,8 @@
 				24DC3B3E1D67145E0042657E /* InfiniteScrollView.swift */,
 				24DC3B3F1D67145E0042657E /* KeyboardManager.swift */,
 				58FE87771D681E5A000BAD14 /* AttributLabel.swift */,
+				58FE87801D68600F000BAD14 /* HeadImagePickerController.swift */,
+				58DB8D951D69436E0097AC58 /* ImageCropViewController.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -494,10 +500,12 @@
 				58FE877D1D68474C000BAD14 /* String+Extension.swift in Sources */,
 				24DC3B431D67145E0042657E /* UIImage+Extension.swift in Sources */,
 				24DC3B421D67145E0042657E /* NSTimer+Extension.swift in Sources */,
+				58DB8D961D69436E0097AC58 /* ImageCropViewController.swift in Sources */,
 				58FE87781D681E5A000BAD14 /* AttributLabel.swift in Sources */,
 				24DC3B461D67145E0042657E /* InfiniteScrollView.swift in Sources */,
 				24591D501D670B7B00B90A38 /* AppDelegate.swift in Sources */,
 				24DC3B451D67145E0042657E /* UIViewController+Alert.swift in Sources */,
+				58FE87811D68600F000BAD14 /* HeadImagePickerController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

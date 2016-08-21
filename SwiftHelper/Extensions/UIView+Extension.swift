@@ -32,15 +32,17 @@ extension UIView {
         get { return self.frame.origin.y + self.height }
         set { self.frame.origin.y = newValue - self.height }
     }
+    
     public var left: CGFloat {
         get { return self.frame.origin.x }
         set { self.frame.origin.x = newValue }
     }
     
-    public var centerX: CGFloat{
+    public var centerX: CGFloat {
         get { return self.center.x }
         set { self.center = CGPoint(x: newValue,y: self.centerY) }
     }
+    
     public var centerY: CGFloat {
         get { return self.center.y }
         set { self.center = CGPoint(x: self.centerX,y: newValue) }
@@ -168,6 +170,7 @@ extension UIView {
             addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[line]|", options: [], metrics: nil, views: views))
         }
     }
+    
     public var bottomBorderWidth: CGFloat {
         get {
             return 0.0   // Just to satisfy property
@@ -187,21 +190,3 @@ extension UIView {
     
 }
 
-extension UIImageView {
-    public var imageRect: CGRect {
-        guard self.contentMode == .ScaleAspectFit && self.width != 0 && self.height != 0 else {
-            return self.bounds
-        }
-        
-        if let image = self.image {
-            let size = image.size
-            let imageScale = CGFloat(fminf(Float(self.bounds.width/size.width), Float(self.bounds.height/size.height)))
-            let scaledImageSize = CGSize(width: size.width*imageScale, height: size.height*imageScale)
-            let imageRect = CGRectMake(round(CGFloat(0.5)*(CGRectGetWidth(self.bounds)-scaledImageSize.width)), round(CGFloat(0.5)*(CGRectGetHeight(self.bounds)-scaledImageSize.height)), round(scaledImageSize.width), round(scaledImageSize.height));
-            return imageRect
-        }else{
-            return self.bounds
-        }
-    }
-    
-}
