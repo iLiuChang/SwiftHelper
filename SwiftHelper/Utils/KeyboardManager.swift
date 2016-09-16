@@ -33,7 +33,7 @@ public class KeyboardManager: NSObject {
      - parameter view: 要改变frame的视图
      */
     public func addObserverInView(view: UIView, objectRect rect: CGRect) {
-        removeKeyboardObserver()
+        removeObserver()
         addKeyboardObserver()
         self.frame = rect
         self.changeView = view
@@ -42,7 +42,7 @@ public class KeyboardManager: NSObject {
     /**
      删除
      */
-    public func removeKeyboardObserver() {
+    public func removeObserver() {
         let center = NSNotificationCenter.defaultCenter()
         center.removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
         center.removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)

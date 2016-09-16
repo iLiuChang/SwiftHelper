@@ -48,7 +48,7 @@ class ViewController: UIViewController {
         let label = AttributLabel()
         label.numberOfLines = 10
 //        label.kerning = 2
-        label.interlineSpacingValue = 10
+        label.interlineSpacing = 10
         label.frame = CGRect(x: 0, y: 300, width: 100, height: 150)
         label.backgroundColor = UIColor.redColor()
         label.text = "nihaosdfasdfasdfasdfasdfasdfasdfasdfasdfasdfaff"
