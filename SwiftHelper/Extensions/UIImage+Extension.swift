@@ -72,49 +72,54 @@ extension UIImage {
     /**
      *  裁剪为圆形的图片
      */
-    public class func circleImageWithName(name: String) -> UIImage {
-        let oldImage = UIImage(named: name)
-        let imageW = oldImage?.size.width
-        let imageH = oldImage?.size.height
+    public func circleImage() -> UIImage {
+        let imageW = self.size.width
+        let imageH = self.size.height
         let circleW = imageW > imageH ? imageH : imageW
-        UIGraphicsBeginImageContextWithOptions(CGSizeMake(circleW!, circleW!), false, 0)
-        let path = UIBezierPath.init(ovalInRect: CGRectMake(0, 0, circleW!, circleW!))
+        UIGraphicsBeginImageContextWithOptions(CGSizeMake(circleW, circleW), false, 0)
+        let path = UIBezierPath.init(ovalInRect: CGRectMake(0, 0, circleW, circleW))
         path.addClip()
-        oldImage?.drawAtPoint(CGPointZero)
+        self.drawAtPoint(CGPointZero)
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return newImage
     }
     
     /**
-     *  裁剪为圆形带边框的图片
-     *  @border: 圆环的宽度
+     裁剪为带边框的圆形图片
+     
+     - parameter border:      边框宽度
+     - parameter borderColor: 边框颜色
+     
+     - returns: image
      */
-    public class func circleImageWithName(name: String, border: CGFloat, borderColor: UIColor) -> UIImage {
-        let oldImage = UIImage(named: name)
-        let imageW = oldImage?.size.width
-        let imageH = oldImage?.size.height
+    public func circleImage(border: CGFloat, borderColor: UIColor) -> UIImage {
+        let imageW = self.size.width
+        let imageH = self.size.height
+        
         let circleW = imageW > imageH ? imageH : imageW
-        UIGraphicsBeginImageContextWithOptions(CGSizeMake(circleW!, circleW!), false, 0)
-        let path = UIBezierPath.init(ovalInRect: CGRectMake(0, 0, circleW!, circleW!))
+        let bigW = circleW + 2 * border
+        UIGraphicsBeginImageContextWithOptions(CGSizeMake(bigW, bigW), false, 0)
+        let path = UIBezierPath.init(ovalInRect: CGRectMake(0, 0, bigW, bigW))
+        
         let context = UIGraphicsGetCurrentContext()
         CGContextAddPath(context, path.CGPath)
         borderColor.set()
         CGContextFillPath(context)
         
-        let cPath = UIBezierPath.init(ovalInRect: CGRectMake(border, border, circleW! - 2 * border, circleW! - 2 * border))
+        let cPath = UIBezierPath.init(ovalInRect: CGRectMake(border, border, circleW, circleW))
         cPath.addClip()
-        oldImage?.drawAtPoint(CGPointZero)
+        self.drawAtPoint(CGPoint(x: border, y: border))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return newImage
     }
+    
     /**
      * 裁剪图片
      */
-    public class func cropImageWithName(name: String, cropRect: CGRect) -> UIImage {
-        let oldImage = UIImage(named: name)
-        let subImageRef = CGImageCreateWithImageInRect(oldImage!.CGImage, cropRect)
+    public func cropImage(cropRect: CGRect) -> UIImage {
+        let subImageRef = CGImageCreateWithImageInRect(self.CGImage, cropRect)
         UIGraphicsBeginImageContext(cropRect.size)
         CGContextDrawImage(UIGraphicsGetCurrentContext(), cropRect, subImageRef)
         let newImage = UIImage(CGImage: subImageRef!)
@@ -141,10 +146,9 @@ extension UIImage {
      *  @point: 在图片大小范围内
      *  @atts: 属性配置，比如颜色、字体大小等
      */
-    public class func watermarkImageWithName(name: String, text: String, point: CGPoint, atts: [String: AnyObject]) -> UIImage {
+    public func watermarkImage(text: String, point: CGPoint, atts: [String: AnyObject]) -> UIImage {
         
-        let oldImage = UIImage(named: name)
-        let size = oldImage!.size
+        let size = self.size
         let H = size.height
         let W = size.width
         var p = point

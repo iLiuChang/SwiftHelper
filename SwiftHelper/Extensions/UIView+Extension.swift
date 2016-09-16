@@ -25,11 +25,11 @@ extension UIView {
         set { self.frame.origin.y = newValue }
     }
     public var right: CGFloat {
-        get { return self.frame.origin.x + self.width }
+        get { return self.frame.maxX }
         set { self.frame.origin.x = newValue - self.width }
     }
     public var bottom: CGFloat {
-        get { return self.frame.origin.y + self.height }
+        get { return self.frame.maxY }
         set { self.frame.origin.y = newValue - self.height }
     }
     
@@ -80,13 +80,6 @@ extension UIView {
         return screenshot;
     }
     
-    public func render() -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(self.bounds.size, false, 0);
-        self.layer.renderInContext(UIGraphicsGetCurrentContext()!)
-        let render = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return render
-    }
 }
 
 // layer

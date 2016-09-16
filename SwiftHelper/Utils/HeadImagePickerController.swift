@@ -5,9 +5,9 @@
 //  Created by LiuChang on 16/8/20.
 //  Copyright © 2016年 LiuChang. All rights reserved.
 //
+#if os(iOS)
 
 import UIKit
-
 
 public class HeadImagePickerViewController: UIViewController {
     
@@ -128,16 +128,14 @@ extension HeadImagePickerViewController: UIImagePickerControllerDelegate, UINavi
 extension HeadImagePickerViewController: ImageCropViewControllerDelegate {
     public func imageCropViewController(crop: ImageCropViewController, didFinishCropingMediaWithImage image: UIImage) {
         self.removeController()
-        if let aDelegate = self.delegate where aDelegate.respondsToSelector(#selector(HeadImagePickerViewControllerDelegate.headImagePickerViewController(_:didFinishPickingMediaWithImage:))) {
-            aDelegate.headImagePickerViewController!(self, didFinishPickingMediaWithImage: image)
-        }
+        delegate?.headImagePickerViewController?(self, didFinishPickingMediaWithImage: image)
 
     }
 }
 
-@objc public protocol HeadImagePickerViewControllerDelegate: NSObjectProtocol {
+@objc public protocol HeadImagePickerViewControllerDelegate: class {
     optional func headImagePickerViewController(headPicker: HeadImagePickerViewController, didFinishPickingMediaWithImage image: UIImage)
 }
 
-
+#endif
 

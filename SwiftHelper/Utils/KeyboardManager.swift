@@ -29,16 +29,10 @@ public class KeyboardManager: NSObject {
     /**
      添加监听键盘
      
-     @warning: 如果在view上监听多个视图，必须在开始编辑的时候监听
-     @example:
-     func textFieldDidBeginEditing(textField: UITextField) {
-        LCKeyboardManager.shareInstance.addKeyboardObserver(textField.frame, toView: view)
-     }
-     
      - parameter rect: 需要监听视图的frame
      - parameter view: 要改变frame的视图
      */
-    public func addKeyboardObserver(rect: CGRect, toView view: UIView) {
+    public func addObserverInView(view: UIView, objectRect rect: CGRect) {
         removeKeyboardObserver()
         addKeyboardObserver()
         self.frame = rect

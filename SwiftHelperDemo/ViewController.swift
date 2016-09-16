@@ -7,32 +7,43 @@
 //
 
 import UIKit
-
-class ViewController: UIViewController, InfiniteScrollViewDelegate, InfiniteScrollViewDataSource {
+enum TestType {
+    case Pass(a: Int)
+    case Fail(b: Int)
+    
+    
+}
+class ViewController: UIViewController {
     
     lazy var iImageView: UIImageView = {
         self.iImageView = UIImageView()
         return self.iImageView
     }()
-    var images: [String]!
+    
+    lazy var iPageControl: UIPageControl = {
+        self.iPageControl = UIPageControl()
+        self.iPageControl.numberOfPages = self.images.count
+        return self.iPageControl
+    }()
+    
+    
+    var images = ["http://p16.qhimg.com/dr/48_48_/t0125e8d438ae9d2fbb.png","http://p19.qhimg.com/dr/48_48_/t0101e2931181bb540d.png","http://p17.qhimg.com/dr/48_48_/t012d281e8ec8e27c06.png","http://p18.qhimg.com/dr/48_48_/t0184f949337481f071.png"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let imageurls = ["http://p16.qhimg.com/dr/48_48_/t0125e8d438ae9d2fbb.png","http://p19.qhimg.com/dr/48_48_/t0101e2931181bb540d.png","http://p17.qhimg.com/dr/48_48_/t012d281e8ec8e27c06.png","http://p18.qhimg.com/dr/48_48_/t0184f949337481f071.png"]
-        images = imageurls
         let view = InfiniteScrollView()
         view.dataSource = self
-        view.currentPageIndicatorTineColor = UIColor.blueColor()
-        view.pageIndicatorTineColor = UIColor.orangeColor()
-    
-        //        view.titleTextColor = UIColor.yellowColor()
+        view.delegate = self
+  
         view.frame = CGRectMake(0, 20, self.view.frame.width, 200)
         view.delegate = self
         self.view.addSubview(view)
         
         let date = NSDate() + 60
         print(date)
-        
+        iPageControl.frame = CGRect(x: 0, y: 0, width: self.view.width, height: 20)
+        view.addSubview(iPageControl)
         
         let label = AttributLabel()
         label.numberOfLines = 10
@@ -43,7 +54,7 @@ class ViewController: UIViewController, InfiniteScrollViewDelegate, InfiniteScro
         label.text = "nihaosdfasdfasdfasdfasdfasdfasdfasdfasdfasdfaff"
 //        self.view.addSubview(label)
         
-iImageView.frame = CGRect(x: 50, y: 300, width: 100, height: 100)
+       iImageView.frame = CGRect(x: 50, y: 300, width: 100, height: 100)
         self.view.addSubview(iImageView)
         
         let button = UIButton()
@@ -69,17 +80,6 @@ iImageView.frame = CGRect(x: 50, y: 300, width: 100, height: 100)
         
         
     }
-    func numberOfItemsAtInfiniteScrollView(infiniteScrollView: InfiniteScrollView) -> Int {
-        return images.count
-    }
-    
-    func infiniteScrollView(infiniteScrollView: InfiniteScrollView, imageURLStringAtIndex index: Int) -> String {
-        return images[index]
-    }
-    
-    func infiniteScrollView(infiniteScrollView: InfiniteScrollView, didSelectedAtIndex index: Int) {
-        print(index)
-    }
     
     
  
@@ -90,6 +90,30 @@ iImageView.frame = CGRect(x: 50, y: 300, width: 100, height: 100)
     }
     
     
+}
+
+extension ViewController: InfiniteScrollViewDelegate, InfiniteScrollViewDataSource {
+    
+    var placeholderImage: UIImage {
+        return UIImage()
+    }
+
+    func numberOfItemsAtInfiniteScrollView(infiniteScrollView: InfiniteScrollView) -> Int {
+        return images.count
+    }
+    
+    func infiniteScrollView(infiniteScrollView: InfiniteScrollView, imageURLStringAtIndex index: Int) -> String? {
+        return images[index]
+    }
+    
+    func infiniteScrollView(infiniteScrollView: InfiniteScrollView, didSelectAtIndex index: Int) {
+        print(index)
+    }
+    
+    func infiniteScrollView(infiniteScrollView: InfiniteScrollView, didScrollAtIndex index: Int) {
+        iPageControl.currentPage = index
+    }
+
 }
 
 

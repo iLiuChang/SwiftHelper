@@ -10,34 +10,11 @@ import Kingfisher
 
 public class InfiniteScrollView: UIView {
     
-    /// 当页指示器颜色
-    public var currentPageIndicatorTineColor: UIColor? {
-        didSet {
-            iPageControl.currentPageIndicatorTintColor = currentPageIndicatorTineColor
-        }
-    }
-    
-    /// 每页指示器颜色
-    public var pageIndicatorTineColor: UIColor? {
-        didSet {
-            iPageControl.pageIndicatorTintColor = pageIndicatorTineColor
-        }
-    }
-    
-    /// 是否显示指示器
-    public var pageControlHidden: Bool = false {
-        didSet {
-            iPageControl.hidden = pageControlHidden
-        }
-    }
-    
-    /// 页码指示器的位置
-    public var pageControlEdgeInsets: UIEdgeInsets = UIEdgeInsetsZero
+    // MARK: - pubic properties
     
     /// 定时器时间间隔，默认2.0s
     public var timeInterval: Double = 2.0 {
         didSet {
-            removeTimer()
             addTimer()
         }
     }
@@ -53,44 +30,39 @@ public class InfiniteScrollView: UIView {
         }
     }
     
-    /// 标题字体颜色
-    public var titleTextColor: UIColor? {
-        didSet {
-            iCenterCell.titleTextColor = titleTextColor
-            iReusableCell.titleTextColor = titleTextColor
-        }
-    }
-    
-    /// 标题背景颜色
-    public var titleBackgroundColor: UIColor? {
-        didSet {
-            iCenterCell.titleBackgroundColor = titleBackgroundColor
-            iReusableCell.titleBackgroundColor = titleBackgroundColor
-        }
-    }
-    
+
     /// 代理
     public weak var delegate: InfiniteScrollViewDelegate?
     
     /// 数据源
     public weak var dataSource: InfiniteScrollViewDataSource? {
         didSet {
-            iPageControl.numberOfPages = allCount()
-            setupInfiniteCell(iCenterCell, currentIndex: 0)
+            let num = allCount()
+            if num <= 1 {
+                removeTimer()
+                iScrollView.scrollEnabled = false
+            }
+            setupImage(iCenterImageView, currentIndex: 0)
         }
     }
     
-    private lazy var iCenterCell: InfiniteCell = {
-        self.iCenterCell = InfiniteCell()
-        self.iCenterCell.tag = 0
-        self.iCenterCell.delegate = self
-        return self.iCenterCell
+    // MARK: - private properies
+    
+    private lazy var iCenterImageView: UIImageView = {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.tap(_:)))
+        self.iCenterImageView = UIImageView()
+        self.iCenterImageView.tag = 0
+        self.iCenterImageView.addGestureRecognizer(tap)
+        self.iCenterImageView.userInteractionEnabled = true
+        return self.iCenterImageView
     }()
     
-    private lazy var iReusableCell: InfiniteCell = {
-        self.iReusableCell = InfiniteCell()
-        self.iReusableCell.delegate = self
-        return self.iReusableCell
+    private lazy var iReusableImageView: UIImageView = {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.tap(_:)))
+        self.iReusableImageView = UIImageView()
+        self.iReusableImageView.addGestureRecognizer(tap)
+        self.iReusableImageView.userInteractionEnabled = true
+        return self.iReusableImageView
     }()
     
     private lazy var iScrollView: UIScrollView = {
@@ -101,34 +73,25 @@ public class InfiniteScrollView: UIView {
         return self.iScrollView
     }()
     
-    private lazy var iPageControl: UIPageControl = {
-        self.iPageControl = UIPageControl()
-        return self.iPageControl
-    }()
-    
     private var timer: NSTimer?
+    
+    // MARK: - life cycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.addSubview(iScrollView)
-        iScrollView.addSubview(iCenterCell)
-        self.addSubview(iPageControl)
+        iScrollView.addSubview(iCenterImageView)
         addTimer()
     }
     
     override public func layoutSubviews() {
         let W = self.frame.width
         let H = self.frame.height
-        iReusableCell.frame = self.bounds
+        iReusableImageView.frame = self.bounds
         iScrollView.frame = self.bounds
-        iCenterCell.frame = CGRectMake(W, 0, W, H)
+        iCenterImageView.frame = CGRectMake(W, 0, W, H)
         iScrollView.contentSize = CGSizeMake(W * 3.0, 0)
         iScrollView.contentOffset.x = W
-        iPageControl.frame = CGRect.init(x: 0 , y: H - 20, width: W, height: 20)
-        
-        iPageControl.frame.origin.x += pageControlEdgeInsets.left / 2 - pageControlEdgeInsets.right / 2
-        iPageControl.frame.origin.y += pageControlEdgeInsets.top / 2 - pageControlEdgeInsets.bottom / 2
-
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -136,6 +99,9 @@ public class InfiniteScrollView: UIView {
     }
     
 }
+    
+// MARK: - reponse events
+    
 extension InfiniteScrollView {
     
     func scroll() {
@@ -145,16 +111,21 @@ extension InfiniteScrollView {
             iScrollView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: true)
         }
     }
+    
+    
+    func tap(aTap: UITapGestureRecognizer) {
+        delegate?.infiniteScrollView?(self, didSelectAtIndex: aTap.view!.tag)
+    }
+
 }
 
-
-
+// MARK: - private methods
+    
 private extension InfiniteScrollView {
     
     func addTimer() {
-        if (self.timer == nil) {
-            self.timer =  NSTimer.scheduledTimerWithTimeInterval(self.timeInterval, target: self, selector: #selector(self.scroll), userInfo: nil, repeats: true )
-        }
+        removeTimer()
+        timer =  NSTimer.scheduledTimerWithTimeInterval(timeInterval, target: self, selector: #selector(self.scroll), userInfo: nil, repeats: true )
     }
     
     func removeTimer() {
@@ -179,63 +150,50 @@ private extension InfiniteScrollView {
         let aCount = allCount()
         var index = 0
         if offsetX > W {
-            iReusableCell.frame.origin.x = cW - W
-            index = iCenterCell.tag + 1
+            iReusableImageView.frame.origin.x = cW - W
+            index = iCenterImageView.tag + 1
             if index >= aCount { index = 0 }
         }else {
-            iReusableCell.frame.origin.x = 0
-            index = iCenterCell.tag - 1
+            iReusableImageView.frame.origin.x = 0
+            index = iCenterImageView.tag - 1
             if index < 0 { index = aCount - 1 }
         }
         
-        iReusableCell.tag = index
-        setupInfiniteCell(iReusableCell, currentIndex: index)
-        iScrollView.addSubview(iReusableCell)
+        iReusableImageView.tag = index
+        setupImage(iReusableImageView, currentIndex: index)
+        iScrollView.addSubview(iReusableImageView)
         
         if offsetX >= W * 2 || offsetX <= 0 {
-            let tempView = iCenterCell
-            iCenterCell = iReusableCell
-            iReusableCell = tempView
+            let tempView = iCenterImageView
+            iCenterImageView = iReusableImageView
+            iReusableImageView = tempView
             
-            iCenterCell.frame = iReusableCell.frame
+            iCenterImageView.frame = iReusableImageView.frame
 
             iScrollView.contentOffset.x = W
-            iReusableCell.removeFromSuperview()
+            iReusableImageView.removeFromSuperview()
         }
         
-        self.iPageControl.currentPage = iCenterCell.tag
+        delegate?.infiniteScrollView?(self, didScrollAtIndex: iCenterImageView.tag)
         
     }
     
     
-    func setupInfiniteCell(infiniteCell: InfiniteCell, currentIndex index: Int) {
+    func setupImage(imageView: UIImageView, currentIndex index: Int) {
         
-        if let aDataSource = dataSource where aDataSource.respondsToSelector(#selector(InfiniteScrollViewDataSource.infiniteScrollView(_:imageAtIndex:))) {
-            infiniteCell.image = aDataSource.infiniteScrollView!(self, imageAtIndex: index)
+        if let image = dataSource?.infiniteScrollView?(self, imageAtIndex: index) {
+            imageView.image = image
         }
         
-        if let aDataSource = dataSource where aDataSource.respondsToSelector(#selector(InfiniteScrollViewDataSource.infiniteScrollView(_:titleAtIndex:))) {
-            infiniteCell.title = aDataSource.infiniteScrollView!(self, titleAtIndex: index)
-        }
-        
-        if let aDataSource = dataSource where aDataSource.respondsToSelector(#selector(InfiniteScrollViewDataSource.infiniteScrollView(_:imageURLStringAtIndex:))) {
-            let path = aDataSource.infiniteScrollView!(self, imageURLStringAtIndex: index)
-            infiniteCell.setupImageWithURLPath(path, placeholderImage: aDataSource.placeholderImage)
+        if let urlString = dataSource?.infiniteScrollView?(self, imageURLStringAtIndex: index) {
+            imageView.kf_setImageWithURL(NSURL(string: urlString), placeholderImage: dataSource?.placeholderImage, optionsInfo: nil, progressBlock: nil, completionHandler: nil)
         }
     }
 
 }
 
-extension InfiniteScrollView: InfiniteCellDelegate {
+// MARK: - UIScrollViewDelegate
     
-    func selectedAtInfiniteCell(infiniteCell: InfiniteCell) {
-        if let aDelegate = delegate where aDelegate.respondsToSelector(#selector(InfiniteScrollViewDelegate.infiniteScrollView(_:didSelectedAtIndex:))) {
-            aDelegate.infiniteScrollView!(self, didSelectedAtIndex: infiniteCell.tag)
-        }
-
-    }
-}
-
 extension InfiniteScrollView: UIScrollViewDelegate {
     
     public func scrollViewDidScroll(scrollView: UIScrollView) {
@@ -254,115 +212,46 @@ extension InfiniteScrollView: UIScrollViewDelegate {
     }
 }
 
-class InfiniteCell: UIView {
+// MARK: - InfiniteScrollViewDelegate
+
+@objc public protocol InfiniteScrollViewDelegate: class {
     
-    var image: UIImage? {
-        didSet {
-            iImageView.image = image
-        }
-    }
+    /**
+     选中的下标
+     */
+    optional func infiniteScrollView(infiniteScrollView: InfiniteScrollView, didSelectAtIndex index: Int)
     
-    var title: String? {
-        didSet {
-            iLabel.text = title
-        }
-    }
-    
-    var titleTextColor: UIColor? {
-        didSet {
-            iLabel.textColor = titleTextColor
-        }
-    }
-    
-    var titleBackgroundColor: UIColor? {
-        didSet {
-            iLabel.backgroundColor = titleBackgroundColor
-        }
-    }
-    
-    weak var delegate: InfiniteCellDelegate?
-    
-    private lazy var iImageView: UIImageView = {
-        self.iImageView = UIImageView()
-        self.iImageView.userInteractionEnabled = true
-        self.initTapGestureRecognizer(self.iImageView)
-        return self.iImageView
-    }()
-    
-    private lazy var iLabel: UILabel = {
-        self.iLabel = UILabel()
-        self.iLabel.textColor = UIColor.blackColor()
-        self.iLabel.backgroundColor = UIColor(white: 0.7, alpha: 0.5)
-        return self.iLabel
-    }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.addSubview(iImageView)
-        iImageView.addSubview(iLabel)
-        
-    }
-    
-    override func layoutSubviews() {
-        iImageView.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
-        iLabel.frame = CGRect(x: 0, y: iImageView.frame.height - 30, width: iImageView.frame.width, height: 30)
-        iLabel.hidden = title == nil
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func setupImageWithURLPath(urlPath: String, placeholderImage: UIImage?) {
-        iImageView.kf_setImageWithURL(NSURL(string: urlPath), placeholderImage: placeholderImage, optionsInfo: nil, progressBlock: nil, completionHandler: nil)
-    }
-    
+    /**
+     滑动的下标
+     */
+    optional func infiniteScrollView(infiniteScrollView: InfiniteScrollView, didScrollAtIndex index: Int)
+
 }
 
-private extension InfiniteCell {
-    func initTapGestureRecognizer(view: UIView) {
-        let tap = UITapGestureRecognizer.init(target: self, action: #selector(self.tap(_:)))
-        view.addGestureRecognizer(tap)
-    }
-}
-
-extension InfiniteCell {
-    func tap(tapGestureRecognizer: UITapGestureRecognizer) {
-        if let aDelegate = delegate  {
-            aDelegate.selectedAtInfiniteCell(self)
-        }
-    }
-}
-
-@objc public protocol InfiniteScrollViewDelegate: NSObjectProtocol {
+// MARK: - InfiniteScrollViewDataSource
+@objc public protocol InfiniteScrollViewDataSource: class {
     
-    /// 选中的下标
-    optional func infiniteScrollView(infiniteScrollView: InfiniteScrollView, didSelectedAtIndex index: Int)
-}
-
-@objc public protocol InfiniteScrollViewDataSource: NSObjectProtocol {
-    
-    /// 占位图片
+    /**
+     占位图片
+     */
     optional var placeholderImage: UIImage { get }
     
-    /// 总数
+    /**
+     总数
+     */
     func numberOfItemsAtInfiniteScrollView(infiniteScrollView: InfiniteScrollView) -> Int
     
-    /// 指定下标的标题，如果不实现该方法就不显示标题试图
-    optional func infiniteScrollView(infiniteScrollView: InfiniteScrollView, titleAtIndex index: Int) -> String
+    /**
+     url路径 - 网络
+     */
+    optional func infiniteScrollView(infiniteScrollView: InfiniteScrollView, imageURLStringAtIndex index: Int) -> String?
     
-    /// 指定下标的图片url路径
-    optional func infiniteScrollView(infiniteScrollView: InfiniteScrollView, imageURLStringAtIndex index: Int) -> String
-    
-    /// 指定下标的图片
-    optional func infiniteScrollView(infiniteScrollView: InfiniteScrollView, imageAtIndex index: Int) -> UIImage
+    /**
+     图片 - 本地
+     */
+    optional func infiniteScrollView(infiniteScrollView: InfiniteScrollView, imageAtIndex index: Int) -> UIImage?
     
 }
 
-protocol InfiniteCellDelegate: NSObjectProtocol {
-    
-     func selectedAtInfiniteCell(infiniteCell: InfiniteCell)
-    
-}
 
 #endif

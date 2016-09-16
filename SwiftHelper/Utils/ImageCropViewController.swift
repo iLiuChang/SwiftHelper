@@ -5,6 +5,7 @@
 //  Created by LiuChang on 16/8/21.
 //  Copyright © 2016年 LiuChang. All rights reserved.
 //
+#if os(iOS)
 
 import UIKit
 
@@ -215,10 +216,7 @@ extension ImageCropViewController {
     }
     
     func sure() {
-        
-        if let aDelegate = delegate where aDelegate.respondsToSelector(#selector(ImageCropViewControllerDelegate.imageCropViewController(_:didFinishCropingMediaWithImage:))){
-            aDelegate.imageCropViewController!(self, didFinishCropingMediaWithImage: getSubImage())
-        }
+        delegate?.imageCropViewController?(self, didFinishCropingMediaWithImage: getSubImage())
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -269,6 +267,8 @@ extension UIImage {
 }
 
 
-@objc public protocol ImageCropViewControllerDelegate: NSObjectProtocol {
+@objc public protocol ImageCropViewControllerDelegate: class {
     optional func imageCropViewController(crop: ImageCropViewController, didFinishCropingMediaWithImage image: UIImage)
 }
+
+#endif
