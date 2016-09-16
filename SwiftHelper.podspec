@@ -11,6 +11,6 @@ Pod::Spec.new do |s|
   s.source_files  = "SwiftHelper", "SwiftHelper/**/*.{swift}"
   s.framework  = "UIKit"
   s.requires_arc = true
-  s.dependency "Kingfisher"
+  s.dependency "Kingfisher", "~> 2.6.0"
 
 end

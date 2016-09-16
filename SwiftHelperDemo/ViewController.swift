@@ -7,12 +7,6 @@
 //
 
 import UIKit
-enum TestType {
-    case Pass(a: Int)
-    case Fail(b: Int)
-    
-    
-}
 class ViewController: UIViewController {
     
     lazy var iImageView: UIImageView = {
