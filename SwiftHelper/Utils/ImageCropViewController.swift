@@ -10,8 +10,12 @@
 import UIKit
 
 public class ImageCropViewController: UIViewController {
+    
+    // MARK: - public properties
+    
     /// 放大倍数
     public var maxScale: CGFloat = 2.0
+    
     /// 半径(10 ..< SrceenWidth/2), 默认:150
     public var cropRadius: CGFloat = 150 {
         didSet {
@@ -23,18 +27,24 @@ public class ImageCropViewController: UIViewController {
             }
         }
     }
+    
     /// 原图
     public var origialImage: UIImage?
+    
     /// 边缘颜色
     public var cropBorderColor: UIColor = UIColor.whiteColor()
+    
     /// 代理
     public weak var delegate: ImageCropViewControllerDelegate?
+    
+    // MARK: - private properties
     
     private weak var origialImageView: UIImageView!
     private var originalFrame: CGRect!
     private var cropFrame: CGRect!
     
     // MARK: - life cycle
+    
     override public func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.blackColor()
@@ -47,6 +57,7 @@ public class ImageCropViewController: UIViewController {
 }
 
 // MARK: - private methods
+    
 private extension ImageCropViewController {
     func initOriginalImageView() {
         let W = origialImage!.size.width / 2
@@ -210,6 +221,7 @@ private extension ImageCropViewController {
 }
 
 // MARK: - response events
+    
 extension ImageCropViewController {
     func cancel() {
         self.dismissViewControllerAnimated(true, completion: nil)

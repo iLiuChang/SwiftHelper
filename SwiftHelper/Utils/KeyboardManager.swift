@@ -14,17 +14,8 @@ public class KeyboardManager: NSObject {
     
     private var frame: CGRect!
     private var changeView: UIView!
-    private static var keyboardManager: KeyboardManager?
-    private static var onceToken: dispatch_once_t = 0
     
-    public class var shareInstance: KeyboardManager {
-        if keyboardManager == nil {
-            dispatch_once(&onceToken) {
-               keyboardManager = KeyboardManager()
-            }
-        }
-        return keyboardManager!
-    }
+    public static let shareInstance: KeyboardManager = KeyboardManager()
     
     /**
      添加监听键盘

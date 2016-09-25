@@ -66,7 +66,7 @@ public class HeadImagePickerViewController: UIViewController {
      删除
      */
     func dismissFromParentController() {
-        currentAlertController?.dismiss()
+        currentAlertController?.dismissViewControllerAnimated(true, completion: nil)
         removeController()
     }
     

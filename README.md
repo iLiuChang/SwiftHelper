@@ -32,9 +32,10 @@ pod 'SwiftHelper'
 - UIView
 - UIViewController
 - UIColor
+- Double
 
 ###【联系我】
 如果有问题欢迎大家pull requests
 
-微博： @Fly刘畅
-Twitter: @_LiuChang
+- 微博： [@Fly刘畅](http://weibo.com/liuchang712)
+- Twitter: @_LiuChang

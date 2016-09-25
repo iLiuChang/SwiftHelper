@@ -32,17 +32,45 @@ extension UIViewController {
      - parameter time: 时间间隔，单位：秒，默认为1.0s
      */
     public func dismissAfter(time: Double = 1.0) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(time * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
-            self.dismiss()
+        time.delay { 
+            self.dismissViewControllerAnimated(true, completion: nil)
         }
     }
     
     /**
-     隐藏
+     回到指定控制器
+     
+     - parameter aClass: 类控制器
      */
-    public func dismiss() {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    func popToViewController(aClass: AnyClass) {
+        guard let vcs = self.navigationController?.viewControllers else { return }
+        for vc in vcs where vc.isKindOfClass(aClass) {
+            self.navigationController?.popToViewController(vc, animated: true)
+            break
+        }
+        
     }
+    
+    /**
+     移除已经push进来的控制器
+     
+     - parameter aClass: 类控制器
+     */
+    func removePushedController(aClass: AnyClass) {
+        guard let vcs = self.navigationController?.viewControllers else { return }
+        var index = 0
+        for i in 0 ..< vcs.count {
+            let vc = vcs[i]
+            if vc.isKindOfClass(aClass) {
+                index = i
+                break
+            }
+        }
+        self.navigationController?.viewControllers.removeAtIndex(index)
+    }
+
+    
+
 }
 
 extension UIAlertController {

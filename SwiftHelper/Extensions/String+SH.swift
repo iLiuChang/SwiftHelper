@@ -6,11 +6,11 @@
 //  Copyright © 2016年 LiuChang. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension String {
     
-    /// 字符串长度
+    /// 字符个数
     public var length: Int {
         return self.characters.count
     }
@@ -27,6 +27,21 @@ extension String {
         let pattern = "[\\w!#$%&'*+/=?^_`{|}~-]+(?:\\.[\\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\\w](?:[\\w-]*[\\w])?\\.)+[\\w](?:[\\w-]*[\\w])?"
         let regextestmobile = NSPredicate(format: "SELF MATCHES %@", pattern)
         return regextestmobile.evaluateWithObject(self)
+    }
+    
+    /**
+     改变某个范围内的字体颜色
+     
+     - parameter color:  颜色
+     - parameter string: 要改变颜色的字符串
+     
+     - returns: NSAttributedString
+     */
+    public func attributedStrinWithColor(color: UIColor, rangeString string: String) -> NSAttributedString {
+        let att = NSMutableAttributedString(string: self)
+        let range = (self as NSString).rangeOfString(string)
+        att.addAttributes([NSForegroundColorAttributeName: color], range: range)
+        return att
     }
     
     public subscript (i: Int) -> Character {

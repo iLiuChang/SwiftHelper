@@ -21,7 +21,7 @@ extension NSTimer {
      - parameter repeats:     是否重复
      - parameter actionBlock: 回调
      */
-    public class func scheduledGCDTimerWithKey(aKey: String, interval: UInt64, queue: dispatch_queue_t?, repeats: Bool, actionBlock: (() -> Void)) {
+    public class func scheduledGCDTimerWithKey(aKey: String, interval: UInt64, queue: dispatch_queue_t? = nil, repeats: Bool, actionBlock: (() -> Void)) {
         var aQueue = queue
         
         if aQueue == nil { aQueue = dispatch_get_main_queue() }
