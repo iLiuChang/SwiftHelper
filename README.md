@@ -1,8 +1,7 @@
 # SwiftHelper
 Swift中常用的Util和Extension
 
-ios: 8.0+
-Swift3.0
+iOS8.0+  Swift3.0
 
 ###【安装】
 
