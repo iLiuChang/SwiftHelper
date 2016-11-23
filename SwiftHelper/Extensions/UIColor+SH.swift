@@ -22,15 +22,15 @@ public extension UIColor {
         var green: CGFloat = 0.0
         var blue:  CGFloat = 0.0
         var alpha: CGFloat = 1.0
-        var hex = hexString.uppercaseString
+        var hex = hexString.uppercased()
         if hex.hasPrefix("#") {
-            hex = hex.substringFromIndex(hex.startIndex.advancedBy(1))
+            hex = hex.substring(from: hex.characters.index(hex.startIndex, offsetBy: 1))
         }else if hex.hasPrefix("0X") {
-            hex = hex.substringFromIndex(hex.startIndex.advancedBy(2))
+            hex = hex.substring(from: hex.characters.index(hex.startIndex, offsetBy: 2))
         }
-        let scanner = NSScanner(string: hex)
+        let scanner = Scanner(string: hex)
         var hexValue: CUnsignedLongLong = 0
-        if scanner.scanHexLongLong(&hexValue) {
+        if scanner.scanHexInt64(&hexValue) {
             switch (hex.characters.count) {
             case 3:
                 red   = CGFloat((hexValue & 0xF00) >> 8)       / 15.0

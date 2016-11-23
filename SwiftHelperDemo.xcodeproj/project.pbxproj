@@ -15,8 +15,7 @@
 		24591D651D670B7B00B90A38 /* SwiftHelperDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24591D641D670B7B00B90A38 /* SwiftHelperDemoTests.swift */; };
 		24591D701D670B7B00B90A38 /* SwiftHelperDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24591D6F1D670B7B00B90A38 /* SwiftHelperDemoUITests.swift */; };
 		24DC3B401D67145E0042657E /* Array+SH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DC3B371D67145E0042657E /* Array+SH.swift */; };
-		24DC3B411D67145E0042657E /* NSDate+SH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DC3B381D67145E0042657E /* NSDate+SH.swift */; };
-		24DC3B421D67145E0042657E /* NSTime+SH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DC3B391D67145E0042657E /* NSTime+SH.swift */; };
+		24DC3B411D67145E0042657E /* Date+SH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DC3B381D67145E0042657E /* Date+SH.swift */; };
 		24DC3B431D67145E0042657E /* UIImage+SH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DC3B3A1D67145E0042657E /* UIImage+SH.swift */; };
 		24DC3B441D67145E0042657E /* UIView+SH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DC3B3B1D67145E0042657E /* UIView+SH.swift */; };
 		24DC3B451D67145E0042657E /* UIViewController+SH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DC3B3C1D67145E0042657E /* UIViewController+SH.swift */; };
@@ -24,11 +23,12 @@
 		24DC3B471D67145E0042657E /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DC3B3F1D67145E0042657E /* KeyboardManager.swift */; };
 		585E0FBF1D8E7CDF0062E059 /* Double+SH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585E0FBE1D8E7CDF0062E059 /* Double+SH.swift */; };
 		58DB8D961D69436E0097AC58 /* ImageCropViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DB8D951D69436E0097AC58 /* ImageCropViewController.swift */; };
+		58F45BA81DE585F700CF7BF2 /* GCDTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F45BA71DE585F700CF7BF2 /* GCDTimer.swift */; };
+		58F45BAA1DE5A30500CF7BF2 /* AvatarPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F45BA91DE5A30500CF7BF2 /* AvatarPickerViewController.swift */; };
 		58FE87761D6818FD000BAD14 /* UIColor+SH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FE87751D6818FD000BAD14 /* UIColor+SH.swift */; };
 		58FE87781D681E5A000BAD14 /* AttributLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FE87771D681E5A000BAD14 /* AttributLabel.swift */; };
 		58FE877B1D684450000BAD14 /* AttributLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FE87771D681E5A000BAD14 /* AttributLabel.swift */; };
 		58FE877D1D68474C000BAD14 /* String+SH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FE877C1D68474C000BAD14 /* String+SH.swift */; };
-		58FE87811D68600F000BAD14 /* HeadImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FE87801D68600F000BAD14 /* HeadImagePickerController.swift */; };
 		6D2060064F34E20B806E894B /* Pods_SwiftHelperDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAA4542F9A6961F9DC06F9E9 /* Pods_SwiftHelperDemoUITests.framework */; };
 		96BC1F0F684996C9A918A868 /* Pods_SwiftHelperDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DC954D7928E64926537B591 /* Pods_SwiftHelperDemoTests.framework */; };
 		BCD204C6092DA206B5E5F4E6 /* Pods_SwiftHelperDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DDFFCAD97B488FE4DAC8B70 /* Pods_SwiftHelperDemo.framework */; };
@@ -67,8 +67,7 @@
 		24591D6F1D670B7B00B90A38 /* SwiftHelperDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftHelperDemoUITests.swift; sourceTree = "<group>"; };
 		24591D711D670B7B00B90A38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24DC3B371D67145E0042657E /* Array+SH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+SH.swift"; sourceTree = "<group>"; };
-		24DC3B381D67145E0042657E /* NSDate+SH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+SH.swift"; sourceTree = "<group>"; };
-		24DC3B391D67145E0042657E /* NSTime+SH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTime+SH.swift"; sourceTree = "<group>"; };
+		24DC3B381D67145E0042657E /* Date+SH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+SH.swift"; sourceTree = "<group>"; };
 		24DC3B3A1D67145E0042657E /* UIImage+SH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+SH.swift"; sourceTree = "<group>"; };
 		24DC3B3B1D67145E0042657E /* UIView+SH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+SH.swift"; sourceTree = "<group>"; };
 		24DC3B3C1D67145E0042657E /* UIViewController+SH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+SH.swift"; sourceTree = "<group>"; };
@@ -79,10 +78,11 @@
 		3DC954D7928E64926537B591 /* Pods_SwiftHelperDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftHelperDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		585E0FBE1D8E7CDF0062E059 /* Double+SH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+SH.swift"; sourceTree = "<group>"; };
 		58DB8D951D69436E0097AC58 /* ImageCropViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCropViewController.swift; sourceTree = "<group>"; };
+		58F45BA71DE585F700CF7BF2 /* GCDTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDTimer.swift; sourceTree = "<group>"; };
+		58F45BA91DE5A30500CF7BF2 /* AvatarPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarPickerViewController.swift; sourceTree = "<group>"; };
 		58FE87751D6818FD000BAD14 /* UIColor+SH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+SH.swift"; sourceTree = "<group>"; };
 		58FE87771D681E5A000BAD14 /* AttributLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributLabel.swift; sourceTree = "<group>"; };
 		58FE877C1D68474C000BAD14 /* String+SH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+SH.swift"; sourceTree = "<group>"; };
-		58FE87801D68600F000BAD14 /* HeadImagePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadImagePickerController.swift; sourceTree = "<group>"; };
 		65B0B48E8A1E05C9755C8EB3 /* Pods-SwiftHelperDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftHelperDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftHelperDemo/Pods-SwiftHelperDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		BADFD574561150CCE6656A21 /* Pods-SwiftHelperDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftHelperDemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftHelperDemoTests/Pods-SwiftHelperDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DAA4542F9A6961F9DC06F9E9 /* Pods_SwiftHelperDemoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftHelperDemoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -154,6 +154,7 @@
 		24591D4E1D670B7B00B90A38 /* SwiftHelperDemo */ = {
 			isa = PBXGroup;
 			children = (
+				58F45BA91DE5A30500CF7BF2 /* AvatarPickerViewController.swift */,
 				24591D4F1D670B7B00B90A38 /* AppDelegate.swift */,
 				24591D511D670B7B00B90A38 /* ViewController.swift */,
 				24591D531D670B7B00B90A38 /* Main.storyboard */,
@@ -196,8 +197,7 @@
 			children = (
 				24DC3B371D67145E0042657E /* Array+SH.swift */,
 				58FE877C1D68474C000BAD14 /* String+SH.swift */,
-				24DC3B381D67145E0042657E /* NSDate+SH.swift */,
-				24DC3B391D67145E0042657E /* NSTime+SH.swift */,
+				24DC3B381D67145E0042657E /* Date+SH.swift */,
 				24DC3B3A1D67145E0042657E /* UIImage+SH.swift */,
 				24DC3B3B1D67145E0042657E /* UIView+SH.swift */,
 				24DC3B3C1D67145E0042657E /* UIViewController+SH.swift */,
@@ -213,8 +213,8 @@
 				24DC3B3E1D67145E0042657E /* InfiniteScrollView.swift */,
 				24DC3B3F1D67145E0042657E /* KeyboardManager.swift */,
 				58FE87771D681E5A000BAD14 /* AttributLabel.swift */,
-				58FE87801D68600F000BAD14 /* HeadImagePickerController.swift */,
 				58DB8D951D69436E0097AC58 /* ImageCropViewController.swift */,
+				58F45BA71DE585F700CF7BF2 /* GCDTimer.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -308,13 +308,16 @@
 				TargetAttributes = {
 					24591D4B1D670B7B00B90A38 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0810;
 					};
 					24591D5F1D670B7B00B90A38 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0810;
 						TestTargetID = 24591D4B1D670B7B00B90A38;
 					};
 					24591D6A1D670B7B00B90A38 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0810;
 						TestTargetID = 24591D4B1D670B7B00B90A38;
 					};
 				};
@@ -494,22 +497,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24DC3B411D67145E0042657E /* NSDate+SH.swift in Sources */,
+				24DC3B411D67145E0042657E /* Date+SH.swift in Sources */,
 				24DC3B441D67145E0042657E /* UIView+SH.swift in Sources */,
 				24DC3B471D67145E0042657E /* KeyboardManager.swift in Sources */,
 				58FE87761D6818FD000BAD14 /* UIColor+SH.swift in Sources */,
 				585E0FBF1D8E7CDF0062E059 /* Double+SH.swift in Sources */,
+				58F45BA81DE585F700CF7BF2 /* GCDTimer.swift in Sources */,
 				24DC3B401D67145E0042657E /* Array+SH.swift in Sources */,
 				24591D521D670B7B00B90A38 /* ViewController.swift in Sources */,
 				58FE877D1D68474C000BAD14 /* String+SH.swift in Sources */,
 				24DC3B431D67145E0042657E /* UIImage+SH.swift in Sources */,
-				24DC3B421D67145E0042657E /* NSTime+SH.swift in Sources */,
 				58DB8D961D69436E0097AC58 /* ImageCropViewController.swift in Sources */,
 				58FE87781D681E5A000BAD14 /* AttributLabel.swift in Sources */,
 				24DC3B461D67145E0042657E /* InfiniteScrollView.swift in Sources */,
 				24591D501D670B7B00B90A38 /* AppDelegate.swift in Sources */,
+				58F45BAA1DE5A30500CF7BF2 /* AvatarPickerViewController.swift in Sources */,
 				24DC3B451D67145E0042657E /* UIViewController+SH.swift in Sources */,
-				58FE87811D68600F000BAD14 /* HeadImagePickerController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -660,6 +663,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = LiuChang.SwiftHelperDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -673,6 +677,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = LiuChang.SwiftHelperDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -685,6 +690,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = LiuChang.SwiftHelperDemoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftHelperDemo.app/SwiftHelperDemo";
 			};
 			name = Debug;
@@ -698,6 +704,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = LiuChang.SwiftHelperDemoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftHelperDemo.app/SwiftHelperDemo";
 			};
 			name = Release;
@@ -710,6 +717,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = LiuChang.SwiftHelperDemoUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = SwiftHelperDemo;
 			};
 			name = Debug;
@@ -722,6 +730,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = LiuChang.SwiftHelperDemoUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = SwiftHelperDemo;
 			};
 			name = Release;

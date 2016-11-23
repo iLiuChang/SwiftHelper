@@ -9,33 +9,33 @@
 
 import UIKit
 
-public class HeadImagePickerViewController: UIViewController {
+open class AvatarPickerViewController: UIViewController {
     
     public typealias ActionConfig = (title: String?, titleColor: UIColor?)
 
     /// 图片放大倍数，默认2.0
-    public var maxScale: CGFloat?
+    open var maxScale: CGFloat?
     /// 裁剪区域的半径，默认150
-    public var cropRadius: CGFloat?
+    open var cropRadius: CGFloat?
     /// 裁剪边框颜色，默认白色
-    public var cropBorderColor: UIColor?
+    open var cropBorderColor: UIColor?
     /// 代理
-    public weak var delegate: HeadImagePickerViewControllerDelegate?
+    open weak var delegate: AvatarPickerViewControllerDelegate?
     /// 默认title:相机,默认titleColor:蓝色
-    public var actionCamera: ActionConfig?
+    open var actionCamera: ActionConfig?
     /// 默认title:相册,默认titleColor:蓝色
-    public var actionPhotoLibrary: ActionConfig?
+    open var actionPhotoLibrary: ActionConfig?
     /// 默认title:取消,默认titleColor:红色
-    public var actionCancel: ActionConfig? = (nil, UIColor.redColor())
+    open var actionCancel: ActionConfig? = (nil, UIColor.red)
     
-    private var currentAlertController: UIAlertController?
+    fileprivate var currentAlertController: UIAlertController?
 
     /**
      展示
      
      - parameter superController: 父控制器
      */
-    func showInController(superController: UIViewController) {
+    func showInController(_ superController: UIViewController) {
         
         superController.addChildViewController(self)
         
@@ -43,19 +43,19 @@ public class HeadImagePickerViewController: UIViewController {
         let titlePhotoLibrary = actionPhotoLibrary?.title ?? "相册"
         let titleCancel = actionCancel?.title ?? "取消"
         
-        currentAlertController = superController.showAlertController(nil, titltAtt: nil, message: nil, messageAtt: nil, preferredStyle: .ActionSheet).addAction(titleCamera, titleColor: actionCamera?.titleColor) {
+        currentAlertController = superController.showAlertController(nil, titltAtt: nil, message: nil, messageAtt: nil, preferredStyle: .actionSheet).addAction(titleCamera, titleColor: actionCamera?.titleColor) {
             
                 if !self.isCamera() {
                     return
                 }
-                self.showPickCotrollerWithType(.Camera, toController: superController)
+                self.showPickCotrollerWithType(.camera, toController: superController)
             
             }.addAction(titlePhotoLibrary, titleColor: actionPhotoLibrary?.titleColor) {
                 
                 if !self.isPhoto() {
                     return
                 }
-                self.showPickCotrollerWithType(.PhotoLibrary, toController: superController)
+                self.showPickCotrollerWithType(.photoLibrary, toController: superController)
                 
             }.addAction(titleCancel, titleColor: actionCancel?.titleColor) {
                 self.removeController()
@@ -66,7 +66,7 @@ public class HeadImagePickerViewController: UIViewController {
      删除
      */
     func dismissFromParentController() {
-        currentAlertController?.dismissViewControllerAnimated(true, completion: nil)
+        currentAlertController?.dismiss(animated: true, completion: nil)
         removeController()
     }
     
@@ -74,34 +74,34 @@ public class HeadImagePickerViewController: UIViewController {
   
 }
 
-private extension HeadImagePickerViewController {
+private extension AvatarPickerViewController {
     
     func removeController() {
         self.removeFromParentViewController()
     }
 
-    func showPickCotrollerWithType(type: UIImagePickerControllerSourceType, toController controller: UIViewController) {
+    func showPickCotrollerWithType(_ type: UIImagePickerControllerSourceType, toController controller: UIViewController) {
         let pickVC = UIImagePickerController()
         pickVC.allowsEditing = false
         pickVC.delegate = self
         pickVC.sourceType = type
-        controller.presentViewController(pickVC, animated: true, completion: nil)
+        controller.present(pickVC, animated: true, completion: nil)
     }
     func isPhoto() -> Bool{
-        return UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary)
+        return UIImagePickerController.isSourceTypeAvailable(.photoLibrary)
     }
     
     func isCamera() -> Bool {
-        return UIImagePickerController.isSourceTypeAvailable(.Camera)
+        return UIImagePickerController.isSourceTypeAvailable(.camera)
     }
 }
 
-extension HeadImagePickerViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension AvatarPickerViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    public func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        picker.dismissViewControllerAnimated(true) {
+    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        picker.dismiss(animated: true) {
             let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-            if picker.sourceType == .Camera {
+            if picker.sourceType == .camera {
                 UIImageWriteToSavedPhotosAlbum(image, self, nil, nil)
             }
             let vc = ImageCropViewController()
@@ -117,24 +117,24 @@ extension HeadImagePickerViewController: UIImagePickerControllerDelegate, UINavi
                 vc.cropBorderColor = aCropBorderColor
             }
             
-            if let aController = self.parentViewController {
-                aController.presentViewController(vc, animated: true, completion: nil)
+            if let aController = self.parent {
+                aController.present(vc, animated: true, completion: nil)
             }
         }
     }
 
 }
 
-extension HeadImagePickerViewController: ImageCropViewControllerDelegate {
-    public func imageCropViewController(crop: ImageCropViewController, didFinishCropingMediaWithImage image: UIImage) {
+extension AvatarPickerViewController: ImageCropViewControllerDelegate {
+    public func imageCropViewController(_ crop: ImageCropViewController, didFinishCropingMediaWithImage image: UIImage) {
         self.removeController()
-        delegate?.headImagePickerViewController?(self, didFinishPickingMediaWithImage: image)
+        delegate?.avatarPickerViewController?(self, didFinishPickingMediaWithImage: image)
 
     }
 }
 
-@objc public protocol HeadImagePickerViewControllerDelegate: class {
-    optional func headImagePickerViewController(headPicker: HeadImagePickerViewController, didFinishPickingMediaWithImage image: UIImage)
+@objc public protocol AvatarPickerViewControllerDelegate: class {
+    @objc optional func avatarPickerViewController(_ picker: AvatarPickerViewController, didFinishPickingMediaWithImage image: UIImage)
 }
 
 #endif

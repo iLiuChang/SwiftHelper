@@ -8,6 +8,19 @@
 
 import UIKit
 import ImageIO
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
 
 extension UIImage {
     
@@ -16,57 +29,57 @@ extension UIImage {
      *
      * @aImage: 一般是使用CoreGraphics获取的图片
      */
-    public class func fixOrientation(aImage: UIImage) -> UIImage {
-        if (aImage.imageOrientation == .Up){
+    public class func fixOrientation(_ aImage: UIImage) -> UIImage {
+        if (aImage.imageOrientation == .up){
             return aImage
         }
-        var transform = CGAffineTransformIdentity
-        if aImage.imageOrientation == .Down || aImage.imageOrientation == .DownMirrored {
-            transform = CGAffineTransformTranslate(transform, aImage.size.width, aImage.size.height)
-            transform = CGAffineTransformRotate(transform,CGFloat( M_PI))
-        }else if aImage.imageOrientation == .Left || aImage.imageOrientation == .LeftMirrored {
-            transform = CGAffineTransformTranslate(transform, aImage.size.width, 0)
-            transform = CGAffineTransformRotate(transform,CGFloat(M_PI_2))
-        }else if aImage.imageOrientation == .Right || aImage.imageOrientation == .RightMirrored {
-            transform = CGAffineTransformTranslate(transform, 0, aImage.size.height)
-            transform = CGAffineTransformRotate(transform, -CGFloat(M_PI_2))
+        var transform = CGAffineTransform.identity
+        if aImage.imageOrientation == .down || aImage.imageOrientation == .downMirrored {
+            transform = transform.translatedBy(x: aImage.size.width, y: aImage.size.height)
+            transform = transform.rotated(by: CGFloat( M_PI))
+        }else if aImage.imageOrientation == .left || aImage.imageOrientation == .leftMirrored {
+            transform = transform.translatedBy(x: aImage.size.width, y: 0)
+            transform = transform.rotated(by: CGFloat(M_PI_2))
+        }else if aImage.imageOrientation == .right || aImage.imageOrientation == .rightMirrored {
+            transform = transform.translatedBy(x: 0, y: aImage.size.height)
+            transform = transform.rotated(by: -CGFloat(M_PI_2))
         }
         
-        if aImage.imageOrientation == .UpMirrored || aImage.imageOrientation == .DownMirrored {
-            transform = CGAffineTransformTranslate(transform, aImage.size.width, 0);
-            transform = CGAffineTransformScale(transform, -1, 1)
-        }else if aImage.imageOrientation == .LeftMirrored || aImage.imageOrientation == .RightMirrored {
-            transform = CGAffineTransformTranslate(transform, aImage.size.height, 0)
-            transform = CGAffineTransformScale(transform, -1, 1)
+        if aImage.imageOrientation == .upMirrored || aImage.imageOrientation == .downMirrored {
+            transform = transform.translatedBy(x: aImage.size.width, y: 0);
+            transform = transform.scaledBy(x: -1, y: 1)
+        }else if aImage.imageOrientation == .leftMirrored || aImage.imageOrientation == .rightMirrored {
+            transform = transform.translatedBy(x: aImage.size.height, y: 0)
+            transform = transform.scaledBy(x: -1, y: 1)
         }
         
-        let ctx = CGBitmapContextCreate(nil,Int(aImage.size.width), Int(aImage.size.height),
+        let ctx = CGContext(data: nil,width: Int(aImage.size.width), height: Int(aImage.size.height),
                                         
-                                        CGImageGetBitsPerComponent(aImage.CGImage), 0,
+                                        bitsPerComponent: (aImage.cgImage?.bitsPerComponent)!, bytesPerRow: 0,
                                         
-                                        CGImageGetColorSpace(aImage.CGImage),
+                                        space: (aImage.cgImage?.colorSpace!)!,
                                         
-                                        CGImageGetBitmapInfo(aImage.CGImage).rawValue)
-        CGContextConcatCTM(ctx, transform)
-        if aImage.imageOrientation == .Left || aImage.imageOrientation == .LeftMirrored || aImage.imageOrientation == .RightMirrored || aImage.imageOrientation == .Right {
-            CGContextDrawImage(ctx, CGRectMake(0,0,aImage.size.height,aImage.size.width), aImage.CGImage)
+                                        bitmapInfo: (aImage.cgImage?.bitmapInfo.rawValue)!)
+        ctx?.concatenate(transform)
+        if aImage.imageOrientation == .left || aImage.imageOrientation == .leftMirrored || aImage.imageOrientation == .rightMirrored || aImage.imageOrientation == .right {
+            ctx?.draw(aImage.cgImage!, in: CGRect(x: 0,y: 0,width: aImage.size.height,height: aImage.size.width))
         }else {
-            CGContextDrawImage(ctx, CGRectMake(0,0,aImage.size.width,aImage.size.height), aImage.CGImage)
+            ctx?.draw(aImage.cgImage!, in: CGRect(x: 0,y: 0,width: aImage.size.width,height: aImage.size.height))
         }
-        let cgimg = CGBitmapContextCreateImage(ctx)
-        return UIImage(CGImage: cgimg!)
+        let cgimg = ctx?.makeImage()
+        return UIImage(cgImage: cgimg!)
     }
     
     /**
      *  截屏
      *  @view: 要截屏的视图
      */
-    public class func imageWithCaptureView(view: UIView) -> UIImage {
+    public class func imageWithCaptureView(_ view: UIView) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(view.bounds.size, false, 0)
         let context = UIGraphicsGetCurrentContext()
-        view.layer.renderInContext(context!)
+        view.layer.render(in: context!)
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        return newImage
+        return newImage!
     }
     
     /**
@@ -76,13 +89,13 @@ extension UIImage {
         let imageW = self.size.width
         let imageH = self.size.height
         let circleW = imageW > imageH ? imageH : imageW
-        UIGraphicsBeginImageContextWithOptions(CGSizeMake(circleW, circleW), false, 0)
-        let path = UIBezierPath.init(ovalInRect: CGRectMake(0, 0, circleW, circleW))
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: circleW, height: circleW), false, 0)
+        let path = UIBezierPath.init(ovalIn: CGRect(x: 0, y: 0, width: circleW, height: circleW))
         path.addClip()
-        self.drawAtPoint(CGPointZero)
+        self.draw(at: CGPoint.zero)
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return newImage
+        return newImage!
     }
     
     /**
@@ -93,36 +106,36 @@ extension UIImage {
      
      - returns: image
      */
-    public func circleImage(border: CGFloat, borderColor: UIColor) -> UIImage {
+    public func circleImage(_ border: CGFloat, borderColor: UIColor) -> UIImage {
         let imageW = self.size.width
         let imageH = self.size.height
         
         let circleW = imageW > imageH ? imageH : imageW
         let bigW = circleW + 2 * border
-        UIGraphicsBeginImageContextWithOptions(CGSizeMake(bigW, bigW), false, 0)
-        let path = UIBezierPath.init(ovalInRect: CGRectMake(0, 0, bigW, bigW))
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: bigW, height: bigW), false, 0)
+        let path = UIBezierPath.init(ovalIn: CGRect(x: 0, y: 0, width: bigW, height: bigW))
         
         let context = UIGraphicsGetCurrentContext()
-        CGContextAddPath(context, path.CGPath)
+        context?.addPath(path.cgPath)
         borderColor.set()
-        CGContextFillPath(context)
+        context?.fillPath()
         
-        let cPath = UIBezierPath.init(ovalInRect: CGRectMake(border, border, circleW, circleW))
+        let cPath = UIBezierPath.init(ovalIn: CGRect(x: border, y: border, width: circleW, height: circleW))
         cPath.addClip()
-        self.drawAtPoint(CGPoint(x: border, y: border))
+        self.draw(at: CGPoint(x: border, y: border))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return newImage
+        return newImage!
     }
     
     /**
      * 裁剪图片
      */
-    public func cropImage(cropRect: CGRect) -> UIImage {
-        let subImageRef = CGImageCreateWithImageInRect(self.CGImage, cropRect)
+    public func cropImage(_ cropRect: CGRect) -> UIImage {
+        let subImageRef = self.cgImage?.cropping(to: cropRect)
         UIGraphicsBeginImageContext(cropRect.size)
-        CGContextDrawImage(UIGraphicsGetCurrentContext(), cropRect, subImageRef)
-        let newImage = UIImage(CGImage: subImageRef!)
+        UIGraphicsGetCurrentContext()?.draw(subImageRef!, in: cropRect)
+        let newImage = UIImage(cgImage: subImageRef!)
         UIGraphicsEndImageContext()
         return newImage
     }
@@ -130,15 +143,15 @@ extension UIImage {
     /**
      *  根据颜色生成图片
      */
-    public class func imageWithColor(color: UIColor, size: CGSize) -> UIImage {
-        let rect = CGRectMake(0, 0, size.width, size.height)
+    public class func imageWithColor(_ color: UIColor, size: CGSize) -> UIImage {
+        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         UIGraphicsBeginImageContext(rect.size)
         let context = UIGraphicsGetCurrentContext()
-        CGContextSetFillColorWithColor(context, color.CGColor)
-        CGContextFillRect(context, rect)
+        context?.setFillColor(color.cgColor)
+        context?.fill(rect)
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return newImage
+        return newImage!
     }
     
     /**
@@ -146,7 +159,7 @@ extension UIImage {
      *  @point: 在图片大小范围内
      *  @atts: 属性配置，比如颜色、字体大小等
      */
-    public func watermarkImage(text: String, point: CGPoint, atts: [String: AnyObject]) -> UIImage {
+    public func watermarkImage(_ text: String, point: CGPoint, atts: [String: AnyObject]) -> UIImage {
         
         let size = self.size
         let H = size.height
@@ -165,10 +178,10 @@ extension UIImage {
             p.y = 0
         }
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
-        (text as NSString).drawAtPoint(p, withAttributes: atts)
+        (text as NSString).draw(at: p, withAttributes: atts)
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return  newImage
+        return  newImage!
     }
     
 }
@@ -176,8 +189,8 @@ extension UIImage {
 // MARK: - gif
 public extension UIImage {
  
-    public class func gifWithData(data: NSData) -> UIImage? {
-        guard let source = CGImageSourceCreateWithData(data, nil) else {
+    public class func gifWithData(_ data: Data) -> UIImage? {
+        guard let source = CGImageSourceCreateWithData(data as CFData, nil) else {
             print("SwiftGif: Source for the image does not exist")
             return nil
         }
@@ -185,13 +198,12 @@ public extension UIImage {
         return UIImage.animatedImageWithSource(source)
     }
     
-    public class func gifWithURLString(urlString:String) -> UIImage? {
-        guard let bundleURL:NSURL? = NSURL(string: urlString)
-            else {
-                print("SwiftGif: This image named \"\(urlString)\" does not exist")
-                return nil
+    public class func gifWithURLString(_ urlString:String) -> UIImage? {
+        guard let bundleURL = URL(string: urlString) else {
+            print("SwiftGif: This image named \"\(urlString)\" does not exist")
+            return nil
         }
-        guard let imageData = NSData(contentsOfURL: bundleURL!) else {
+        guard let imageData = try? Data(contentsOf: bundleURL) else {
             print("SwiftGif: Cannot turn image named \"\(urlString)\" into NSData")
             return nil
         }
@@ -199,19 +211,19 @@ public extension UIImage {
         return gifWithData(imageData)
     }
     
-    public class func gifWithName(name: String) -> UIImage? {
+    public class func gifWithName(_ name: String) -> UIImage? {
         var fileName = name
         if fileName.hasSuffix(".gif") {
-            let nameRange = fileName.endIndex.advancedBy(-4) ..< fileName.endIndex
-            fileName.removeRange(nameRange)
+            let nameRange = fileName.characters.index(fileName.endIndex, offsetBy: -4) ..< fileName.endIndex
+            fileName.removeSubrange(nameRange)
         }
-        guard let bundleURL = NSBundle.mainBundle()
-            .URLForResource(fileName, withExtension: "gif") else {
+        guard let bundleURL = Bundle.main
+            .url(forResource: fileName, withExtension: "gif") else {
                 print("SwiftGif: This image named \"\(fileName)\" does not exist")
                 return nil
         }
         
-        guard let imageData = NSData(contentsOfURL: bundleURL) else {
+        guard let imageData = try? Data(contentsOf: bundleURL) else {
             print("SwiftGif: Cannot turn image named \"\(fileName)\" into NSData")
             return nil
         }
@@ -219,24 +231,24 @@ public extension UIImage {
         return gifWithData(imageData)
     }
     
-    class func delayForImageAtIndex(index: Int, source: CGImageSource!) -> Double {
+    class func delayForImageAtIndex(_ index: Int, source: CGImageSource!) -> Double {
         var delay = 0.1
         
         // Get dictionaries
         let cfProperties = CGImageSourceCopyPropertiesAtIndex(source, index, nil)
-        let gifProperties: CFDictionaryRef = unsafeBitCast(
+        let gifProperties: CFDictionary = unsafeBitCast(
             CFDictionaryGetValue(cfProperties,
-                unsafeAddressOf(kCGImagePropertyGIFDictionary)),
-            CFDictionary.self)
+                Unmanaged.passUnretained(kCGImagePropertyGIFDictionary).toOpaque()),
+            to: CFDictionary.self)
         
         // Get delay time
         var delayObject: AnyObject = unsafeBitCast(
             CFDictionaryGetValue(gifProperties,
-                unsafeAddressOf(kCGImagePropertyGIFUnclampedDelayTime)),
-            AnyObject.self)
+                Unmanaged.passUnretained(kCGImagePropertyGIFUnclampedDelayTime).toOpaque()),
+            to: AnyObject.self)
         if delayObject.doubleValue == 0 {
             delayObject = unsafeBitCast(CFDictionaryGetValue(gifProperties,
-                unsafeAddressOf(kCGImagePropertyGIFDelayTime)), AnyObject.self)
+                Unmanaged.passUnretained(kCGImagePropertyGIFDelayTime).toOpaque()), to: AnyObject.self)
         }
         
         delay = delayObject as! Double
@@ -248,7 +260,7 @@ public extension UIImage {
         return delay
     }
     
-    class func gcdForPair(a: Int?, _ b: Int?) -> Int {
+    class func gcdForPair(_ a: Int?, _ b: Int?) -> Int {
         var a = a
         var b = b
         // Check if one of them is nil
@@ -283,7 +295,7 @@ public extension UIImage {
         }
     }
     
-    class func gcdForArray(array: Array<Int>) -> Int {
+    class func gcdForArray(_ array: Array<Int>) -> Int {
         if array.isEmpty {
             return 1
         }
@@ -297,9 +309,9 @@ public extension UIImage {
         return gcd
     }
     
-    class func animatedImageWithSource(source: CGImageSource) -> UIImage? {
+    class func animatedImageWithSource(_ source: CGImageSource) -> UIImage? {
         let count = CGImageSourceGetCount(source)
-        var images = [CGImageRef]()
+        var images = [CGImage]()
         var delays = [Int]()
         // Fill arrays
         for i in 0..<count {
@@ -332,7 +344,7 @@ public extension UIImage {
         var frame: UIImage
         var frameCount: Int
         for i in 0..<count {
-            frame = UIImage(CGImage: images[Int(i)])
+            frame = UIImage(cgImage: images[Int(i)])
             frameCount = Int(delays[Int(i)] / gcd)
             
             for _ in 0..<frameCount {
@@ -341,7 +353,7 @@ public extension UIImage {
         }
         
         // Heyhey
-        let animation = UIImage.animatedImageWithImages(frames,
+        let animation = UIImage.animatedImage(with: frames,
                                                         duration: Double(duration) / 1000.0)
         return animation
     }

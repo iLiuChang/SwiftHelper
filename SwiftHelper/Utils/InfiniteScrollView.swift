@@ -8,21 +8,21 @@
 import UIKit
 import Kingfisher
 
-public class InfiniteScrollView: UIView {
+open class InfiniteScrollView: UIView {
     
     // MARK: - pubic properties
     
-    /// 定时器时间间隔，默认2.0s
-    public var timeInterval: Double = 2.0 {
+    /// 定时器时间间隔，默认3.0s
+    open var timeInterval: Double = 3.0 {
         didSet {
             addTimer()
         }
     }
     
-    /// 是否开启定时器，默认开启
-    public var allowsTimer: Bool? {
+    /// 是否开启定时器，默认关闭
+    open var allowsTimer = false {
         didSet {
-            if allowsTimer == true {
+            if allowsTimer {
                 addTimer()
             }else {
                 removeTimer()
@@ -30,50 +30,44 @@ public class InfiniteScrollView: UIView {
         }
     }
     
-
     /// 代理
-    public weak var delegate: InfiniteScrollViewDelegate?
+    open weak var delegate: InfiniteScrollViewDelegate?
     
     /// 数据源
-    public weak var dataSource: InfiniteScrollViewDataSource? {
+    open weak var dataSource: InfiniteScrollViewDataSource? {
         didSet {
-            let num = allCount()
-            if num <= 1 {
-                removeTimer()
-                iScrollView.scrollEnabled = false
-            }
-            setupImage(iCenterImageView, currentIndex: 0)
+            reloadData()
         }
     }
     
     // MARK: - private properies
     
-    private lazy var iCenterImageView: UIImageView = {
+    fileprivate lazy var iCenterImageView: UIImageView = {
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.tap(_:)))
         self.iCenterImageView = UIImageView()
         self.iCenterImageView.tag = 0
         self.iCenterImageView.addGestureRecognizer(tap)
-        self.iCenterImageView.userInteractionEnabled = true
+        self.iCenterImageView.isUserInteractionEnabled = true
         return self.iCenterImageView
     }()
     
-    private lazy var iReusableImageView: UIImageView = {
+    fileprivate lazy var iReusableImageView: UIImageView = {
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.tap(_:)))
         self.iReusableImageView = UIImageView()
         self.iReusableImageView.addGestureRecognizer(tap)
-        self.iReusableImageView.userInteractionEnabled = true
+        self.iReusableImageView.isUserInteractionEnabled = true
         return self.iReusableImageView
     }()
     
-    private lazy var iScrollView: UIScrollView = {
+    fileprivate lazy var iScrollView: UIScrollView = {
         self.iScrollView = UIScrollView()
-        self.iScrollView.pagingEnabled = true
+        self.iScrollView.isPagingEnabled = true
         self.iScrollView.delegate = self
         self.iScrollView.showsHorizontalScrollIndicator = false
         return self.iScrollView
     }()
     
-    private var timer: NSTimer?
+    fileprivate var timer: Timer?
     
     // MARK: - life cycle
     
@@ -81,16 +75,15 @@ public class InfiniteScrollView: UIView {
         super.init(frame: frame)
         self.addSubview(iScrollView)
         iScrollView.addSubview(iCenterImageView)
-        addTimer()
     }
     
-    override public func layoutSubviews() {
+    override open func layoutSubviews() {
         let W = self.frame.width
         let H = self.frame.height
         iReusableImageView.frame = self.bounds
         iScrollView.frame = self.bounds
-        iCenterImageView.frame = CGRectMake(W, 0, W, H)
-        iScrollView.contentSize = CGSizeMake(W * 3.0, 0)
+        iCenterImageView.frame = CGRect(x: W, y: 0, width: W, height: H)
+        iScrollView.contentSize = CGSize(width: W * 3.0, height: 0)
         iScrollView.contentOffset.x = W
     }
     
@@ -98,22 +91,41 @@ public class InfiniteScrollView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {
+        removeTimer()
+    }
+    
+    /**
+     刷新数据 - 自动开启定时器
+     */
+    open func reloadData() {
+        
+        let num = allCount()
+        if num <= 1 {
+            removeTimer()
+            iScrollView.isScrollEnabled = false
+        }else {
+            addTimer()
+            iScrollView.isScrollEnabled = true
+        }
+        setupImage(iCenterImageView, currentIndex: iCenterImageView.tag)
+    }
+    
 }
     
 // MARK: - reponse events
     
-extension InfiniteScrollView {
+private extension InfiniteScrollView {
     
-    func scroll() {
+    @objc func scroll() {
         let W = self.bounds.width
         if W > 0.0 {
-            let offsetX = self.iScrollView.contentOffset.x + W
+            let offsetX = W * 2
             iScrollView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: true)
         }
     }
     
-    
-    func tap(aTap: UITapGestureRecognizer) {
+    @objc func tap(_ aTap: UITapGestureRecognizer) {
         delegate?.infiniteScrollView?(self, didSelectAtIndex: aTap.view!.tag)
     }
 
@@ -125,7 +137,7 @@ private extension InfiniteScrollView {
     
     func addTimer() {
         removeTimer()
-        timer =  NSTimer.scheduledTimerWithTimeInterval(timeInterval, target: self, selector: #selector(self.scroll), userInfo: nil, repeats: true )
+        timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(self.scroll), userInfo: nil, repeats: true )
     }
     
     func removeTimer() {
@@ -143,7 +155,7 @@ private extension InfiniteScrollView {
         return aCount
     }
     
-    func changeFrame(offsetX: CGFloat) {
+    func changeFrame(_ offsetX: CGFloat) {
         
         let W = iScrollView.frame.width
         let cW = iScrollView.contentSize.width
@@ -178,35 +190,34 @@ private extension InfiniteScrollView {
         
     }
     
-    
-    func setupImage(imageView: UIImageView, currentIndex index: Int) {
-        
+    func setupImage(_ imageView: UIImageView, currentIndex index: Int) {
+        if let urlString = dataSource?.infiniteScrollView?(self, imageURLStringAtIndex: index) {
+            imageView.kf.setImage(with: ImageResource(downloadURL: URL(string: urlString)!), placeholder:  dataSource?.placeholderImage)
+            return
+        }
+
         if let image = dataSource?.infiniteScrollView?(self, imageAtIndex: index) {
             imageView.image = image
         }
-        
-        if let urlString = dataSource?.infiniteScrollView?(self, imageURLStringAtIndex: index) {
-            imageView.kf_setImageWithURL(NSURL(string: urlString), placeholderImage: dataSource?.placeholderImage, optionsInfo: nil, progressBlock: nil, completionHandler: nil)
-        }
     }
-
+    
 }
 
 // MARK: - UIScrollViewDelegate
     
 extension InfiniteScrollView: UIScrollViewDelegate {
     
-    public func scrollViewDidScroll(scrollView: UIScrollView) {
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetX = scrollView.contentOffset.x
         changeFrame(offsetX)
     }
     
-    public func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         self.removeTimer()
     }
     
-    public func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if allowsTimer != false {
+    public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if allowsTimer {
             self.addTimer()
         }
     }
@@ -219,12 +230,12 @@ extension InfiniteScrollView: UIScrollViewDelegate {
     /**
      选中的下标
      */
-    optional func infiniteScrollView(infiniteScrollView: InfiniteScrollView, didSelectAtIndex index: Int)
+    @objc optional func infiniteScrollView(_ infiniteScrollView: InfiniteScrollView, didSelectAtIndex index: Int)
     
     /**
      滑动的下标
      */
-    optional func infiniteScrollView(infiniteScrollView: InfiniteScrollView, didScrollAtIndex index: Int)
+    @objc optional func infiniteScrollView(_ infiniteScrollView: InfiniteScrollView, didScrollAtIndex index: Int)
 
 }
 
@@ -234,22 +245,22 @@ extension InfiniteScrollView: UIScrollViewDelegate {
     /**
      占位图片
      */
-    optional var placeholderImage: UIImage { get }
+    @objc optional var placeholderImage: UIImage { get }
     
     /**
      总数
      */
-    func numberOfItemsAtInfiniteScrollView(infiniteScrollView: InfiniteScrollView) -> Int
+    func numberOfItemsAtInfiniteScrollView(_ infiniteScrollView: InfiniteScrollView) -> Int
     
     /**
      url路径 - 网络
      */
-    optional func infiniteScrollView(infiniteScrollView: InfiniteScrollView, imageURLStringAtIndex index: Int) -> String?
+    @objc optional func infiniteScrollView(_ infiniteScrollView: InfiniteScrollView, imageURLStringAtIndex index: Int) -> String?
     
     /**
      图片 - 本地
      */
-    optional func infiniteScrollView(infiniteScrollView: InfiniteScrollView, imageAtIndex index: Int) -> UIImage?
+    @objc optional func infiniteScrollView(_ infiniteScrollView: InfiniteScrollView, imageAtIndex index: Int) -> UIImage?
     
 }
 

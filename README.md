@@ -2,13 +2,16 @@
 Swift中常用的Util和Extension
 
 ios: 8.0+
+Swift3.0
 
 ###【安装】
+
 ```
 pod 'SwiftHelper'
 ```
 
 ###【说明】
+依赖库: [Kingfisher](https://github.com/onevcat/Kingfisher)
 
 #####Utils
 - InfiniteScrollView
@@ -23,11 +26,13 @@ pod 'SwiftHelper'
 - ImageCropViewController
 对图片裁剪
 
+- GCDTimer
+多线程定时器
+
 #####Extensions
 - Array
 - String
 - NSDate
-- NSTimer
 - UIImage
 - UIView
 - UIViewController
@@ -38,4 +43,4 @@ pod 'SwiftHelper'
 如果有问题欢迎大家pull requests
 
 - 微博： [@Fly刘畅](http://weibo.com/liuchang712)
-- Twitter: @_LiuChang
+- Twitter: [@_LiuChang](https://twitter.com/_LiuChang)

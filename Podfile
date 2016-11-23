@@ -5,7 +5,7 @@ target 'SwiftHelperDemo' do
   # Comment this line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
-  pod ‘Kingfisher’, '~> 2.6.0'
+  pod ‘Kingfisher’
 
   target 'SwiftHelperDemoTests' do
     inherit! :search_paths

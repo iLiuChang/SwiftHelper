@@ -14,9 +14,8 @@ extension Double {
      
      - parameter closure: 结束
      */
-    func delay(closure:()->()) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(self * Double(NSEC_PER_SEC))
-            ), dispatch_get_main_queue(), closure)
+    func delay(_ closure:@escaping ()->()) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(self * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
     }
 
 }

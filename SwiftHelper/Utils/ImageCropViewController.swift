@@ -9,15 +9,15 @@
 
 import UIKit
 
-public class ImageCropViewController: UIViewController {
+open class ImageCropViewController: UIViewController {
     
     // MARK: - public properties
     
     /// 放大倍数
-    public var maxScale: CGFloat = 2.0
+    open var maxScale: CGFloat = 2.0
     
     /// 半径(10 ..< SrceenWidth/2), 默认:150
-    public var cropRadius: CGFloat = 150 {
+    open var cropRadius: CGFloat = 150 {
         didSet {
             if cropRadius > self.view.width / 2 {
                 cropRadius = self.view.width / 2
@@ -29,25 +29,25 @@ public class ImageCropViewController: UIViewController {
     }
     
     /// 原图
-    public var origialImage: UIImage?
+    open var origialImage: UIImage?
     
     /// 边缘颜色
-    public var cropBorderColor: UIColor = UIColor.whiteColor()
+    open var cropBorderColor: UIColor = UIColor.white
     
     /// 代理
-    public weak var delegate: ImageCropViewControllerDelegate?
+    open weak var delegate: ImageCropViewControllerDelegate?
     
     // MARK: - private properties
     
-    private weak var origialImageView: UIImageView!
-    private var originalFrame: CGRect!
-    private var cropFrame: CGRect!
+    fileprivate weak var origialImageView: UIImageView!
+    fileprivate var originalFrame: CGRect!
+    fileprivate var cropFrame: CGRect!
     
     // MARK: - life cycle
     
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.blackColor()
+        self.view.backgroundColor = UIColor.black
         initOriginalImageView()
         initCropView()
         initButton()
@@ -78,12 +78,12 @@ private extension ImageCropViewController {
         }
         
         let imageView = UIImageView()
-        imageView.frame = CGRectMake(0, 0, fitW, fitH)
-        imageView.multipleTouchEnabled = true
-        imageView.userInteractionEnabled = true
+        imageView.frame = CGRect(x: 0, y: 0, width: fitW, height: fitH)
+        imageView.isMultipleTouchEnabled = true
+        imageView.isUserInteractionEnabled = true
         imageView.image = origialImage
         imageView.center = self.view.center
-        imageView.backgroundColor = UIColor.blackColor()
+        imageView.backgroundColor = UIColor.black
         
         self.view.addSubview(imageView)
         self.originalFrame = imageView.frame
@@ -95,53 +95,53 @@ private extension ImageCropViewController {
         let H = self.view.frame.height
         
         let center = self.view.center
-        self.cropFrame = CGRectMake(center.x - cropRadius , center.y - cropRadius, cropRadius * 2, cropRadius * 2)
+        self.cropFrame = CGRect(x: center.x - cropRadius , y: center.y - cropRadius, width: cropRadius * 2, height: cropRadius * 2)
         
         let view = UIView()
         view.frame = self.view.frame
-        view.backgroundColor = UIColor.blackColor()
+        view.backgroundColor = UIColor.black
         view.alpha = 0.5
         self.view.addSubview(view)
         let shaperLayer = CAShapeLayer()
-        let path = CGPathCreateMutable()
+        let path = CGMutablePath()
         
         // top
-        CGPathAddRect(path, nil, CGRectMake(0, 0, W, cropFrame.origin.y))
+        path.addRect(CGRect(x: 0, y: 0, width: W, height: cropFrame.origin.y))
         // down
-        CGPathAddRect(path, nil, CGRectMake(0, cropFrame.maxY, W, H - cropFrame.maxY))
+        path.addRect(CGRect(x: 0, y: cropFrame.maxY, width: W, height: H - cropFrame.maxY))
         // left
-        CGPathAddRect(path, nil, CGRectMake(0, cropFrame.origin.y, cropFrame.origin.x, cropRadius * 2))
+        path.addRect( CGRect(x: 0, y: cropFrame.origin.y, width: cropFrame.origin.x, height: cropRadius * 2))
         // right
-        CGPathAddRect(path, nil, CGRectMake(cropFrame.maxX, cropFrame.origin.y, W - cropFrame.maxX, cropRadius * 2))
+        path.addRect(CGRect(x: cropFrame.maxX, y: cropFrame.origin.y, width: W - cropFrame.maxX, height: cropRadius * 2))
         
         shaperLayer.path = path
         view.layer.mask = shaperLayer
         
         let edgePath = UIBezierPath.init(rect: cropFrame)
         let edgeLayer = CAShapeLayer()
-        edgeLayer.path = edgePath.CGPath
+        edgeLayer.path = edgePath.cgPath
         edgeLayer.lineWidth = 1.5
-        edgeLayer.strokeColor = cropBorderColor.CGColor
+        edgeLayer.strokeColor = cropBorderColor.cgColor
         view.layer.addSublayer(edgeLayer)
     }
     
     func initButton() {
         let bottomView = UIView()
-        bottomView.frame = CGRectMake(0, self.view.frame.height - 50, self.view.frame.width, 50)
-        bottomView.backgroundColor = UIColor.blackColor()
+        bottomView.frame = CGRect(x: 0, y: self.view.frame.height - 50, width: self.view.frame.width, height: 50)
+        bottomView.backgroundColor = UIColor.black
         bottomView.alpha = 0.7
         self.view.addSubview(bottomView)
         
         let button = UIButton()
-        button.frame = CGRectMake(0, 0, 100, 50)
-        button.setTitle("确定", forState: .Normal)
-        button.addTarget(self, action: #selector(self.sure), forControlEvents: .TouchUpInside)
+        button.frame = CGRect(x: 0, y: 0, width: 100, height: 50)
+        button.setTitle("确定", for: UIControlState())
+        button.addTarget(self, action: #selector(self.sure), for: .touchUpInside)
         bottomView.addSubview(button)
         
         let cancelBtn = UIButton()
-        cancelBtn.frame = CGRectMake(self.view.frame.width - 100, 0, 100, 50)
-        cancelBtn.setTitle("取消", forState: .Normal)
-        cancelBtn.addTarget(self, action: #selector(self.cancel), forControlEvents: .TouchUpInside)
+        cancelBtn.frame = CGRect(x: self.view.frame.width - 100, y: 0, width: 100, height: 50)
+        cancelBtn.setTitle("取消", for: UIControlState())
+        cancelBtn.addTarget(self, action: #selector(self.cancel), for: .touchUpInside)
         bottomView.addSubview(cancelBtn)
     }
     
@@ -174,12 +174,12 @@ private extension ImageCropViewController {
             w = newH
             h = newH
         }
-        let myImageRect = CGRectMake(x, y, w, h)
+        let myImageRect = CGRect(x: x, y: y, width: w, height: h)
         return self.origialImage!.imageWithCropRect(myImageRect)
         
     }
     
-    func handleScaleOverflow(lastFrame: CGRect) -> CGRect {
+    func handleScaleOverflow(_ lastFrame: CGRect) -> CGRect {
         
         var newFrame = lastFrame
         let oriCenter = self.origialImageView.center
@@ -187,17 +187,17 @@ private extension ImageCropViewController {
             newFrame = self.originalFrame
         }
         var maxFrame = self.originalFrame
-        maxFrame.size.width = self.originalFrame.width * maxScale
-        maxFrame.size.height = self.originalFrame.height * maxScale
-        if (newFrame.size.width > maxFrame.size.width) {
-            newFrame = maxFrame
+        maxFrame?.size.width = self.originalFrame.width * maxScale
+        maxFrame?.size.height = self.originalFrame.height * maxScale
+        if (newFrame.size.width > (maxFrame?.size.width)!) {
+            newFrame = maxFrame!
         }
         newFrame.origin.x = oriCenter.x - (newFrame.size.width / 2)
         newFrame.origin.y = oriCenter.y - (newFrame.size.height / 2)
         return newFrame
     }
     
-    func handleBorderOverflow(lastFrame: CGRect) -> CGRect {
+    func handleBorderOverflow(_ lastFrame: CGRect) -> CGRect {
         var newFrame = lastFrame
         // 水平
         if lastFrame.origin.x > cropFrame.origin.x {
@@ -224,38 +224,38 @@ private extension ImageCropViewController {
     
 extension ImageCropViewController {
     func cancel() {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     func sure() {
         delegate?.imageCropViewController?(self, didFinishCropingMediaWithImage: getSubImage())
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     
-    func pinch(pinch: UIPinchGestureRecognizer) {
-        if pinch.state == .Began || pinch.state == .Changed {
-            origialImageView.transform = CGAffineTransformScale(origialImageView.transform, pinch.scale, pinch.scale)
+    func pinch(_ pinch: UIPinchGestureRecognizer) {
+        if pinch.state == .began || pinch.state == .changed {
+            origialImageView.transform = origialImageView.transform.scaledBy(x: pinch.scale, y: pinch.scale)
             pinch.scale = 1
             if self.origialImageView.frame.width > cropRadius * 2 && self.origialImageView.frame.height > cropRadius * 2 {
                 self.origialImageView.frame = self.handleBorderOverflow(self.origialImageView.frame)
             }
-        }else if pinch.state == .Ended {
+        }else if pinch.state == .ended {
             var newFrame = handleScaleOverflow(self.origialImageView.frame)
             newFrame = handleBorderOverflow(newFrame)
-            UIView.animateWithDuration(0.25, animations: {
+            UIView.animate(withDuration: 0.25, animations: {
                 self.origialImageView.frame = newFrame
             })
         }
     }
     
-    func pan(pan: UIPanGestureRecognizer) {
-        if pan.state == .Began || pan.state == .Changed {
-            let translation = pan.translationInView(origialImageView.superview)
-            origialImageView.center = CGPointMake(origialImageView.center.x + translation.x, origialImageView.center.y + translation.y)
-            pan.setTranslation(CGPointZero, inView: origialImageView.superview)
-        }else if pan.state == .Ended {
-            UIView.animateWithDuration(0.25, animations: {
+    func pan(_ pan: UIPanGestureRecognizer) {
+        if pan.state == .began || pan.state == .changed {
+            let translation = pan.translation(in: origialImageView.superview)
+            origialImageView.center = CGPoint(x: origialImageView.center.x + translation.x, y: origialImageView.center.y + translation.y)
+            pan.setTranslation(CGPoint.zero, in: origialImageView.superview)
+        }else if pan.state == .ended {
+            UIView.animate(withDuration: 0.25, animations: {
                 self.origialImageView.frame = self.handleBorderOverflow(self.origialImageView.frame)
             })
         }
@@ -265,13 +265,13 @@ extension ImageCropViewController {
 
 extension UIImage {
     // crop image
-    func imageWithCropRect(imageRect: CGRect) -> UIImage {
+    func imageWithCropRect(_ imageRect: CGRect) -> UIImage {
         let fixImage = UIImage.fixOrientation(self)
-        let subImageRef = CGImageCreateWithImageInRect(fixImage.CGImage, imageRect)
+        let subImageRef = fixImage.cgImage?.cropping(to: imageRect)
         UIGraphicsBeginImageContext(imageRect.size)
         let context = UIGraphicsGetCurrentContext()
-        CGContextDrawImage(context, imageRect, subImageRef)
-        let cropImage = UIImage(CGImage: subImageRef!)
+        context?.draw(subImageRef!, in: imageRect)
+        let cropImage = UIImage(cgImage: subImageRef!)
         UIGraphicsEndImageContext()
         return cropImage
     }
@@ -280,7 +280,7 @@ extension UIImage {
 
 
 @objc public protocol ImageCropViewControllerDelegate: class {
-    optional func imageCropViewController(crop: ImageCropViewController, didFinishCropingMediaWithImage image: UIImage)
+    @objc optional func imageCropViewController(_ crop: ImageCropViewController, didFinishCropingMediaWithImage image: UIImage)
 }
 
 #endif

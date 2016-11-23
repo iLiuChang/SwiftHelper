@@ -13,7 +13,7 @@ extension UIViewController {
     /**
      显示
      */
-    public func showAlertController(title: String?, titltAtt: NSAttributedString? = nil, message: String?, messageAtt: NSAttributedString? = nil, preferredStyle: UIAlertControllerStyle = .Alert) -> UIAlertController {
+    public func showAlertController(_ title: String?, titltAtt: NSAttributedString? = nil, message: String?, messageAtt: NSAttributedString? = nil, preferredStyle: UIAlertControllerStyle = .alert) -> UIAlertController {
         let alertVC = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
         if let aTitleAtt = titltAtt {
             alertVC.setValue(aTitleAtt, forKey: "attributedTitle")
@@ -21,7 +21,7 @@ extension UIViewController {
         if let aMessageAtt = messageAtt {
             alertVC.setValue(aMessageAtt, forKey: "attributedMessage")
         }
-        self.presentViewController(alertVC, animated: true, completion: nil)
+        self.present(alertVC, animated: true, completion: nil)
         
         return alertVC
     }
@@ -31,46 +31,43 @@ extension UIViewController {
      
      - parameter time: 时间间隔，单位：秒，默认为1.0s
      */
-    public func dismissAfter(time: Double = 1.0) {
+    public func dismissAfter(_ time: Double = 1.0) {
         time.delay { 
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
         }
     }
     
     /**
      回到指定控制器
      
-     - parameter aClass: 类控制器
+     - parameter Controller: 类控制器
      */
-    func popToViewController(aClass: AnyClass) {
+    func pop(to Controller: AnyClass) {
         guard let vcs = self.navigationController?.viewControllers else { return }
-        for vc in vcs where vc.isKindOfClass(aClass) {
-            self.navigationController?.popToViewController(vc, animated: true)
+        for vc in vcs where vc.isKind(of: Controller) {
+            _ = self.navigationController?.popToViewController(vc, animated: true)
             break
         }
-        
     }
     
     /**
-     移除已经push进来的控制器
+     移除
      
-     - parameter aClass: 类控制器
+     - parameter Controller: 类控制器
      */
-    func removePushedController(aClass: AnyClass) {
+    func remove(from Controller: AnyClass) {
         guard let vcs = self.navigationController?.viewControllers else { return }
-        var index = 0
+        var index: Int?
         for i in 0 ..< vcs.count {
             let vc = vcs[i]
-            if vc.isKindOfClass(aClass) {
+            if vc.isKind(of: Controller) {
                 index = i
                 break
             }
         }
-        self.navigationController?.viewControllers.removeAtIndex(index)
+        guard let aIndex = index else { return }
+        self.navigationController?.viewControllers.remove(at: aIndex)
     }
-
-    
-
 }
 
 extension UIAlertController {
@@ -78,9 +75,9 @@ extension UIAlertController {
     /**
      添加action
      */
-    public func addAction(title: String?, titleColor: UIColor? = nil, completionHandler: (() -> Void)?) -> UIAlertController {
+    public func addAction(_ title: String?, titleColor: UIColor? = nil, style: UIAlertActionStyle = .default, completionHandler: (() -> Void)?) -> UIAlertController {
         
-        let action = UIAlertAction(title: title, style: .Default) { (aAction) in
+        let action = UIAlertAction(title: title, style: style) { (aAction) in
             if completionHandler != nil {
                 completionHandler!()
             }

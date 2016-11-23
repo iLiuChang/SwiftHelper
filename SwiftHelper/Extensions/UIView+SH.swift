@@ -60,7 +60,7 @@ extension UIView {
     public var viewController: UIViewController? {
         var parentResponder: UIResponder? = self
         while let responder = parentResponder {
-            parentResponder = responder.nextResponder()
+            parentResponder = responder.next
             if let vc = parentResponder as? UIViewController {
                 return vc
             }
@@ -71,18 +71,23 @@ extension UIView {
 
 extension UIView {
     
-    public func renderWithBounds(bounds: CGRect? = nil) -> UIImage {
+    public func render(at bounds: CGRect? = nil) -> UIImage {
         let bounds = bounds ?? self.bounds
         UIGraphicsBeginImageContextWithOptions(bounds.size, true, 0);
-        drawViewHierarchyInRect(CGRect(x: -bounds.origin.x, y: -bounds.origin.y, width: self.width , height: self.height), afterScreenUpdates: true)
+        drawHierarchy(in: CGRect(x: -bounds.origin.x, y: -bounds.origin.y, width: self.width , height: self.height), afterScreenUpdates: true)
         let screenshot = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
-        return screenshot;
+        return screenshot!;
     }
     
 }
 
-// layer
+// MARK: - layer
+private var BottomBorderViewKey = "SHBottomBorderViewKey"
+private var LeftBorderViewKey = "SHLeftBorderViewKey"
+private var TopBorderViewKey = "SHTopBorderViewKey"
+private var RightBorderViewKey = "SHBottomBorderViewKey"
+
 extension UIView {
     
     public var cornerRadius: CGFloat {
@@ -90,6 +95,9 @@ extension UIView {
             return layer.cornerRadius
         }
         set {
+            guard newValue >= 0 else {
+                return
+            }
             layer.cornerRadius = newValue
             layer.masksToBounds = newValue > 0
         }
@@ -100,86 +108,149 @@ extension UIView {
             return layer.borderWidth
         }
         set {
+            guard newValue >= 0 else {
+                return
+            }
             layer.borderWidth = newValue
         }
     }
     
     public var borderColor: UIColor? {
         get {
-            return UIColor(CGColor: layer.borderColor!)
+            return UIColor(cgColor: layer.borderColor!)
         }
         set {
-            layer.borderColor = newValue?.CGColor
+            layer.borderColor = newValue?.cgColor
         }
     }
     
     public var leftBorderWidth: CGFloat {
         get {
-            return 0.0   // Just to satisfy property
+            if let view = leftBorderView {
+                return view.height
+            }
+            return 0.0
         }
         set {
+            guard newValue >= 0 else {
+                return
+            }
             let line = UIView(frame: CGRect(x: 0.0, y: 0.0, width: newValue, height: bounds.height))
             line.translatesAutoresizingMaskIntoConstraints = false
-            line.backgroundColor = UIColor(CGColor: layer.borderColor!)
+            line.backgroundColor = UIColor(cgColor: layer.borderColor!)
             self.addSubview(line)
-            
+            leftBorderView = line
             let views = ["line": line]
             let metrics = ["lineWidth": newValue]
-            addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|[line(==lineWidth)]", options: [], metrics: metrics, views: views))
-            addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[line]|", options: [], metrics: nil, views: views))
+            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|[line(==lineWidth)]", options: [], metrics: metrics, views: views))
+            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[line]|", options: [], metrics: nil, views: views))
         }
     }
     
     public var topBorderWidth: CGFloat {
         get {
-            return 0.0   // Just to satisfy property
+            if let view = topBorderView {
+                return view.height
+            }
+            return 0.0
         }
         set {
+            guard newValue >= 0 else {
+                return
+            }
             let line = UIView(frame: CGRect(x: 0.0, y: 0.0, width: bounds.width, height: newValue))
             line.translatesAutoresizingMaskIntoConstraints = false
             line.backgroundColor = borderColor
             self.addSubview(line)
-            
+            topBorderView = line
             let views = ["line": line]
             let metrics = ["lineWidth": newValue]
-            addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|[line]|", options: [], metrics: nil, views: views))
-            addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[line(==lineWidth)]", options: [], metrics: metrics, views: views))
+            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|[line]|", options: [], metrics: nil, views: views))
+            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[line(==lineWidth)]", options: [], metrics: metrics, views: views))
         }
     }
     
     public var rightBorderWidth: CGFloat {
         get {
-            return 0.0   // Just to satisfy property
+            if let view = rightBorderView {
+                return view.height
+            }
+            return 0.0
         }
         set {
+            guard newValue >= 0 else {
+                return
+            }
             let line = UIView(frame: CGRect(x: bounds.width, y: 0.0, width: newValue, height: bounds.height))
             line.translatesAutoresizingMaskIntoConstraints = false
             line.backgroundColor = borderColor
             self.addSubview(line)
-            
+            rightBorderView = line
             let views = ["line": line]
             let metrics = ["lineWidth": newValue]
-            addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("[line(==lineWidth)]|", options: [], metrics: metrics, views: views))
-            addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[line]|", options: [], metrics: nil, views: views))
+            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "[line(==lineWidth)]|", options: [], metrics: metrics, views: views))
+            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[line]|", options: [], metrics: nil, views: views))
         }
     }
     
     public var bottomBorderWidth: CGFloat {
         get {
-            return 0.0   // Just to satisfy property
+            if let view = bottomBorderView {
+                return view.height
+            }
+            return 0.0
         }
         set {
+            guard newValue >= 0 else {
+                return
+            }
             let line = UIView(frame: CGRect(x: 0.0, y: bounds.height, width: bounds.width, height: newValue))
             line.translatesAutoresizingMaskIntoConstraints = false
             line.backgroundColor = borderColor
             self.addSubview(line)
-            
+            bottomBorderView = line
             let views = ["line": line]
             let metrics = ["lineWidth": newValue]
-            addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|[line]|", options: [], metrics: nil, views: views))
-            addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:[line(==lineWidth)]|", options: [], metrics: metrics, views: views))
+            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|[line]|", options: [], metrics: nil, views: views))
+            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[line(==lineWidth)]|", options: [], metrics: metrics, views: views))
         }
     }
     
+    public var bottomBorderView: UIView? {
+        get {
+            return objc_getAssociatedObject(self, &BottomBorderViewKey) as? UIView
+        }
+        set {
+            objc_setAssociatedObject(self, &BottomBorderViewKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
+    public var leftBorderView: UIView? {
+        get {
+            return objc_getAssociatedObject(self, &LeftBorderViewKey) as? UIView
+        }
+        set {
+            objc_setAssociatedObject(self, &LeftBorderViewKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
+    public var topBorderView: UIView? {
+        get {
+            return objc_getAssociatedObject(self, &TopBorderViewKey) as? UIView
+        }
+        set {
+            objc_setAssociatedObject(self, &TopBorderViewKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
+    public var rightBorderView: UIView? {
+        get {
+            return objc_getAssociatedObject(self, &RightBorderViewKey) as? UIView
+        }
+        set {
+            objc_setAssociatedObject(self, &RightBorderViewKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
+    
 }
-

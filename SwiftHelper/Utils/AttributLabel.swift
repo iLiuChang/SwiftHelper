@@ -10,44 +10,44 @@
 
 import UIKit
     
-public class AttributLabel: UILabel {
+open class AttributLabel: UILabel {
     
     /// 左右间距
-    public var kerning: CGFloat = 0 {
+    open var kerning: CGFloat = 0 {
         didSet {
             refreshAttributes()
         }
     }
     
     /// 上下间距
-    public var interlineSpacing: CGFloat = 0 {
+    open var interlineSpacing: CGFloat = 0 {
         didSet {
             refreshAttributes()
         }
     }
     
-    override public var text: String? {
+    override open var text: String? {
         didSet {
             refreshAttributes()
         }
     }
     
-    override public var font: UIFont? {
+    override open var font: UIFont? {
         didSet {
             refreshAttributes()
         }
     }
     
-    override public func awakeFromNib() {
+    override open func awakeFromNib() {
         super.awakeFromNib()
         refreshAttributes()
     }
     
-    private func refreshAttributes() {
+    fileprivate func refreshAttributes() {
         var attributes: [String: AnyObject] = [:]
         attributes[NSFontAttributeName] = font
         if kerning > 0 {
-            attributes[NSKernAttributeName] = kerning
+            attributes[NSKernAttributeName] = kerning as AnyObject?
         }
         if interlineSpacing > 0 {
             let paragraphStyle = NSMutableParagraphStyle()
