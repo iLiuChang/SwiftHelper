@@ -9,10 +9,10 @@ iOS8.0+  Swift3.0
 pod 'SwiftHelper'
 ```
 
-###【说明】
+### 【说明】
 依赖库: [Kingfisher](https://github.com/onevcat/Kingfisher)
 
-#####Utils
+##### Utils
 - InfiniteScrollView
 两个UIImageView实现的无限滚动
 
@@ -28,7 +28,7 @@ pod 'SwiftHelper'
 - GCDTimer
 多线程定时器
 
-#####Extensions
+##### Extensions
 - Array
 - String
 - NSDate
@@ -38,8 +38,8 @@ pod 'SwiftHelper'
 - UIColor
 - Double
 
-###【联系我】
+### 【联系我】
 如果有问题欢迎大家pull requests
 
-- 微博： [@Fly刘畅](http://weibo.com/liuchang712)
+- 微博： [@刘畅流畅](http://weibo.com/liuchang712)
 - Twitter: [@_LiuChang](https://twitter.com/_LiuChang)
