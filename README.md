@@ -1,7 +1,7 @@
 # SwiftHelper
 Swift中常用的Util和Extension
 
-iOS8.0+  Swift3.0
+iOS8.0+  Swift4.2
 
 ### 【安装】
 
@@ -10,11 +10,8 @@ pod 'SwiftHelper'
 ```
 
 ### 【说明】
-依赖库: [Kingfisher](https://github.com/onevcat/Kingfisher)
 
 ##### Utils
-- InfiniteScrollView
-两个UIImageView实现的无限滚动
 
 - KeyboardManager
 一行代码实现键盘监听
