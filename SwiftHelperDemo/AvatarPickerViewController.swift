@@ -37,7 +37,7 @@ open class AvatarPickerViewController: UIViewController {
      */
     func showInController(_ superController: UIViewController) {
         
-        superController.addChildViewController(self)
+        superController.addChild(self)
         
         let titleCamera = actionCamera?.title ?? "拍照"
         let titlePhotoLibrary = actionPhotoLibrary?.title ?? "相册"
@@ -77,10 +77,10 @@ open class AvatarPickerViewController: UIViewController {
 private extension AvatarPickerViewController {
     
     func removeController() {
-        self.removeFromParentViewController()
+        self.removeFromParent()
     }
 
-    func showPickCotrollerWithType(_ type: UIImagePickerControllerSourceType, toController controller: UIViewController) {
+    func showPickCotrollerWithType(_ type: UIImagePickerController.SourceType, toController controller: UIViewController) {
         let pickVC = UIImagePickerController()
         pickVC.allowsEditing = false
         pickVC.delegate = self
@@ -98,9 +98,9 @@ private extension AvatarPickerViewController {
 
 extension AvatarPickerViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true) {
-            let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+            let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
             if picker.sourceType == .camera {
                 UIImageWriteToSavedPhotosAlbum(image, self, nil, nil)
             }

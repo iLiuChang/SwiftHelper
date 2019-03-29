@@ -27,7 +27,7 @@ open class KeyboardManager: NSObject {
     fileprivate var frame: CGRect!
     fileprivate var changeView: UIView!
     
-    open static let shareInstance: KeyboardManager = KeyboardManager()
+    public static let shareInstance: KeyboardManager = KeyboardManager()
     
     /**
      添加监听键盘
@@ -47,8 +47,8 @@ open class KeyboardManager: NSObject {
      */
     open func removeObserver() {
         let center = NotificationCenter.default
-        center.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        center.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        center.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        center.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
 }
@@ -57,15 +57,15 @@ private extension KeyboardManager {
     
    func addKeyboardObserver() {
         let center = NotificationCenter.default
-        center.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        center.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    center.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+    center.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     @objc func keyboardWillShow(_ note:Notification){
         let telMaxY = frame.maxY
-        let keyboardH : CGFloat = ((note.userInfo![UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue.size.height)
+        let keyboardH : CGFloat = ((note.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue.size.height)
         let keyboardY : CGFloat = changeView.frame.size.height - keyboardH
-        var duration  = (note.userInfo![UIKeyboardAnimationDurationUserInfoKey] as AnyObject).doubleValue
+        var duration  = (note.userInfo![UIResponder.keyboardAnimationDurationUserInfoKey] as AnyObject).doubleValue
         if duration < 0.0 {
             duration = 0.25
         }
@@ -80,7 +80,7 @@ private extension KeyboardManager {
     }
     
     @objc func keyboardWillHide(_ note:Notification){
-        let duration  = (note.userInfo![UIKeyboardAnimationDurationUserInfoKey] as AnyObject).doubleValue
+        let duration  = (note.userInfo![UIResponder.keyboardAnimationDurationUserInfoKey] as AnyObject).doubleValue
         UIView.animate(withDuration: duration!, animations: { () -> Void in
             self.changeView.transform = CGAffineTransform.identity
         }) 

@@ -36,13 +36,13 @@ extension UIImage {
         var transform = CGAffineTransform.identity
         if aImage.imageOrientation == .down || aImage.imageOrientation == .downMirrored {
             transform = transform.translatedBy(x: aImage.size.width, y: aImage.size.height)
-            transform = transform.rotated(by: CGFloat( M_PI))
+            transform = transform.rotated(by: CGFloat( Double.pi))
         }else if aImage.imageOrientation == .left || aImage.imageOrientation == .leftMirrored {
             transform = transform.translatedBy(x: aImage.size.width, y: 0)
-            transform = transform.rotated(by: CGFloat(M_PI_2))
+            transform = transform.rotated(by: CGFloat(Double.pi/2))
         }else if aImage.imageOrientation == .right || aImage.imageOrientation == .rightMirrored {
             transform = transform.translatedBy(x: 0, y: aImage.size.height)
-            transform = transform.rotated(by: -CGFloat(M_PI_2))
+            transform = transform.rotated(by: -CGFloat(Double.pi/2))
         }
         
         if aImage.imageOrientation == .upMirrored || aImage.imageOrientation == .downMirrored {
@@ -159,7 +159,7 @@ extension UIImage {
      *  @point: 在图片大小范围内
      *  @atts: 属性配置，比如颜色、字体大小等
      */
-    public func watermarkImage(_ text: String, point: CGPoint, atts: [String: AnyObject]) -> UIImage {
+    public func watermarkImage(_ text: String, point: CGPoint, atts: [NSAttributedString.Key : AnyObject]) -> UIImage {
         
         let size = self.size
         let H = size.height
@@ -214,7 +214,7 @@ public extension UIImage {
     public class func gifWithName(_ name: String) -> UIImage? {
         var fileName = name
         if fileName.hasSuffix(".gif") {
-            let nameRange = fileName.characters.index(fileName.endIndex, offsetBy: -4) ..< fileName.endIndex
+            let nameRange = fileName.index(fileName.endIndex, offsetBy: -4) ..< fileName.endIndex
             fileName.removeSubrange(nameRange)
         }
         guard let bundleURL = Bundle.main

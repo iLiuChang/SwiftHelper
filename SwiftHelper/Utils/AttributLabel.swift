@@ -44,16 +44,17 @@ open class AttributLabel: UILabel {
     }
     
     fileprivate func refreshAttributes() {
-        var attributes: [String: AnyObject] = [:]
-        attributes[NSFontAttributeName] = font
+        var attributes: [NSAttributedString.Key: Any] = [:]
+        attributes[NSAttributedString.Key.font] = font
+        
         if kerning > 0 {
-            attributes[NSKernAttributeName] = kerning as AnyObject?
+            attributes[NSAttributedString.Key.kern] = kerning as AnyObject?
         }
         if interlineSpacing > 0 {
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.alignment = textAlignment
             paragraphStyle.lineSpacing = CGFloat(interlineSpacing)
-            attributes[NSParagraphStyleAttributeName] = paragraphStyle
+            attributes[NSAttributedString.Key.paragraphStyle] = paragraphStyle
         }
         attributedText = NSAttributedString(string: text ?? "", attributes: attributes)
     }

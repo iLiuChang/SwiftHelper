@@ -26,18 +26,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let view = InfiniteScrollView()
-        view.dataSource = self
-        view.delegate = self
-  
-        view.frame = CGRect(x: 0, y: 20, width: self.view.frame.width, height: 200)
-        view.delegate = self
-        self.view.addSubview(view)
-        let date = Date() + 60
-        print(date)
-        iPageControl.frame = CGRect(x: 0, y: 0, width: self.view.width, height: 20)
-        view.addSubview(iPageControl)
-        
         let label = AttributLabel()
         label.numberOfLines = 10
 //        label.kerning = 2
@@ -45,7 +33,7 @@ class ViewController: UIViewController {
         label.frame = CGRect(x: 0, y: 300, width: 100, height: 150)
         label.backgroundColor = UIColor.red
         label.text = "nihaosdfasdfasdfasdfasdfasdfasdfasdfasdfasdfaff"
-//        self.view.addSubview(label)
+        self.view.addSubview(label)
         
        iImageView.frame = CGRect(x: 50, y: 300, width: 100, height: 100)
         self.view.addSubview(iImageView)
@@ -71,27 +59,4 @@ class ViewController: UIViewController {
 }
 
 
-extension ViewController: InfiniteScrollViewDelegate, InfiniteScrollViewDataSource {
-    
-    var placeholderImage: UIImage {
-        return UIImage()
-    }
-
-    func numberOfItemsAtInfiniteScrollView(_ infiniteScrollView: InfiniteScrollView) -> Int {
-        return images.count
-    }
-    
-    func infiniteScrollView(_ infiniteScrollView: InfiniteScrollView, imageURLStringAtIndex index: Int) -> String? {
-        return images[index]
-    }
-    
-    func infiniteScrollView(_ infiniteScrollView: InfiniteScrollView, didSelectAtIndex index: Int) {
-        print(index)
-    }
-    
-    func infiniteScrollView(_ infiniteScrollView: InfiniteScrollView, didScrollAtIndex index: Int) {
-        iPageControl.currentPage = index
-    }
-
-}
 

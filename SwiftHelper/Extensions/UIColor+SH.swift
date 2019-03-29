@@ -24,14 +24,14 @@ public extension UIColor {
         var alpha: CGFloat = 1.0
         var hex = hexString.uppercased()
         if hex.hasPrefix("#") {
-            hex = hex.substring(from: hex.characters.index(hex.startIndex, offsetBy: 1))
+            hex = hex.substring(from: hex.index(hex.startIndex, offsetBy: 1))
         }else if hex.hasPrefix("0X") {
-            hex = hex.substring(from: hex.characters.index(hex.startIndex, offsetBy: 2))
+            hex = hex.substring(from: hex.index(hex.startIndex, offsetBy: 2))
         }
         let scanner = Scanner(string: hex)
         var hexValue: CUnsignedLongLong = 0
         if scanner.scanHexInt64(&hexValue) {
-            switch (hex.characters.count) {
+            switch (hex.count) {
             case 3:
                 red   = CGFloat((hexValue & 0xF00) >> 8)       / 15.0
                 green = CGFloat((hexValue & 0x0F0) >> 4)       / 15.0

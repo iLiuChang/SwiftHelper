@@ -134,13 +134,13 @@ private extension ImageCropViewController {
         
         let button = UIButton()
         button.frame = CGRect(x: 0, y: 0, width: 100, height: 50)
-        button.setTitle("确定", for: UIControlState())
+        button.setTitle("确定", for: UIControl.State())
         button.addTarget(self, action: #selector(self.sure), for: .touchUpInside)
         bottomView.addSubview(button)
         
         let cancelBtn = UIButton()
         cancelBtn.frame = CGRect(x: self.view.frame.width - 100, y: 0, width: 100, height: 50)
-        cancelBtn.setTitle("取消", for: UIControlState())
+        cancelBtn.setTitle("取消", for: UIControl.State())
         cancelBtn.addTarget(self, action: #selector(self.cancel), for: .touchUpInside)
         bottomView.addSubview(cancelBtn)
     }
@@ -223,17 +223,17 @@ private extension ImageCropViewController {
 // MARK: - response events
     
 extension ImageCropViewController {
-    func cancel() {
+    @objc func cancel() {
         self.dismiss(animated: true, completion: nil)
     }
     
-    func sure() {
+    @objc func sure() {
         delegate?.imageCropViewController?(self, didFinishCropingMediaWithImage: getSubImage())
         self.dismiss(animated: true, completion: nil)
     }
     
     
-    func pinch(_ pinch: UIPinchGestureRecognizer) {
+    @objc func pinch(_ pinch: UIPinchGestureRecognizer) {
         if pinch.state == .began || pinch.state == .changed {
             origialImageView.transform = origialImageView.transform.scaledBy(x: pinch.scale, y: pinch.scale)
             pinch.scale = 1
@@ -249,7 +249,7 @@ extension ImageCropViewController {
         }
     }
     
-    func pan(_ pan: UIPanGestureRecognizer) {
+    @objc func pan(_ pan: UIPanGestureRecognizer) {
         if pan.state == .began || pan.state == .changed {
             let translation = pan.translation(in: origialImageView.superview)
             origialImageView.center = CGPoint(x: origialImageView.center.x + translation.x, y: origialImageView.center.y + translation.y)

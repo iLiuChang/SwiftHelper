@@ -13,7 +13,7 @@ extension UIViewController {
     /**
      显示
      */
-    public func showAlertController(_ title: String?, titltAtt: NSAttributedString? = nil, message: String?, messageAtt: NSAttributedString? = nil, preferredStyle: UIAlertControllerStyle = .alert) -> UIAlertController {
+    public func showAlertController(_ title: String?, titltAtt: NSAttributedString? = nil, message: String?, messageAtt: NSAttributedString? = nil, preferredStyle: UIAlertController.Style = .alert) -> UIAlertController {
         let alertVC = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
         if let aTitleAtt = titltAtt {
             alertVC.setValue(aTitleAtt, forKey: "attributedTitle")
@@ -75,7 +75,7 @@ extension UIAlertController {
     /**
      添加action
      */
-    public func addAction(_ title: String?, titleColor: UIColor? = nil, style: UIAlertActionStyle = .default, completionHandler: (() -> Void)?) -> UIAlertController {
+    public func addAction(_ title: String?, titleColor: UIColor? = nil, style: UIAlertAction.Style = .default, completionHandler: (() -> Void)?) -> UIAlertController {
         
         let action = UIAlertAction(title: title, style: style) { (aAction) in
             if completionHandler != nil {

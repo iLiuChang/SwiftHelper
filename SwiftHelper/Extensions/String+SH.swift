@@ -10,7 +10,7 @@ import UIKit
 
 extension String {
     public subscript (i: Int) -> Character {
-        return self[self.characters.index(self.startIndex, offsetBy: i)]
+        return self[self.index(self.startIndex, offsetBy: i)]
     }
     
     public subscript (i: Int) -> String {
@@ -18,12 +18,12 @@ extension String {
     }
     
     public subscript (r: Range<Int>) -> String {
-        return substring(with: Range(characters.index(startIndex, offsetBy: r.lowerBound)..<characters.index(startIndex, offsetBy: r.upperBound)))
+        return substring(with: index(startIndex, offsetBy: r.lowerBound)..<index(startIndex, offsetBy: r.upperBound))
     }
 
     /// 字符个数
     public var length: Int {
-        return self.characters.count
+        return self.count
     }
     
     /// 是否是手机格式
@@ -51,7 +51,7 @@ extension String {
     public func attributedStrinWithColor(_ color: UIColor, rangeString string: String) -> NSAttributedString {
         let att = NSMutableAttributedString(string: self)
         let range = (self as NSString).range(of: string)
-        att.addAttributes([NSForegroundColorAttributeName: color], range: range)
+        att.addAttributes([NSAttributedString.Key.foregroundColor: color], range: range)
         return att
     }
     
@@ -62,7 +62,7 @@ extension String {
         guard self.length > 0 else {
             return
         }
-        let range = self.characters.index(self.endIndex, offsetBy: -1) ..< self.endIndex
+        let range = self.index(self.endIndex, offsetBy: -1) ..< self.endIndex
         self = self.replacingCharacters(in: range, with: "")
     }
     
