@@ -187,7 +187,7 @@ extension UIImage {
 }
 
 // MARK: - gif
-public extension UIImage {
+extension UIImage {
  
     public class func gifWithData(_ data: Data) -> UIImage? {
         guard let source = CGImageSourceCreateWithData(data as CFData, nil) else {

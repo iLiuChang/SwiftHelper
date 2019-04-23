@@ -21,7 +21,7 @@ class GCDTimer {
                      actionBlock: @escaping ((GCDTimer) -> ())) {
         self.init()
         let dispath = DispatchSource.makeTimerSource(queue: queue) as? DispatchSource
-        dispath!.scheduleRepeating(deadline: .now(), interval: interval)
+        dispath!.schedule(deadline: .now(), repeating: interval)
         dispath!.setEventHandler(handler: {
             actionBlock(self)
             if !repeats {

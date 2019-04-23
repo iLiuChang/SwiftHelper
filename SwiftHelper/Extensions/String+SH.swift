@@ -17,9 +17,9 @@ extension String {
         return String(self[i] as Character)
     }
     
-    public subscript (r: Range<Int>) -> String {
-        return substring(with: index(startIndex, offsetBy: r.lowerBound)..<index(startIndex, offsetBy: r.upperBound))
-    }
+//    public subscript (r: Range<Int>) -> String {
+//        return substring(with: index(startIndex, offsetBy: r.lowerBound)..<index(startIndex, offsetBy: r.upperBound))
+//    }
 
     /// 字符个数
     public var length: Int {
