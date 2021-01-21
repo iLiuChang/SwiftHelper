@@ -21,6 +21,7 @@
 		58FE877D1D68474C000BAD14 /* String+SH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FE877C1D68474C000BAD14 /* String+SH.swift */; };
 		DA609C1F25B9169800FDABBA /* JSONSerialization+SH.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA609C1E25B9169800FDABBA /* JSONSerialization+SH.swift */; };
 		DA609C2225B91B7100FDABBA /* UIAlertController+SH.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA609C2125B91B7100FDABBA /* UIAlertController+SH.swift */; };
+		DA609C2925B98F8100FDABBA /* Int+SH.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA609C2825B98F8100FDABBA /* Int+SH.swift */; };
 		DA6CB72725B5778300420457 /* Timer+SH.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6CB72625B5778300420457 /* Timer+SH.swift */; };
 		DA6CB72A25B580C500420457 /* UIScrollView+SHKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6CB72925B580C500420457 /* UIScrollView+SHKeyboard.swift */; };
 		DA6CB72F25B5938600420457 /* Dictionary+SH.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6CB72E25B5938600420457 /* Dictionary+SH.swift */; };
@@ -43,6 +44,7 @@
 		58FE877C1D68474C000BAD14 /* String+SH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+SH.swift"; sourceTree = "<group>"; };
 		DA609C1E25B9169800FDABBA /* JSONSerialization+SH.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONSerialization+SH.swift"; sourceTree = "<group>"; };
 		DA609C2125B91B7100FDABBA /* UIAlertController+SH.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+SH.swift"; sourceTree = "<group>"; };
+		DA609C2825B98F8100FDABBA /* Int+SH.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+SH.swift"; sourceTree = "<group>"; };
 		DA6CB72625B5778300420457 /* Timer+SH.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Timer+SH.swift"; sourceTree = "<group>"; };
 		DA6CB72925B580C500420457 /* UIScrollView+SHKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+SHKeyboard.swift"; sourceTree = "<group>"; };
 		DA6CB72E25B5938600420457 /* Dictionary+SH.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+SH.swift"; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				585E0FBE1D8E7CDF0062E059 /* Double+SH.swift */,
+				DA609C2825B98F8100FDABBA /* Int+SH.swift */,
 				24DC3B371D67145E0042657E /* Array+SH.swift */,
 				58FE877C1D68474C000BAD14 /* String+SH.swift */,
 				24DC3B381D67145E0042657E /* Date+SH.swift */,
@@ -207,6 +210,7 @@
 			files = (
 				DA6CB72725B5778300420457 /* Timer+SH.swift in Sources */,
 				24DC3B411D67145E0042657E /* Date+SH.swift in Sources */,
+				DA609C2925B98F8100FDABBA /* Int+SH.swift in Sources */,
 				24DC3B441D67145E0042657E /* UIView+SH.swift in Sources */,
 				58FE87761D6818FD000BAD14 /* UIColor+SH.swift in Sources */,
 				DA609C2225B91B7100FDABBA /* UIAlertController+SH.swift in Sources */,

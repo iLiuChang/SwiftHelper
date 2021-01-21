@@ -35,13 +35,14 @@ public extension UIAlertController {
     }
     
     class func show(in vc: UIViewController, title: String?, message: String? = nil, delay seconds: TimeInterval = 2.0) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        if (seconds > 0) {
-            seconds.delay {
-                alertController.dismiss(animated: true, completion: nil)
-            }
+        if (seconds <= 0) {
+            return
         }
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.show(in: vc)
+        seconds.delay {
+            alertController.dismiss(animated: true, completion: nil)
+        }
     }
     
     func show(in vc: UIViewController) {

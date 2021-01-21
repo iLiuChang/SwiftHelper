@@ -72,19 +72,6 @@ public extension UIView {
     }
 }
 
-public extension UIView {
-    
-    func render(at bounds: CGRect? = nil) -> UIImage {
-        let bounds = bounds ?? self.bounds
-        UIGraphicsBeginImageContextWithOptions(bounds.size, true, 0);
-        drawHierarchy(in: CGRect(x: -bounds.origin.x, y: -bounds.origin.y, width: self.width , height: self.height), afterScreenUpdates: true)
-        let screenshot = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        return screenshot!;
-    }
-    
-}
-
 // MARK: - layer
 private var BottomBorderViewKey = "SHBottomBorderViewKey"
 private var LeftBorderViewKey = "SHLeftBorderViewKey"
