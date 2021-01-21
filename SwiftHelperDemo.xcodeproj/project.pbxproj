@@ -16,15 +16,14 @@
 		24DC3B411D67145E0042657E /* Date+SH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DC3B381D67145E0042657E /* Date+SH.swift */; };
 		24DC3B431D67145E0042657E /* UIImage+SH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DC3B3A1D67145E0042657E /* UIImage+SH.swift */; };
 		24DC3B441D67145E0042657E /* UIView+SH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DC3B3B1D67145E0042657E /* UIView+SH.swift */; };
-		24DC3B451D67145E0042657E /* UIViewController+SH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DC3B3C1D67145E0042657E /* UIViewController+SH.swift */; };
-		24DC3B471D67145E0042657E /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DC3B3F1D67145E0042657E /* KeyboardManager.swift */; };
 		585E0FBF1D8E7CDF0062E059 /* Double+SH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585E0FBE1D8E7CDF0062E059 /* Double+SH.swift */; };
-		58DB8D961D69436E0097AC58 /* ImageCropViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DB8D951D69436E0097AC58 /* ImageCropViewController.swift */; };
-		58F45BA81DE585F700CF7BF2 /* GCDTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F45BA71DE585F700CF7BF2 /* GCDTimer.swift */; };
-		58F45BAA1DE5A30500CF7BF2 /* AvatarPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F45BA91DE5A30500CF7BF2 /* AvatarPickerViewController.swift */; };
 		58FE87761D6818FD000BAD14 /* UIColor+SH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FE87751D6818FD000BAD14 /* UIColor+SH.swift */; };
-		58FE87781D681E5A000BAD14 /* AttributLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FE87771D681E5A000BAD14 /* AttributLabel.swift */; };
 		58FE877D1D68474C000BAD14 /* String+SH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FE877C1D68474C000BAD14 /* String+SH.swift */; };
+		DA609C1F25B9169800FDABBA /* JSONSerialization+SH.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA609C1E25B9169800FDABBA /* JSONSerialization+SH.swift */; };
+		DA609C2225B91B7100FDABBA /* UIAlertController+SH.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA609C2125B91B7100FDABBA /* UIAlertController+SH.swift */; };
+		DA6CB72725B5778300420457 /* Timer+SH.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6CB72625B5778300420457 /* Timer+SH.swift */; };
+		DA6CB72A25B580C500420457 /* UIScrollView+SHKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6CB72925B580C500420457 /* UIScrollView+SHKeyboard.swift */; };
+		DA6CB72F25B5938600420457 /* Dictionary+SH.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6CB72E25B5938600420457 /* Dictionary+SH.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,15 +38,14 @@
 		24DC3B381D67145E0042657E /* Date+SH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+SH.swift"; sourceTree = "<group>"; };
 		24DC3B3A1D67145E0042657E /* UIImage+SH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+SH.swift"; sourceTree = "<group>"; };
 		24DC3B3B1D67145E0042657E /* UIView+SH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+SH.swift"; sourceTree = "<group>"; };
-		24DC3B3C1D67145E0042657E /* UIViewController+SH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+SH.swift"; sourceTree = "<group>"; };
-		24DC3B3F1D67145E0042657E /* KeyboardManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardManager.swift; sourceTree = "<group>"; };
 		585E0FBE1D8E7CDF0062E059 /* Double+SH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+SH.swift"; sourceTree = "<group>"; };
-		58DB8D951D69436E0097AC58 /* ImageCropViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCropViewController.swift; sourceTree = "<group>"; };
-		58F45BA71DE585F700CF7BF2 /* GCDTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDTimer.swift; sourceTree = "<group>"; };
-		58F45BA91DE5A30500CF7BF2 /* AvatarPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarPickerViewController.swift; sourceTree = "<group>"; };
 		58FE87751D6818FD000BAD14 /* UIColor+SH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+SH.swift"; sourceTree = "<group>"; };
-		58FE87771D681E5A000BAD14 /* AttributLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributLabel.swift; sourceTree = "<group>"; };
 		58FE877C1D68474C000BAD14 /* String+SH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+SH.swift"; sourceTree = "<group>"; };
+		DA609C1E25B9169800FDABBA /* JSONSerialization+SH.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONSerialization+SH.swift"; sourceTree = "<group>"; };
+		DA609C2125B91B7100FDABBA /* UIAlertController+SH.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+SH.swift"; sourceTree = "<group>"; };
+		DA6CB72625B5778300420457 /* Timer+SH.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Timer+SH.swift"; sourceTree = "<group>"; };
+		DA6CB72925B580C500420457 /* UIScrollView+SHKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+SHKeyboard.swift"; sourceTree = "<group>"; };
+		DA6CB72E25B5938600420457 /* Dictionary+SH.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+SH.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,7 +87,6 @@
 		24591D4E1D670B7B00B90A38 /* SwiftHelperDemo */ = {
 			isa = PBXGroup;
 			children = (
-				58F45BA91DE5A30500CF7BF2 /* AvatarPickerViewController.swift */,
 				24591D4F1D670B7B00B90A38 /* AppDelegate.swift */,
 				24591D511D670B7B00B90A38 /* ViewController.swift */,
 				24591D531D670B7B00B90A38 /* Main.storyboard */,
@@ -103,36 +100,36 @@
 		24DC3B351D67145E0042657E /* SwiftHelper */ = {
 			isa = PBXGroup;
 			children = (
-				24DC3B361D67145E0042657E /* Extensions */,
-				24DC3B3D1D67145E0042657E /* Utils */,
+				DA6CB72425B576D800420457 /* Foundation */,
+				24DC3B361D67145E0042657E /* UIKit */,
 			);
 			path = SwiftHelper;
 			sourceTree = "<group>";
 		};
-		24DC3B361D67145E0042657E /* Extensions */ = {
+		24DC3B361D67145E0042657E /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				24DC3B3A1D67145E0042657E /* UIImage+SH.swift */,
+				24DC3B3B1D67145E0042657E /* UIView+SH.swift */,
+				58FE87751D6818FD000BAD14 /* UIColor+SH.swift */,
+				DA6CB72925B580C500420457 /* UIScrollView+SHKeyboard.swift */,
+				DA609C2125B91B7100FDABBA /* UIAlertController+SH.swift */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		DA6CB72425B576D800420457 /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				585E0FBE1D8E7CDF0062E059 /* Double+SH.swift */,
 				24DC3B371D67145E0042657E /* Array+SH.swift */,
 				58FE877C1D68474C000BAD14 /* String+SH.swift */,
 				24DC3B381D67145E0042657E /* Date+SH.swift */,
-				24DC3B3A1D67145E0042657E /* UIImage+SH.swift */,
-				24DC3B3B1D67145E0042657E /* UIView+SH.swift */,
-				24DC3B3C1D67145E0042657E /* UIViewController+SH.swift */,
-				58FE87751D6818FD000BAD14 /* UIColor+SH.swift */,
-				585E0FBE1D8E7CDF0062E059 /* Double+SH.swift */,
+				DA6CB72625B5778300420457 /* Timer+SH.swift */,
+				DA6CB72E25B5938600420457 /* Dictionary+SH.swift */,
+				DA609C1E25B9169800FDABBA /* JSONSerialization+SH.swift */,
 			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		24DC3B3D1D67145E0042657E /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				24DC3B3F1D67145E0042657E /* KeyboardManager.swift */,
-				58FE87771D681E5A000BAD14 /* AttributLabel.swift */,
-				58DB8D951D69436E0097AC58 /* ImageCropViewController.swift */,
-				58F45BA71DE585F700CF7BF2 /* GCDTimer.swift */,
-			);
-			path = Utils;
+			path = Foundation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,7 +159,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 1020;
+				LastUpgradeCheck = 1220;
 				ORGANIZATIONNAME = LiuChang;
 				TargetAttributes = {
 					24591D4B1D670B7B00B90A38 = {
@@ -208,21 +205,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA6CB72725B5778300420457 /* Timer+SH.swift in Sources */,
 				24DC3B411D67145E0042657E /* Date+SH.swift in Sources */,
 				24DC3B441D67145E0042657E /* UIView+SH.swift in Sources */,
-				24DC3B471D67145E0042657E /* KeyboardManager.swift in Sources */,
 				58FE87761D6818FD000BAD14 /* UIColor+SH.swift in Sources */,
+				DA609C2225B91B7100FDABBA /* UIAlertController+SH.swift in Sources */,
 				585E0FBF1D8E7CDF0062E059 /* Double+SH.swift in Sources */,
-				58F45BA81DE585F700CF7BF2 /* GCDTimer.swift in Sources */,
 				24DC3B401D67145E0042657E /* Array+SH.swift in Sources */,
 				24591D521D670B7B00B90A38 /* ViewController.swift in Sources */,
 				58FE877D1D68474C000BAD14 /* String+SH.swift in Sources */,
 				24DC3B431D67145E0042657E /* UIImage+SH.swift in Sources */,
-				58DB8D961D69436E0097AC58 /* ImageCropViewController.swift in Sources */,
-				58FE87781D681E5A000BAD14 /* AttributLabel.swift in Sources */,
+				DA6CB72F25B5938600420457 /* Dictionary+SH.swift in Sources */,
 				24591D501D670B7B00B90A38 /* AppDelegate.swift in Sources */,
-				58F45BAA1DE5A30500CF7BF2 /* AvatarPickerViewController.swift in Sources */,
-				24DC3B451D67145E0042657E /* UIViewController+SH.swift in Sources */,
+				DA6CB72A25B580C500420457 /* UIScrollView+SHKeyboard.swift in Sources */,
+				DA609C1F25B9169800FDABBA /* JSONSerialization+SH.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +268,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -296,7 +293,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -330,6 +327,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -348,7 +346,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -365,7 +363,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SwiftHelperDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = LiuChang.SwiftHelperDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -381,7 +379,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SwiftHelperDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = LiuChang.SwiftHelperDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";

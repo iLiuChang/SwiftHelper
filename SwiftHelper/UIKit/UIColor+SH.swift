@@ -8,16 +8,9 @@
 
 import UIKit
 
-extension UIColor {
+public extension UIColor {
     
-    /**
-     十六进制颜色
-     
-     - parameter hex: 十六进制字符
-     
-     - returns: UIColor
-     */
-    public convenience init(hexString: String) {
+    convenience init(hexString: String) {
         var red:   CGFloat = 0.0
         var green: CGFloat = 0.0
         var blue:  CGFloat = 0.0
@@ -59,12 +52,10 @@ extension UIColor {
         self.init(red:red, green:green, blue:blue, alpha:alpha)
     }
     
-    public convenience init(rgbValue: UInt32) {
+    convenience init(rgbValue: UInt32) {
         let red = CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0
         let green = CGFloat((rgbValue & 0xFF00) >> 8) / 255.0
         let blue = CGFloat(rgbValue & 0xFF) / 255.0
         self.init(red:red, green:green, blue:blue, alpha:1.0)
     }
-
-    
 }

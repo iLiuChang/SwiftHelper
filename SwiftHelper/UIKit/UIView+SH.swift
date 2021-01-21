@@ -8,56 +8,59 @@
 
 import UIKit
 
-extension UIView {
+public extension UIView {
     
-    public var width: CGFloat {
+    var width: CGFloat {
         get { return self.frame.size.width }
         set { self.frame.size.width = newValue }
     }
     
-    public var height: CGFloat {
+    var height: CGFloat {
         get { return self.frame.size.height }
         set { self.frame.size.height = newValue }
     }
     
-    public var top: CGFloat {
+    var top: CGFloat {
         get { return self.frame.origin.y }
         set { self.frame.origin.y = newValue }
     }
-    public var right: CGFloat {
+    
+    var right: CGFloat {
         get { return self.frame.maxX }
         set { self.frame.origin.x = newValue - self.width }
     }
-    public var bottom: CGFloat {
+    
+    var bottom: CGFloat {
         get { return self.frame.maxY }
         set { self.frame.origin.y = newValue - self.height }
     }
     
-    public var left: CGFloat {
+    var left: CGFloat {
         get { return self.frame.origin.x }
         set { self.frame.origin.x = newValue }
     }
     
-    public var centerX: CGFloat {
+    var centerX: CGFloat {
         get { return self.center.x }
         set { self.center = CGPoint(x: newValue,y: self.centerY) }
     }
     
-    public var centerY: CGFloat {
+    var centerY: CGFloat {
         get { return self.center.y }
         set { self.center = CGPoint(x: self.centerX,y: newValue) }
     }
     
-    public var origin: CGPoint {
+    var origin: CGPoint {
         set { self.frame.origin = newValue }
         get { return self.frame.origin }
     }
-    public var size: CGSize {
+    
+    var size: CGSize {
         set { self.frame.size = newValue }
         get { return self.frame.size }
     }
     
-    public var viewController: UIViewController? {
+    var viewController: UIViewController? {
         var parentResponder: UIResponder? = self
         while let responder = parentResponder {
             parentResponder = responder.next
@@ -69,9 +72,9 @@ extension UIView {
     }
 }
 
-extension UIView {
+public extension UIView {
     
-    public func render(at bounds: CGRect? = nil) -> UIImage {
+    func render(at bounds: CGRect? = nil) -> UIImage {
         let bounds = bounds ?? self.bounds
         UIGraphicsBeginImageContextWithOptions(bounds.size, true, 0);
         drawHierarchy(in: CGRect(x: -bounds.origin.x, y: -bounds.origin.y, width: self.width , height: self.height), afterScreenUpdates: true)
@@ -88,9 +91,9 @@ private var LeftBorderViewKey = "SHLeftBorderViewKey"
 private var TopBorderViewKey = "SHTopBorderViewKey"
 private var RightBorderViewKey = "SHBottomBorderViewKey"
 
-extension UIView {
+public extension UIView {
     
-    public var cornerRadius: CGFloat {
+    var cornerRadius: CGFloat {
         get {
             return layer.cornerRadius
         }
@@ -103,7 +106,7 @@ extension UIView {
         }
     }
     
-    public var borderWidth: CGFloat {
+    var borderWidth: CGFloat {
         get {
             return layer.borderWidth
         }
@@ -115,7 +118,7 @@ extension UIView {
         }
     }
     
-    public var borderColor: UIColor? {
+    var borderColor: UIColor? {
         get {
             return UIColor(cgColor: layer.borderColor!)
         }
@@ -124,7 +127,7 @@ extension UIView {
         }
     }
     
-    public var leftBorderWidth: CGFloat {
+    var leftBorderWidth: CGFloat {
         get {
             if let view = leftBorderView {
                 return view.height
@@ -147,7 +150,7 @@ extension UIView {
         }
     }
     
-    public var topBorderWidth: CGFloat {
+    var topBorderWidth: CGFloat {
         get {
             if let view = topBorderView {
                 return view.height
@@ -170,7 +173,7 @@ extension UIView {
         }
     }
     
-    public var rightBorderWidth: CGFloat {
+    var rightBorderWidth: CGFloat {
         get {
             if let view = rightBorderView {
                 return view.height
@@ -193,7 +196,7 @@ extension UIView {
         }
     }
     
-    public var bottomBorderWidth: CGFloat {
+    var bottomBorderWidth: CGFloat {
         get {
             if let view = bottomBorderView {
                 return view.height
@@ -216,7 +219,7 @@ extension UIView {
         }
     }
     
-    public var bottomBorderView: UIView? {
+    var bottomBorderView: UIView? {
         get {
             return objc_getAssociatedObject(self, &BottomBorderViewKey) as? UIView
         }
@@ -225,7 +228,7 @@ extension UIView {
         }
     }
     
-    public var leftBorderView: UIView? {
+    var leftBorderView: UIView? {
         get {
             return objc_getAssociatedObject(self, &LeftBorderViewKey) as? UIView
         }
@@ -234,7 +237,7 @@ extension UIView {
         }
     }
     
-    public var topBorderView: UIView? {
+    var topBorderView: UIView? {
         get {
             return objc_getAssociatedObject(self, &TopBorderViewKey) as? UIView
         }
@@ -243,7 +246,7 @@ extension UIView {
         }
     }
     
-    public var rightBorderView: UIView? {
+    var rightBorderView: UIView? {
         get {
             return objc_getAssociatedObject(self, &RightBorderViewKey) as? UIView
         }

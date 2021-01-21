@@ -9,11 +9,7 @@
 import UIKit
 
 extension Double {
-    /**
-     延迟
-     
-     - parameter closure: 结束
-     */
+
     func delay(_ closure:@escaping ()->()) {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(self * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
     }
