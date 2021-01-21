@@ -1,7 +1,10 @@
 # SwiftHelper
-Swift中常用的Util和Extension
+Swift中常用的Extension
 
-iOS8.0+  Swift4.2
+###【环境】
+
+- iOS 8.0+
+- Swift 5  
 
 ### 【安装】
 
@@ -9,34 +12,3 @@ iOS8.0+  Swift4.2
 pod 'SwiftHelper'
 ```
 
-### 【说明】
-
-##### Utils
-
-- KeyboardManager
-一行代码实现键盘监听
-
-- AttributLabel
-可以调整文本之间上下间距和左右间距
-
-- ImageCropViewController
-对图片裁剪
-
-- GCDTimer
-多线程定时器
-
-##### Extensions
-- Array
-- String
-- NSDate
-- UIImage
-- UIView
-- UIViewController
-- UIColor
-- Double
-
-### 【联系我】
-如果有问题欢迎大家pull requests
-
-- 微博： [@刘畅流畅](http://weibo.com/liuchang712)
-- Twitter: [@_LiuChang](https://twitter.com/_LiuChang)
