@@ -104,5 +104,20 @@ public extension String {
         let size = CGSize(width: width, height: .greatestFiniteMagnitude)
         return self.size(for: font, size: size).height
     }
+}
 
+public extension String {
+    init(_ value: Float, precision: Int) {
+        let nFormatter = NumberFormatter()
+        nFormatter.numberStyle = .decimal
+        nFormatter.maximumFractionDigits = precision
+        self = nFormatter.string(from: NSNumber(value: value))!
+    }
+    
+    init(_ value: Double, precision: Int) {
+        let nFormatter = NumberFormatter()
+        nFormatter.numberStyle = .decimal
+        nFormatter.maximumFractionDigits = precision
+        self = nFormatter.string(from: NSNumber(value: value))!
+    }
 }

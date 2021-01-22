@@ -35,18 +35,20 @@ public extension Array {
         }
     }
     
-    func each (_ call: (Element) -> ()) {
-        for item in self {
-            call(item)
+    func union(_ values: [Element]...) -> Array {
+        var result = self
+        for array in values {
+            for value in array {
+                result.append(value)
+            }
         }
+        return result
     }
     
-    func each (_ call: (Int, Element) -> ()) {
-        var index = 0
-        for item in self {
-            call(index, item)
-            index += 1
-        }
+    func random() -> Element? {
+        guard count > 0 else { return nil }
+        let index = Int(arc4random_uniform(UInt32(count)))
+        return self[index]
     }
     
     func jsonString() -> String? {
@@ -56,5 +58,24 @@ public extension Array {
     static func json(from jsonString: String) -> Array? {
         guard let data = JSONSerialization.jsonObject(from: jsonString) as? Array else { return nil }
         return data
+    }
+}
+
+extension Array where Element: Equatable {
+    
+    func indexes(of value: Element) -> [Int] {
+        return enumerated().compactMap { ($0.element == value) ? $0.offset : nil }
+    }
+    
+    mutating func remove(value: Element) {
+        self = filter { $0 != value }
+    }
+}
+
+public extension Array where Element: Hashable {
+    
+    mutating func remove(objects: [Element]) {
+        let elementsSet = Set(objects)
+        self = filter { !elementsSet.contains($0) }
     }
 }

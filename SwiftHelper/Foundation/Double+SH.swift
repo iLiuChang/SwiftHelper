@@ -8,10 +8,23 @@
 
 import UIKit
 
-extension Double {
+public extension Double {
 
+    var abs: Double {
+        return fabs(self)
+    }
+    
     func delay(_ closure:@escaping ()->()) {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(self * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
     }
 
 }
+
+public extension Float {
+
+    var abs: Float {
+        return fabsf(self)
+    }
+    
+}
+
