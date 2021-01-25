@@ -107,6 +107,24 @@ public extension String {
 }
 
 public extension String {
+    init?(base64: String) {
+        let pad = String(repeating: "=", count: base64.length % 4)
+        let base64Padded = base64 + pad
+        if let decodedData = Data(base64Encoded: base64Padded, options: NSData.Base64DecodingOptions(rawValue: 0)), let decodedString = NSString(data: decodedData, encoding: String.Encoding.utf8.rawValue) {
+            self.init(decodedString)
+            return
+        }
+        return nil
+    }
+    
+    var base64: String {
+        let plainData = (self as NSString).data(using: String.Encoding.utf8.rawValue)
+        let base64String = plainData!.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0))
+        return base64String
+    }
+}
+
+public extension String {
     init(_ value: Float, precision: Int) {
         let nFormatter = NumberFormatter()
         nFormatter.numberStyle = .decimal

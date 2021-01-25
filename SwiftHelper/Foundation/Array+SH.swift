@@ -18,7 +18,6 @@ public extension Array {
     /// 多个索引
     /// eg: let array = [23,23,4,5,67,7] print(array[3,2,1])
     subscript(i1: Int, i2: Int, rest: Int...) -> [Element] {
-        //通过实现get方法，获取数组中相应的值
         get {
             var result: [Element] = [self[i1], self[i2]]
             for index in rest {
@@ -26,8 +25,6 @@ public extension Array {
             }
             return result
         }
-        
-        //通过set方法，对数组相应的索引进行设置
         set (values) {
             for (index, value) in zip([i1, i2] + rest, values) {
                 self[index] = value
@@ -51,6 +48,14 @@ public extension Array {
         return self[index]
     }
     
+    func forEachEnumerated(_ body: @escaping (_ index: Int, _ value: Element) -> Void) {
+        enumerated().forEach(body)
+    }
+    
+    func testAll(_ body: @escaping (Element) -> Bool) -> Bool {
+        return !contains { !body($0) }
+    }
+    
     func jsonString() -> String? {
         return JSONSerialization.jsonString(from: self)
     }
@@ -61,8 +66,8 @@ public extension Array {
     }
 }
 
-extension Array where Element: Equatable {
-    
+public extension Array where Element: Equatable {
+
     func indexes(of value: Element) -> [Int] {
         return enumerated().compactMap { ($0.element == value) ? $0.offset : nil }
     }
@@ -77,5 +82,15 @@ public extension Array where Element: Hashable {
     mutating func remove(objects: [Element]) {
         let elementsSet = Set(objects)
         self = filter { !elementsSet.contains($0) }
+    }
+}
+
+public extension Array where Element: NSObject {
+    func clone() -> Array {
+        var objects = Array<Element>()
+        for element in self {
+            objects.append(element.copy() as! Element)
+        }
+        return objects
     }
 }

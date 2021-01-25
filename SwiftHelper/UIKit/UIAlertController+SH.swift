@@ -45,8 +45,8 @@ public extension UIAlertController {
         }
     }
     
-    func show(in vc: UIViewController) {
-        vc.present(self, animated: true, completion: nil)
+    func show(in vc: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) {
+        vc?.present(self, animated: true, completion: nil)
     }
     
     private func getActionIndex(_ action: UIAlertAction) -> Int {

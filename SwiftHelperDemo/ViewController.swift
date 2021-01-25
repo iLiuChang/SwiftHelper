@@ -27,12 +27,18 @@ class ViewController: UIViewController {
         text.backgroundColor = UIColor.red
         scrollview.addSubview(text)
         
-        let button = UIButton(frame: CGRect(x: 300, y: self.view.height+100, width: 100, height: 30))
+        let button = UIButton(target: self, action: #selector(self.didSelectButton), font: UIFont.systemFont(ofSize: 13), titleColor: UIColor.black, title: "sure")
+        button.frame = CGRect(x: 300, y: self.view.height+100, width: 100, height: 30)
         scrollview.addSubview(button)
         button.backgroundColor = UIColor(hexString: "#FCD02E")
-        button.addTarget(self, action:  #selector(self.didSelectButton), for: UIControl.Event.touchUpInside)
 
-
+        let test = UITextField(font: UIFont.systemFont(ofSize: 16), textColor: UIColor.white)
+        test.frame = CGRect(x: 20, y: 300, width: 100, height: 40)
+        test.backgroundColor = UIColor.red
+        test.leftTextOffset = 20
+        test.rightTextOffset = 20
+        self.view.addSubview(test)
+        
     }
     
     @objc func didSelectButton() {

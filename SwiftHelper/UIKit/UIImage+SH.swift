@@ -68,13 +68,17 @@ public extension UIImage {
     }
     
     /// 裁剪图片
-    func crop(at cropRect: CGRect) -> UIImage? {
-        guard let subImageRef = self.cgImage?.cropping(to: cropRect) else { return nil}
-        UIGraphicsBeginImageContext(cropRect.size)
-        UIGraphicsGetCurrentContext()?.draw(subImageRef, in: cropRect)
-        let newImage = UIImage(cgImage: subImageRef)
-        UIGraphicsEndImageContext()
-        return newImage
+    func crop(at bound: CGRect) -> UIImage? {
+        guard self.size.width > bound.origin.x else {
+            return nil
+        }
+        guard self.size.height > bound.origin.y else {
+            return nil
+        }
+        let scaledBounds: CGRect = CGRect(x: bound.origin.x * self.scale, y: bound.origin.y * self.scale, width: bound.size.width * self.scale, height: bound.size.height * self.scale)
+        let imageRef = self.cgImage?.cropping(to: scaledBounds)
+        let croppedImage: UIImage = UIImage(cgImage: imageRef!, scale: self.scale, orientation: .up)
+        return croppedImage
     }
    
     func tint(color: UIColor) -> UIImage {
