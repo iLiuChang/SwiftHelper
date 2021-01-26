@@ -52,10 +52,6 @@ public extension Array {
         enumerated().forEach(body)
     }
     
-    func testAll(_ body: @escaping (Element) -> Bool) -> Bool {
-        return !contains { !body($0) }
-    }
-    
     func jsonString() -> String? {
         return JSONSerialization.jsonString(from: self)
     }
@@ -75,6 +71,16 @@ public extension Array where Element: Equatable {
     mutating func remove(value: Element) {
         self = filter { $0 != value }
     }
+    
+    mutating func remove(first value: Element) {
+        guard let index = firstIndex(of: value) else { return }
+        remove(at: index)
+    }
+    
+    mutating func remove(last value: Element) {
+        guard let index = lastIndex(of: value) else { return }
+        remove(at: index)
+    }
 }
 
 public extension Array where Element: Hashable {
@@ -82,6 +88,14 @@ public extension Array where Element: Hashable {
     mutating func remove(objects: [Element]) {
         let elementsSet = Set(objects)
         self = filter { !elementsSet.contains($0) }
+    }
+    
+    mutating func unique() {
+        self = reduce(into: []) {
+            if !$0.contains($1) {
+                $0.append($1)
+            }
+        }
     }
 }
 
@@ -94,3 +108,4 @@ public extension Array where Element: NSObject {
         return objects
     }
 }
+

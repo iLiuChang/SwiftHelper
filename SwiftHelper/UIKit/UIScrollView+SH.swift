@@ -1,19 +1,27 @@
 //
-//  UIScrollView+SHKeyboard.swift
+//  UIScrollView+SH.swift
 //  SwiftHelperDemo
 //
-//  Created by 刘畅 on 2021/1/18.
+//  Created by 刘畅 on 2021/1/26.
 //  Copyright © 2021 LiuChang. All rights reserved.
 //
 
 import UIKit
 
-private var UIScrollViewTransformViewKey = "UIScrollViewTransformViewKey"
+public extension UIScrollView {
+    func scrollToBottom(animated: Bool) {
+        var bottomContentOffset = contentOffset
+        bottomContentOffset.y = contentSize.height - bounds.height + contentInset.bottom
+        setContentOffset(bottomContentOffset, animated: animated)
+    }
+}
 
+
+private var UIScrollViewKeyboardTransformViewKey = "UIScrollViewKeyboardTransformViewKey"
 public extension UIScrollView {
 
     func addKeyboardObserver(transformView: UIView) {
-        objc_setAssociatedObject(self, &UIScrollViewTransformViewKey, transformView, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        objc_setAssociatedObject(self, &UIScrollViewKeyboardTransformViewKey, transformView, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
@@ -30,7 +38,7 @@ public extension UIScrollView {
     }
 
     @objc private func keyboardWillShow(_ notification: Foundation.Notification) {
-        guard let transformView = objc_getAssociatedObject(self, &UIScrollViewTransformViewKey) as? UIView else { return }
+        guard let transformView = objc_getAssociatedObject(self, &UIScrollViewKeyboardTransformViewKey) as? UIView else { return }
         let scrollViewRect = transformView.convert(self.frame, from: self.superview)
         if let rectValue = (notification as NSNotification).userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let kbRect = transformView.convert(rectValue.cgRectValue, from: nil)
