@@ -21,7 +21,7 @@ public extension UIImage {
         self.init(cgImage: cgImage)
     }
     
-    /// 截屏
+    /// Screenshot
     convenience init(captureView: UIView) {
         UIGraphicsBeginImageContextWithOptions(captureView.bounds.size, captureView.isOpaque, 0.0)
         captureView.drawHierarchy(in: captureView.bounds, afterScreenUpdates: false)
@@ -30,7 +30,7 @@ public extension UIImage {
         self.init(cgImage: img!.cgImage!)
     }
 
-    /// 裁剪为圆形的图片
+    /// Image cropped to a circle
     func circleImage() -> UIImage {
         let imageW = self.size.width
         let imageH = self.size.height
@@ -44,7 +44,7 @@ public extension UIImage {
         return newImage!
     }
     
-    /// 裁剪为带边框的圆形图片
+    /// Crop into a round image with border
     func circleImage(border: CGFloat, borderColor: UIColor) -> UIImage {
         let imageW = self.size.width
         let imageH = self.size.height
@@ -67,7 +67,7 @@ public extension UIImage {
         return newImage!
     }
     
-    /// 裁剪图片
+    /// Crop the image
     func crop(at bound: CGRect) -> UIImage? {
         guard self.size.width > bound.origin.x else {
             return nil
@@ -81,6 +81,7 @@ public extension UIImage {
         return croppedImage
     }
    
+    /// Color the image
     func tint(color: UIColor) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
         let context = UIGraphicsGetCurrentContext()
@@ -97,6 +98,7 @@ public extension UIImage {
         return newImage!
     }
     
+    /// return gray image
     func grayImage() -> UIImage? {
         let imageRect = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height)
         let colorSpace = CGColorSpaceCreateDeviceGray();
@@ -113,7 +115,8 @@ public extension UIImage {
         return nil
     }
     
-    func size(to size: CGSize) -> UIImage {
+    /// Resize image
+    func resize(to size: CGSize) -> UIImage {
         UIGraphicsBeginImageContext(size)
         self.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
@@ -121,7 +124,7 @@ public extension UIImage {
         return newImage!
     }
     
-    /// 提取颜色 1x1 pixel
+    /// Pick the color on the picture(1x1 pixel)
     func pickColor(at point: CGPoint) -> UIColor {
         let pixelData = self.cgImage?.dataProvider?.data
         let data = CFDataGetBytePtr(pixelData)
@@ -136,7 +139,7 @@ public extension UIImage {
         return UIColor(red: red, green: green, blue: blue, alpha: alpha)
     }
     
-    /// 修正方向
+    /// Fix orientation
     func fixOrientation() -> UIImage? {
         guard self.cgImage != nil else {
             return nil

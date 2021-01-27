@@ -10,12 +10,12 @@ import UIKit
 
 public extension Array {
     
-    /// 防止数组越界
+    /// return safe element
     subscript (safe index: Int) -> Element? {
         return (0..<count).contains(index) ? self[index] : nil
     }
     
-    /// 多个索引
+    /// multiple index
     /// eg: let array = [23,23,4,5,67,7] print(array[3,2,1])
     subscript(i1: Int, i2: Int, rest: Int...) -> [Element] {
         get {
