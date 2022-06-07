@@ -1,6 +1,6 @@
 //
-//  NSDate.swift
-//  YST
+//  Date+SH.swift
+//  SwiftHelper (https://github.com/iLiuChang/SwiftHelper)
 //
 //  Created by LiuChang on 16/8/16.
 //  Copyright © 2016年 LiuChang. All rights reserved.

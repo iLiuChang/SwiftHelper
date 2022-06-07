@@ -27,10 +27,9 @@ class ViewController: UIViewController {
         text.backgroundColor = UIColor.red
         scrollview.addSubview(text)
         
-        let button = SHButton(target: self, action: #selector(self.didSelectButton), font: UIFont.systemFont(ofSize: 13), titleColor: UIColor.black, title: "sure")
+        let button = UIButton(target: self, action: #selector(self.didSelectButton), font: UIFont.systemFont(ofSize: 13), titleColor: UIColor.black, title: "sure")
         button.setImage(UIImage(named: "income_gold_icon"), for: .normal)
-        button.titlePosition = .left
-        button.spacing = 20
+        button.setEdgeInsetsStyle(.left, imageTitleSpace: 20)
         button.frame = CGRect(x: 300, y: self.view.height+100, width: 100, height: 30)
         scrollview.addSubview(button)
         button.backgroundColor = UIColor(hexString: "#FCD02E")
@@ -53,7 +52,9 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 }
 
 

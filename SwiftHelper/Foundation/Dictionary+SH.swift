@@ -1,6 +1,6 @@
 //
 //  Dictionary+SH.swift
-//  SwiftHelperDemo
+//  SwiftHelper (https://github.com/iLiuChang/SwiftHelper)
 //
 //  Created by 刘畅 on 2021/1/18.
 //  Copyright © 2021 LiuChang. All rights reserved.

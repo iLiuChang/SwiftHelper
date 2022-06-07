@@ -1,6 +1,6 @@
 //
-//  Double+Extension.swift
-//  SwiftHelperDemo
+//  Double+SH.swift
+//  SwiftHelper (https://github.com/iLiuChang/SwiftHelper)
 //
 //  Created by LiuChang on 16/9/18.
 //  Copyright © 2016年 LiuChang. All rights reserved.

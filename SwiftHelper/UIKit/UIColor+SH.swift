@@ -1,6 +1,6 @@
 //
-//  UIColor+Extension.swift
-//  SwiftHelper
+//  UIColor+SH.swift
+//  SwiftHelper (https://github.com/iLiuChang/SwiftHelper)
 //
 //  Created by LiuChang on 16/8/20.
 //  Copyright © 2016年 LiuChang. All rights reserved.
