@@ -40,7 +40,7 @@ public extension UIAlertController {
         }
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.show(in: vc)
-        seconds.delay {
+        seconds.alertDelay {
             alertController.dismiss(animated: true, completion: nil)
         }
     }
@@ -58,4 +58,12 @@ public extension UIAlertController {
         return -1
     }
     
+}
+
+private extension Double {
+    
+    func alertDelay(_ closure:@escaping ()->()) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(self * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
+    }
+
 }

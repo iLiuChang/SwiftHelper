@@ -11,55 +11,55 @@ import Foundation
 public extension Date {
     
     var year: Int {
-        return (Calendar.current as NSCalendar).components(.year, from: self).year!
+        return Calendar.current.component(.year, from: self)
     }
     
     var month: Int {
-        return (Calendar.current as NSCalendar).components(.month, from: self).month!
+        return Calendar.current.component(.month, from: self)
     }
     
     var day: Int {
-        return (Calendar.current as NSCalendar).components(.day, from: self).day!
+        return Calendar.current.component(.day, from: self)
     }
     
     var hour: Int {
-        return (Calendar.current as NSCalendar).components(.hour, from: self).hour!
+        return Calendar.current.component(.hour, from: self)
     }
     
     var minute: Int {
-        return (Calendar.current as NSCalendar).components(.minute, from: self).minute!
+        return Calendar.current.component(.minute, from: self)
     }
     
     var second: Int {
-        return (Calendar.current as NSCalendar).components(.second, from: self).second!
+        return Calendar.current.component(.second, from: self)
     }
     
     var nanosecond: Int {
-        return (Calendar.current as NSCalendar).components(.nanosecond, from: self).nanosecond!
+        return Calendar.current.component(.nanosecond, from: self)
     }
     
     var weekday: Int {
-        return (Calendar.current as NSCalendar).components(.weekday, from: self).weekday!
+        return Calendar.current.component(.weekday, from: self)
     }
     
     var weekdayOrdinal: Int {
-        return (Calendar.current as NSCalendar).components(.weekdayOrdinal, from: self).weekdayOrdinal!
+        return Calendar.current.component(.weekdayOrdinal, from: self)
     }
     
     var weekOfMonth: Int {
-        return (Calendar.current as NSCalendar).components(.weekOfMonth, from: self).weekOfMonth!
+        return Calendar.current.component(.weekOfMonth, from: self)
     }
     
     var weekOfYear: Int {
-        return (Calendar.current as NSCalendar).components(.weekOfYear, from: self).weekOfYear!
+        return Calendar.current.component(.weekOfYear, from: self)
     }
     
     var yearForWeekOfYear: Int {
-        return (Calendar.current as NSCalendar).components(.yearForWeekOfYear, from: self).yearForWeekOfYear!
+        return Calendar.current.component(.yearForWeekOfYear, from: self)
     }
     
     var quarter: Int {
-        return (Calendar.current as NSCalendar).components(.quarter, from: self).quarter!
+        return Calendar.current.component(.quarter, from: self)
     }
     
     var isLeapMonth: Bool {
