@@ -3,8 +3,10 @@ Some extensions in Swift.
 
 ## Requirements
 
-- **iOS 9.0+**
+- **iOS 10.0+**
 - **Swift 4.2+**
+
+> If you need to support iOS 9.0, please use version 1.0
 
 ## Installation
 
