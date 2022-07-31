@@ -8,32 +8,12 @@
 
 import UIKit
 
-/// image
+/// image position
 public enum UIButtonEdgeInsetsStyle: Int {
     case top, bottom, left, right
 }
 
 public extension UIButton {
-
-    convenience init(target: Any?, action: Selector, font: UIFont, titleColor: UIColor, title: String? = nil) {
-        self.init()
-        self.setTitleColor(titleColor, for: .normal)
-        self.setTitle(title, for: .normal)
-        self.titleLabel?.font = font
-        self.addTarget(target, action: action, for: UIControl.Event.touchUpInside)
-    }
-    
-    convenience init(target: Any?, action: Selector, image: UIImage) {
-        self.init()
-        self.setImage(image, for: .normal)
-        self.addTarget(target, action: action, for: UIControl.Event.touchUpInside)
-    }
-    
-    convenience init(target: Any?, action: Selector, backgroundImage: UIImage) {
-        self.init()
-        self.setBackgroundImage(backgroundImage, for: .normal)
-        self.addTarget(target, action: action, for: UIControl.Event.touchUpInside)
-    }
 
     func setEdgeInsetsStyle(_ style: UIButtonEdgeInsetsStyle, imageTitleSpace space:CGFloat) {
         guard let titleLabel = self.titleLabel else { return }

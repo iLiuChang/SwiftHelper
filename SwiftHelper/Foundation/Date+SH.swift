@@ -103,41 +103,49 @@ public extension Date {
         let calender = Calendar.current
         var components = DateComponents()
         components.year = years
-        return (calender as NSCalendar).date(byAdding: components, to: self, options: .wrapComponents)!
+        return calender.date(byAdding: components, to: self)!
     }
     
     func addMonths(_ months: Int) -> Date {
         let calender = Calendar.current
         var components = DateComponents()
         components.month = months
-        return (calender as NSCalendar).date(byAdding: components, to: self, options: .wrapComponents)!
+        return calender.date(byAdding: components, to: self)!
     }
     
     func addWeeks(_ weeks: Int) -> Date {
         let calender = Calendar.current
         var components = DateComponents()
         components.weekOfYear = weeks
-        return (calender as NSCalendar).date(byAdding: components, to: self, options: .wrapComponents)!
+        return calender.date(byAdding: components, to: self)!
     }
     
     func addDays(_ days: Int) -> Date {
-        let aTimeInterval = self.timeIntervalSinceReferenceDate + Double(86400 * days)
-        return Date.init(timeIntervalSinceReferenceDate: aTimeInterval)
+        let calender = Calendar.current
+        var components = DateComponents()
+        components.day = days
+        return calender.date(byAdding: components, to: self)!
     }
     
     func addHours(_ hours: Int) -> Date {
-        let aTimeInterval = self.timeIntervalSinceReferenceDate + Double(3600 * hours)
-        return Date.init(timeIntervalSinceReferenceDate: aTimeInterval)
+        let calender = Calendar.current
+        var components = DateComponents()
+        components.hour = hours
+        return calender.date(byAdding: components, to: self)!
     }
     
     func addMinutes(_ minutes: Int) -> Date {
-        let aTimeInterval = self.timeIntervalSinceReferenceDate + Double(60 * minutes)
-        return Date.init(timeIntervalSinceReferenceDate: aTimeInterval)
+        let calender = Calendar.current
+        var components = DateComponents()
+        components.minute = minutes
+        return calender.date(byAdding: components, to: self)!
     }
     
     func addSeconds(_ seconds: Int) -> Date {
-        let aTimeInterval = self.timeIntervalSinceReferenceDate + Double(seconds)
-        return Date.init(timeIntervalSinceReferenceDate: aTimeInterval)
+        let calender = Calendar.current
+        var components = DateComponents()
+        components.second = seconds
+        return calender.date(byAdding: components, to: self)!
     }
 
 }

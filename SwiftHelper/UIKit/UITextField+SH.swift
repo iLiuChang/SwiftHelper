@@ -9,13 +9,6 @@
 import UIKit
 public extension UITextField {
     
-    convenience init(font: UIFont, textColor: UIColor, placeholder: String? = nil) {
-        self.init()
-        self.font = font
-        self.textColor = textColor
-        self.placeholder = placeholder
-    }
-    
     var leftTextOffset: CGFloat {
         get {
             return self.leftView?.width ?? 0

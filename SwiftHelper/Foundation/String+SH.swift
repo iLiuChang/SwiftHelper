@@ -18,16 +18,12 @@ public extension String {
     }
     
     subscript (r: Range<Int>) -> String? {
-        if r.lowerBound < 0 || r.upperBound > self.length {
+        if r.lowerBound < 0 || r.upperBound > self.count {
             return nil
         }
         
         let substring = self[index(startIndex, offsetBy: r.lowerBound)..<index(startIndex, offsetBy: r.upperBound)]
         return String(substring)
-    }
-
-    var length: Int {
-        return self.count
     }
 
     var isNumber: Bool {
@@ -38,7 +34,7 @@ public extension String {
     }
     
     mutating func removeLastCharacter() {
-        guard self.length > 0 else {
+        guard self.count > 0 else {
             return
         }
         let range = self.index(self.endIndex, offsetBy: -1) ..< self.endIndex
@@ -54,7 +50,7 @@ public extension String {
     }
     
     func containsEmoji() -> Bool {
-        for i in 0...length {
+        for i in 0...count {
             let c: unichar = (self as NSString).character(at: i)
             if (0xD800 <= c && c <= 0xDBFF) || (0xDC00 <= c && c <= 0xDFFF) {
                 return true
@@ -107,20 +103,21 @@ public extension String {
 }
 
 public extension String {
-    init?(base64: String) {
-        let pad = String(repeating: "=", count: base64.length % 4)
-        let base64Padded = base64 + pad
+    func base64Decoding() -> String? {
+        let pad = String(repeating: "=", count: count % 4)
+        let base64Padded = self + pad
         if let decodedData = Data(base64Encoded: base64Padded, options: NSData.Base64DecodingOptions(rawValue: 0)), let decodedString = NSString(data: decodedData, encoding: String.Encoding.utf8.rawValue) {
-            self.init(decodedString)
-            return
+            return String(decodedString)
         }
         return nil
     }
     
-    var base64: String {
+    func base64Encoded() -> String? {
         let plainData = (self as NSString).data(using: String.Encoding.utf8.rawValue)
-        let base64String = plainData!.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0))
-        return base64String
+        if let base64String = plainData?.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0)) {
+            return base64String
+        }
+        return nil
     }
 }
 
