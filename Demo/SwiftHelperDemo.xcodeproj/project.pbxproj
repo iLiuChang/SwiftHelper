@@ -26,6 +26,7 @@
 		5868BA8C284EE6FE008DD9CC /* URL+SH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5868BA7B284EE6FE008DD9CC /* URL+SH.swift */; };
 		5868BA8E284EE6FE008DD9CC /* Double+SH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5868BA7D284EE6FE008DD9CC /* Double+SH.swift */; };
 		5868BA8F284EE6FE008DD9CC /* String+SH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5868BA7E284EE6FE008DD9CC /* String+SH.swift */; };
+		58734637289761BA00DF7D42 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58734636289761BA00DF7D42 /* ReusableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		5868BA7B284EE6FE008DD9CC /* URL+SH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+SH.swift"; sourceTree = "<group>"; };
 		5868BA7D284EE6FE008DD9CC /* Double+SH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+SH.swift"; sourceTree = "<group>"; };
 		5868BA7E284EE6FE008DD9CC /* String+SH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+SH.swift"; sourceTree = "<group>"; };
+		58734636289761BA00DF7D42 /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 				5868BA72284EE6FE008DD9CC /* UIView+SH.swift */,
 				5868BA73284EE6FE008DD9CC /* UIAlertController+SH.swift */,
 				5868BA74284EE6FE008DD9CC /* UIColor+SH.swift */,
+				58734636289761BA00DF7D42 /* ReusableView.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5868BA8C284EE6FE008DD9CC /* URL+SH.swift in Sources */,
+				58734637289761BA00DF7D42 /* ReusableView.swift in Sources */,
 				5868BA86284EE6FE008DD9CC /* UIColor+SH.swift in Sources */,
 				5868BA87284EE6FE008DD9CC /* Int+SH.swift in Sources */,
 				5868BA84284EE6FE008DD9CC /* UIView+SH.swift in Sources */,
