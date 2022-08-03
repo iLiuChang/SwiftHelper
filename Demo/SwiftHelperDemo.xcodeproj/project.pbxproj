@@ -12,6 +12,7 @@
 		24591D551D670B7B00B90A38 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24591D531D670B7B00B90A38 /* Main.storyboard */; };
 		24591D571D670B7B00B90A38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24591D561D670B7B00B90A38 /* Assets.xcassets */; };
 		24591D5A1D670B7B00B90A38 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24591D581D670B7B00B90A38 /* LaunchScreen.storyboard */; };
+		285D111C28993AD4001E0923 /* UIControl+SH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285D111B28993AD3001E0923 /* UIControl+SH.swift */; };
 		5868BA81284EE6FE008DD9CC /* UIImage+SH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5868BA6F284EE6FE008DD9CC /* UIImage+SH.swift */; };
 		5868BA82284EE6FE008DD9CC /* UITextField+SH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5868BA70284EE6FE008DD9CC /* UITextField+SH.swift */; };
 		5868BA83284EE6FE008DD9CC /* UIButton+SH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5868BA71284EE6FE008DD9CC /* UIButton+SH.swift */; };
@@ -37,6 +38,7 @@
 		24591D561D670B7B00B90A38 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		24591D591D670B7B00B90A38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		24591D5B1D670B7B00B90A38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		285D111B28993AD3001E0923 /* UIControl+SH.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+SH.swift"; sourceTree = "<group>"; };
 		5868BA6F284EE6FE008DD9CC /* UIImage+SH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+SH.swift"; sourceTree = "<group>"; };
 		5868BA70284EE6FE008DD9CC /* UITextField+SH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+SH.swift"; sourceTree = "<group>"; };
 		5868BA71284EE6FE008DD9CC /* UIButton+SH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+SH.swift"; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				5868BA73284EE6FE008DD9CC /* UIAlertController+SH.swift */,
 				5868BA74284EE6FE008DD9CC /* UIColor+SH.swift */,
 				58734636289761BA00DF7D42 /* ReusableView.swift */,
+				285D111B28993AD3001E0923 /* UIControl+SH.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 				5868BA8E284EE6FE008DD9CC /* Double+SH.swift in Sources */,
 				24591D521D670B7B00B90A38 /* ViewController.swift in Sources */,
 				5868BA82284EE6FE008DD9CC /* UITextField+SH.swift in Sources */,
+				285D111C28993AD4001E0923 /* UIControl+SH.swift in Sources */,
 				5868BA85284EE6FE008DD9CC /* UIAlertController+SH.swift in Sources */,
 				5868BA8B284EE6FE008DD9CC /* Dictionary+SH.swift in Sources */,
 				24591D501D670B7B00B90A38 /* AppDelegate.swift in Sources */,
