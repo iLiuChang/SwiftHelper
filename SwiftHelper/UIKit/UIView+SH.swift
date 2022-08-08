@@ -70,6 +70,14 @@ public extension UIView {
         }
         return nil
     }
+    
+    func roundedCorners(_ corners: UIRectCorner, cornerRadius: CGFloat) {
+        let maskPath = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: cornerRadius, height: cornerRadius))
+        let maskLayer = CAShapeLayer()
+        maskLayer.frame = bounds
+        maskLayer.path = maskPath.cgPath
+        layer.mask = maskLayer
+    }
 }
 
 // MARK: - layer
@@ -107,7 +115,10 @@ public extension UIView {
     
     var borderColor: UIColor? {
         get {
-            return UIColor(cgColor: layer.borderColor!)
+            if let color = layer.borderColor {
+                return UIColor(cgColor: color)
+            }
+            return nil
         }
         set {
             layer.borderColor = newValue?.cgColor
