@@ -104,20 +104,17 @@ public extension String {
 
 public extension String {
     func base64Decoding() -> String? {
-        let pad = String(repeating: "=", count: count % 4)
-        let base64Padded = self + pad
-        if let decodedData = Data(base64Encoded: base64Padded, options: NSData.Base64DecodingOptions(rawValue: 0)), let decodedString = NSString(data: decodedData, encoding: String.Encoding.utf8.rawValue) {
-            return String(decodedString)
+        guard let data = Data(base64Encoded: self, options: .ignoreUnknownCharacters) else {
+            return nil
         }
-        return nil
+        return String(data: data, encoding: .utf8)
     }
     
     func base64Encoded() -> String? {
-        let plainData = (self as NSString).data(using: String.Encoding.utf8.rawValue)
-        if let base64String = plainData?.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0)) {
-            return base64String
+        guard let data = data(using: .utf8) else {
+            return nil
         }
-        return nil
+        return data.base64EncodedString()
     }
 }
 
