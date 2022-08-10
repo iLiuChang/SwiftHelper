@@ -30,7 +30,6 @@ class ViewController: UIViewController {
                 .action(title: "sure") { _ in
                     v.removeEvent(for: .touchUpInside)
                 }
-            
             self.present(alert, animated: true, completion: nil)
         }
     }
