@@ -2,7 +2,7 @@
 //  ReusableView.swift
 //  SwiftHelper (https://github.com/iLiuChang/SwiftHelper)
 //
-//  Created by 刘畅 on 2022/8/1.
+//  Created by LiuChang on 2022/8/1.
 //  Copyright © 2022 LiuChang. All rights reserved.
 //
 

@@ -2,7 +2,7 @@
 //  UIImage+SH.swift
 //  SwiftHelper (https://github.com/iLiuChang/SwiftHelper)
 //
-//  Created by 刘畅 on 16/6/30.
+//  Created by LiuChang on 16/6/30.
 //  Copyright © 2016年 LiuChang. All rights reserved.
 //
 

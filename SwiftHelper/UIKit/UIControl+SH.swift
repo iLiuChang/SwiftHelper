@@ -2,7 +2,7 @@
 //  UIControl+SH.swift
 //  SwiftHelper (https://github.com/iLiuChang/SwiftHelper)
 //
-//  Created by 刘畅 on 2022/8/2.
+//  Created by LiuChang on 2022/8/2.
 //  Copyright © 2022 LiuChang. All rights reserved.
 //
 
