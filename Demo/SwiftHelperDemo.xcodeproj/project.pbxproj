@@ -17,7 +17,6 @@
 		28F165A228A25699009BC6BB /* StringTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F165A128A25699009BC6BB /* StringTest.swift */; };
 		28F165A428A26778009BC6BB /* FileManager+SH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F165A328A26778009BC6BB /* FileManager+SH.swift */; };
 		5868BA81284EE6FE008DD9CC /* UIImage+SH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5868BA6F284EE6FE008DD9CC /* UIImage+SH.swift */; };
-		5868BA82284EE6FE008DD9CC /* UITextField+SH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5868BA70284EE6FE008DD9CC /* UITextField+SH.swift */; };
 		5868BA83284EE6FE008DD9CC /* UIButton+SH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5868BA71284EE6FE008DD9CC /* UIButton+SH.swift */; };
 		5868BA84284EE6FE008DD9CC /* UIView+SH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5868BA72284EE6FE008DD9CC /* UIView+SH.swift */; };
 		5868BA85284EE6FE008DD9CC /* UIAlertController+SH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5868BA73284EE6FE008DD9CC /* UIAlertController+SH.swift */; };
@@ -57,7 +56,6 @@
 		28F165A128A25699009BC6BB /* StringTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTest.swift; sourceTree = "<group>"; };
 		28F165A328A26778009BC6BB /* FileManager+SH.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+SH.swift"; sourceTree = "<group>"; };
 		5868BA6F284EE6FE008DD9CC /* UIImage+SH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+SH.swift"; sourceTree = "<group>"; };
-		5868BA70284EE6FE008DD9CC /* UITextField+SH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+SH.swift"; sourceTree = "<group>"; };
 		5868BA71284EE6FE008DD9CC /* UIButton+SH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+SH.swift"; sourceTree = "<group>"; };
 		5868BA72284EE6FE008DD9CC /* UIView+SH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+SH.swift"; sourceTree = "<group>"; };
 		5868BA73284EE6FE008DD9CC /* UIAlertController+SH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+SH.swift"; sourceTree = "<group>"; };
@@ -154,7 +152,6 @@
 			isa = PBXGroup;
 			children = (
 				5868BA6F284EE6FE008DD9CC /* UIImage+SH.swift */,
-				5868BA70284EE6FE008DD9CC /* UITextField+SH.swift */,
 				5868BA71284EE6FE008DD9CC /* UIButton+SH.swift */,
 				5868BA72284EE6FE008DD9CC /* UIView+SH.swift */,
 				5868BA73284EE6FE008DD9CC /* UIAlertController+SH.swift */,
@@ -293,7 +290,6 @@
 				5868BA8E284EE6FE008DD9CC /* Double+SH.swift in Sources */,
 				24591D521D670B7B00B90A38 /* ViewController.swift in Sources */,
 				28F165A428A26778009BC6BB /* FileManager+SH.swift in Sources */,
-				5868BA82284EE6FE008DD9CC /* UITextField+SH.swift in Sources */,
 				285D111C28993AD4001E0923 /* UIControl+SH.swift in Sources */,
 				5868BA85284EE6FE008DD9CC /* UIAlertController+SH.swift in Sources */,
 				5868BA8B284EE6FE008DD9CC /* Dictionary+SH.swift in Sources */,
