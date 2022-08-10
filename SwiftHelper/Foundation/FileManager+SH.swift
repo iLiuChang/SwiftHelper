@@ -46,7 +46,7 @@ public extension FileManager {
     
     /// creates a folder at the specified path. The intermediate directory will be created automatically if it does not exist.
     @discardableResult
-    static func createFolder(path: String) -> Error? {
+    static func createFolder(atPath path: String) -> Error? {
         if FileManager.default.fileExists(atPath: path) {
             return nil
         }
@@ -60,7 +60,7 @@ public extension FileManager {
     
     /// creates a file at the specified path.
     @discardableResult
-    static func createFile(path: String, data: Data? = nil) -> Bool {
+    static func createFile(atPath path: String, data: Data? = nil) -> Bool {
         if FileManager.default.fileExists(atPath: path) {
             return true
         }
