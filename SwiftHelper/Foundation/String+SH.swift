@@ -10,10 +10,10 @@ import UIKit
 
 public extension String {
     subscript (safe i: Int) -> Character? {
-        if i < 0  || i > self.count - 1 {
-            return nil
+        if (0..<count).contains(i) {
+            return self[self.index(self.startIndex, offsetBy: i)]
         }
-        return self[self.index(self.startIndex, offsetBy: i)]
+        return nil
     }
     
     subscript (safe i: Int) -> String? {
