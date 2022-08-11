@@ -17,7 +17,7 @@ public extension String {
         return String(self[i] as Character)
     }
     
-    subscript (r: Range<Int>) -> String? {
+    subscript (safe r: Range<Int>) -> String? {
         if r.lowerBound < 0 || r.upperBound > self.count {
             return nil
         }

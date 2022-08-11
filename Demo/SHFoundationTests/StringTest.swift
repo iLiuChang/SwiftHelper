@@ -25,5 +25,11 @@ class StringTest: XCTestCase {
         XCTAssert(dd == str)
     }
 
+    func testRange() throws {
+        let str = "liuchang"
+        XCTAssert(str[safe: 0..<100] == nil)
+        XCTAssert(str[safe: 0..<2]! == "li")
+
+    }
 
 }
