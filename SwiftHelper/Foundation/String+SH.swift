@@ -9,12 +9,18 @@
 import UIKit
 
 public extension String {
-    subscript (i: Int) -> Character {
+    subscript (safe i: Int) -> Character? {
+        if i < 0  || i > self.count - 1 {
+            return nil
+        }
         return self[self.index(self.startIndex, offsetBy: i)]
     }
     
-    subscript (i: Int) -> String {
-        return String(self[i] as Character)
+    subscript (safe i: Int) -> String? {
+        if let str: Character = self[safe: i] {
+            return String(str)
+        }
+        return nil
     }
     
     subscript (safe r: Range<Int>) -> String? {

@@ -32,4 +32,14 @@ class StringTest: XCTestCase {
 
     }
 
+    func testIndex() throws {
+        let str = "liuchang"
+        let str100: String? = str[safe: 100]
+        let str2: String? = str[safe: 1]
+
+        XCTAssert(str100 == nil)
+        XCTAssert(str2 == "i")
+
+    }
+
 }
