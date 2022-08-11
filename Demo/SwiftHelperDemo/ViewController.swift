@@ -13,10 +13,14 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let v = UIButton.init(frame: CGRect(x: 20, y: 100, width: 40, height: 30))
+        let v = UIButton.init()
         v.backgroundColor = UIColor.orange
         v.topBorderWidth = 2
+        v.leftBorderWidth = 2
+        v.rightBorderWidth = 2
+        v.bottomBorderWidth = 2
         self.view.addSubview(v)
+        v.frame = CGRect(x: 20, y: 100, width: 40, height: 30)
     
         v.addEvent(for: .touchUpInside) { _ in
             print("touchUpInside")

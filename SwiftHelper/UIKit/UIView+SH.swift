@@ -88,41 +88,11 @@ private var RightBorderViewKey = "SHBottomBorderViewKey"
 
 public extension UIView {
     
-    var cornerRadius: CGFloat {
-        get {
-            return layer.cornerRadius
+    private var borderColor: UIColor? {
+        if let color = layer.borderColor {
+            return UIColor(cgColor: color)
         }
-        set {
-            guard newValue >= 0 else {
-                return
-            }
-            layer.cornerRadius = newValue
-            layer.masksToBounds = newValue > 0
-        }
-    }
-    
-    var borderWidth: CGFloat {
-        get {
-            return layer.borderWidth
-        }
-        set {
-            guard newValue >= 0 else {
-                return
-            }
-            layer.borderWidth = newValue
-        }
-    }
-    
-    var borderColor: UIColor? {
-        get {
-            if let color = layer.borderColor {
-                return UIColor(cgColor: color)
-            }
-            return nil
-        }
-        set {
-            layer.borderColor = newValue?.cgColor
-        }
+        return nil
     }
     
     var leftBorderWidth: CGFloat {
@@ -138,7 +108,7 @@ public extension UIView {
             }
             let line = UIView(frame: CGRect(x: 0.0, y: 0.0, width: newValue, height: bounds.height))
             line.translatesAutoresizingMaskIntoConstraints = false
-            line.backgroundColor = UIColor(cgColor: layer.borderColor!)
+            line.backgroundColor = borderColor
             self.addSubview(line)
             leftBorderView = line
             let views = ["line": line]
@@ -217,7 +187,7 @@ public extension UIView {
         }
     }
     
-    var bottomBorderView: UIView? {
+    private(set) var bottomBorderView: UIView? {
         get {
             return objc_getAssociatedObject(self, &BottomBorderViewKey) as? UIView
         }
@@ -226,7 +196,7 @@ public extension UIView {
         }
     }
     
-    var leftBorderView: UIView? {
+    private(set) var leftBorderView: UIView? {
         get {
             return objc_getAssociatedObject(self, &LeftBorderViewKey) as? UIView
         }
@@ -235,7 +205,7 @@ public extension UIView {
         }
     }
     
-    var topBorderView: UIView? {
+    private(set) var topBorderView: UIView? {
         get {
             return objc_getAssociatedObject(self, &TopBorderViewKey) as? UIView
         }
@@ -244,7 +214,7 @@ public extension UIView {
         }
     }
     
-    var rightBorderView: UIView? {
+    private(set) var rightBorderView: UIView? {
         get {
             return objc_getAssociatedObject(self, &RightBorderViewKey) as? UIView
         }
