@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  SwiftHelperDemo
 //
-//  Created by xinma on 16/8/19.
+//  Created by SwiftHelper on 16/8/19.
 //  Copyright © 2016年 LiuChang. All rights reserved.
 //
 
