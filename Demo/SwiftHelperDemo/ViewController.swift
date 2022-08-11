@@ -29,12 +29,12 @@ class ViewController: UIViewController {
             print("touchDown")
         }
         2.delay {
-            let alert = UIAlertController(title: "remove event", message: nil, preferredStyle: UIAlertController.Style.alert)
+            UIAlertController(title: "remove event", message: nil, preferredStyle: UIAlertController.Style.alert)
                 .action(title: "cancel")
                 .action(title: "sure") { _ in
                     v.removeEvent(for: .touchUpInside)
                 }
-            self.present(alert, animated: true, completion: nil)
+                .show(in: self)
         }
     }
     

@@ -16,5 +16,9 @@ public extension UIAlertController {
         return self
     }
     
+    func show(in vc: UIViewController, animated: Bool = true) {
+        vc.present(self, animated: animated, completion: nil)
+    }
+    
 }
 
