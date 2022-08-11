@@ -48,17 +48,7 @@ public extension String {
     func contains(of str: String) -> Bool {
         return self.contains(of: str, options: .caseInsensitive)
     }
-    
-    func containsEmoji() -> Bool {
-        for i in 0...count {
-            let c: unichar = (self as NSString).character(at: i)
-            if (0xD800 <= c && c <= 0xDBFF) || (0xDC00 <= c && c <= 0xDFFF) {
-                return true
-            }
-        }
-        return false
-    }
-    
+        
     /// Remove whitespaces and newlines
     mutating func trim() {
         self = self.trim()
