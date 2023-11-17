@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "SwiftHelper"
-  s.version      = "3.1.0"
+  s.version      = "4.0.0"
   s.summary      = "Some extensions in Swift."
   s.homepage     = "https://github.com/iLiuChang/SwiftHelper"
   s.license      = "MIT"
@@ -11,9 +11,9 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.swift_version = "4.0"
   s.subspec "Foundation" do |ss|
-    ss.source_files = "SwiftHelper/Foundation/*.{swift}"
+    ss.source_files = "SwiftHelper/Foundation/*.{swift}", "SwiftHelper/SwiftHelper.swift"
   end
   s.subspec "UIKit" do |ss|
-    ss.source_files = "SwiftHelper/UIKit/*.{swift}"
+    ss.source_files = "SwiftHelper/UIKit/*.{swift}", "SwiftHelper/SwiftHelper.swift"
   end
 end

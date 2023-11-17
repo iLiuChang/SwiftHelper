@@ -32,34 +32,12 @@ public extension Array {
         }
     }
     
-    func union(_ values: [Element]...) -> Array {
-        var result = self
-        for array in values {
-            for value in array {
-                result.append(value)
-            }
-        }
-        return result
-    }
-    
     func random() -> Element? {
         guard count > 0 else { return nil }
         let index = Int(arc4random_uniform(UInt32(count)))
         return self[index]
     }
     
-    func forEachEnumerated(_ body: @escaping (_ index: Int, _ value: Element) -> Void) {
-        enumerated().forEach(body)
-    }
-    
-    func jsonString() -> String? {
-        return JSONSerialization.jsonString(from: self)
-    }
-    
-    static func json(from jsonString: String) -> Array? {
-        guard let data = JSONSerialization.jsonObject(from: jsonString) as? Array else { return nil }
-        return data
-    }
 }
 
 public extension Array where Element: Equatable {
@@ -99,11 +77,13 @@ public extension Array where Element: Hashable {
     }
 }
 
-public extension Array where Element: NSObject {
-    func clone() -> Array {
-        var objects = Array<Element>()
-        for element in self {
-            objects.append(element.copy() as! Element)
+extension Array: SwiftHelperCompatibleValue {}
+
+public extension SwiftHelperWrapper where Base == Array<NSObject> {
+    func clone() -> Base {
+        var objects = Base()
+        for element in base {
+            objects.append(element.copy() as! NSObject)
         }
         return objects
     }

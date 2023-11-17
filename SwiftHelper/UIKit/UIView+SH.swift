@@ -8,60 +8,61 @@
 
 import UIKit
 
-public extension UIView {
-    
+extension UIView: SwiftHelperCompatible { }
+
+public extension SwiftHelperWrapper where Base: UIView {
     var width: CGFloat {
-        get { return self.frame.size.width }
-        set { self.frame.size.width = newValue }
+        get { return base.frame.size.width }
+        set { base.frame.size.width = newValue }
     }
     
     var height: CGFloat {
-        get { return self.frame.size.height }
-        set { self.frame.size.height = newValue }
+        get { return base.frame.size.height }
+        set { base.frame.size.height = newValue }
     }
     
     var top: CGFloat {
-        get { return self.frame.origin.y }
-        set { self.frame.origin.y = newValue }
+        get { return base.frame.origin.y }
+        set { base.frame.origin.y = newValue }
     }
     
     var right: CGFloat {
-        get { return self.frame.maxX }
-        set { self.frame.origin.x = newValue - self.width }
+        get { return base.frame.maxX }
+        set { base.frame.origin.x = newValue - self.width }
     }
     
     var bottom: CGFloat {
-        get { return self.frame.maxY }
-        set { self.frame.origin.y = newValue - self.height }
+        get { return base.frame.maxY }
+        set { base.frame.origin.y = newValue - self.height }
     }
     
     var left: CGFloat {
-        get { return self.frame.origin.x }
-        set { self.frame.origin.x = newValue }
+        get { return base.frame.origin.x }
+        set { base.frame.origin.x = newValue }
     }
     
     var centerX: CGFloat {
-        get { return self.center.x }
-        set { self.center = CGPoint(x: newValue,y: self.centerY) }
+        get { return base.center.x }
+        set { base.center = CGPoint(x: newValue,y: self.centerY) }
     }
     
     var centerY: CGFloat {
-        get { return self.center.y }
-        set { self.center = CGPoint(x: self.centerX,y: newValue) }
+        get { return base.center.y }
+        set { base.center = CGPoint(x: self.centerX,y: newValue) }
     }
     
     var origin: CGPoint {
-        set { self.frame.origin = newValue }
-        get { return self.frame.origin }
+        set { base.frame.origin = newValue }
+        get { return base.frame.origin }
     }
     
     var size: CGSize {
-        set { self.frame.size = newValue }
-        get { return self.frame.size }
+        set { base.frame.size = newValue }
+        get { return base.frame.size }
     }
     
     var viewController: UIViewController? {
-        var parentResponder: UIResponder? = self
+        var parentResponder: UIResponder? = base
         while let responder = parentResponder {
             parentResponder = responder.next
             if let vc = parentResponder as? UIViewController {
@@ -72,24 +73,24 @@ public extension UIView {
     }
     
     func roundedCorners(_ corners: UIRectCorner, cornerRadius: CGFloat) {
-        let maskPath = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: cornerRadius, height: cornerRadius))
+        let maskPath = UIBezierPath(roundedRect: base.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: cornerRadius, height: cornerRadius))
         let maskLayer = CAShapeLayer()
-        maskLayer.frame = bounds
+        maskLayer.frame = base.bounds
         maskLayer.path = maskPath.cgPath
-        layer.mask = maskLayer
+        base.layer.mask = maskLayer
     }
 }
 
 // MARK: - layer
-private var BottomBorderViewKey = "SHBottomBorderViewKey"
-private var LeftBorderViewKey = "SHLeftBorderViewKey"
-private var TopBorderViewKey = "SHTopBorderViewKey"
-private var RightBorderViewKey = "SHBottomBorderViewKey"
+private var BottomBorderViewKey: Void?
+private var LeftBorderViewKey: Void?
+private var TopBorderViewKey: Void?
+private var RightBorderViewKey: Void?
 
-public extension UIView {
-    
+public extension SwiftHelperWrapper where Base: UIView {
+
     private var borderColor: UIColor? {
-        if let color = layer.borderColor {
+        if let color = base.layer.borderColor {
             return UIColor(cgColor: color)
         }
         return nil
@@ -98,7 +99,7 @@ public extension UIView {
     var leftBorderWidth: CGFloat {
         get {
             if let view = leftBorderView {
-                return view.height
+                return view.frame.height
             }
             return 0.0
         }
@@ -106,22 +107,22 @@ public extension UIView {
             guard newValue >= 0 else {
                 return
             }
-            let line = UIView(frame: CGRect(x: 0.0, y: 0.0, width: newValue, height: bounds.height))
+            let line = UIView(frame: CGRect(x: 0.0, y: 0.0, width: newValue, height: base.bounds.height))
             line.translatesAutoresizingMaskIntoConstraints = false
             line.backgroundColor = borderColor
-            self.addSubview(line)
+            base.addSubview(line)
             leftBorderView = line
             let views = ["line": line]
             let metrics = ["lineWidth": newValue]
-            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|[line(==lineWidth)]", options: [], metrics: metrics, views: views))
-            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[line]|", options: [], metrics: nil, views: views))
+            base.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|[line(==lineWidth)]", options: [], metrics: metrics, views: views))
+            base.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[line]|", options: [], metrics: nil, views: views))
         }
     }
     
     var topBorderWidth: CGFloat {
         get {
             if let view = topBorderView {
-                return view.height
+                return view.frame.height
             }
             return 0.0
         }
@@ -129,22 +130,22 @@ public extension UIView {
             guard newValue >= 0 else {
                 return
             }
-            let line = UIView(frame: CGRect(x: 0.0, y: 0.0, width: bounds.width, height: newValue))
+            let line = UIView(frame: CGRect(x: 0.0, y: 0.0, width: base.bounds.width, height: newValue))
             line.translatesAutoresizingMaskIntoConstraints = false
-            line.backgroundColor = borderColor
-            self.addSubview(line)
+            line.backgroundColor = self.borderColor
+            base.addSubview(line)
             topBorderView = line
             let views = ["line": line]
             let metrics = ["lineWidth": newValue]
-            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|[line]|", options: [], metrics: nil, views: views))
-            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[line(==lineWidth)]", options: [], metrics: metrics, views: views))
+            base.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|[line]|", options: [], metrics: nil, views: views))
+            base.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[line(==lineWidth)]", options: [], metrics: metrics, views: views))
         }
     }
     
     var rightBorderWidth: CGFloat {
         get {
             if let view = rightBorderView {
-                return view.height
+                return view.frame.height
             }
             return 0.0
         }
@@ -152,22 +153,22 @@ public extension UIView {
             guard newValue >= 0 else {
                 return
             }
-            let line = UIView(frame: CGRect(x: bounds.width, y: 0.0, width: newValue, height: bounds.height))
+            let line = UIView(frame: CGRect(x: base.bounds.width, y: 0.0, width: newValue, height: base.bounds.height))
             line.translatesAutoresizingMaskIntoConstraints = false
             line.backgroundColor = borderColor
-            self.addSubview(line)
+            base.addSubview(line)
             rightBorderView = line
             let views = ["line": line]
             let metrics = ["lineWidth": newValue]
-            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "[line(==lineWidth)]|", options: [], metrics: metrics, views: views))
-            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[line]|", options: [], metrics: nil, views: views))
+            base.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "[line(==lineWidth)]|", options: [], metrics: metrics, views: views))
+            base.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[line]|", options: [], metrics: nil, views: views))
         }
     }
     
     var bottomBorderWidth: CGFloat {
         get {
             if let view = bottomBorderView {
-                return view.height
+                return view.frame.height
             }
             return 0.0
         }
@@ -175,51 +176,51 @@ public extension UIView {
             guard newValue >= 0 else {
                 return
             }
-            let line = UIView(frame: CGRect(x: 0.0, y: bounds.height, width: bounds.width, height: newValue))
+            let line = UIView(frame: CGRect(x: 0.0, y: base.bounds.height, width: base.bounds.width, height: newValue))
             line.translatesAutoresizingMaskIntoConstraints = false
             line.backgroundColor = borderColor
-            self.addSubview(line)
+            base.addSubview(line)
             bottomBorderView = line
             let views = ["line": line]
             let metrics = ["lineWidth": newValue]
-            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|[line]|", options: [], metrics: nil, views: views))
-            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[line(==lineWidth)]|", options: [], metrics: metrics, views: views))
+            base.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|[line]|", options: [], metrics: nil, views: views))
+            base.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[line(==lineWidth)]|", options: [], metrics: metrics, views: views))
         }
     }
     
     private(set) var bottomBorderView: UIView? {
         get {
-            return objc_getAssociatedObject(self, &BottomBorderViewKey) as? UIView
+            return objc_getAssociatedObject(base, &BottomBorderViewKey) as? UIView
         }
         set {
-            objc_setAssociatedObject(self, &BottomBorderViewKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(base, &BottomBorderViewKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     
     private(set) var leftBorderView: UIView? {
         get {
-            return objc_getAssociatedObject(self, &LeftBorderViewKey) as? UIView
+            return objc_getAssociatedObject(base, &LeftBorderViewKey) as? UIView
         }
         set {
-            objc_setAssociatedObject(self, &LeftBorderViewKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(base, &LeftBorderViewKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     
     private(set) var topBorderView: UIView? {
         get {
-            return objc_getAssociatedObject(self, &TopBorderViewKey) as? UIView
+            return objc_getAssociatedObject(base, &TopBorderViewKey) as? UIView
         }
         set {
-            objc_setAssociatedObject(self, &TopBorderViewKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(base, &TopBorderViewKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     
     private(set) var rightBorderView: UIView? {
         get {
-            return objc_getAssociatedObject(self, &RightBorderViewKey) as? UIView
+            return objc_getAssociatedObject(base, &RightBorderViewKey) as? UIView
         }
         set {
-            objc_setAssociatedObject(self, &RightBorderViewKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(base, &RightBorderViewKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     

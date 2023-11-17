@@ -9,23 +9,26 @@
 import Foundation
 
 public extension JSONSerialization {
-    class func jsonObject(from jsonString: String) -> Any? {
-        if let data = (try? JSONSerialization.jsonObject(
-            with: jsonString.data(using: String.Encoding.utf8,
-            allowLossyConversion: true)!,
-            options: JSONSerialization.ReadingOptions.mutableContainers)) {
-            return data
+    struct SH {
+        public static func jsonObject(from jsonString: String) -> Any? {
+            if let data = (try? JSONSerialization.jsonObject(
+                with: jsonString.data(using: String.Encoding.utf8,
+                allowLossyConversion: true)!,
+                options: JSONSerialization.ReadingOptions.mutableContainers)) {
+                return data
+            }
+            else {
+                return nil
+            }
         }
-        else {
+        
+        public static func jsonString(from obj: Any) -> String? {
+            if let jsonData = try? JSONSerialization.data(withJSONObject: obj, options: JSONSerialization.WritingOptions()) {
+                let jsonStr = String(data: jsonData, encoding: String.Encoding(rawValue: String.Encoding.utf8.rawValue))
+                return jsonStr
+            }
             return nil
         }
     }
-    
-    class func jsonString(from obj: Any) -> String? {
-        if let jsonData = try? JSONSerialization.data(withJSONObject: obj, options: JSONSerialization.WritingOptions()) {
-            let jsonStr = String(data: jsonData, encoding: String.Encoding(rawValue: String.Encoding.utf8.rawValue))
-            return jsonStr
-        }
-        return nil
-    }
+   
 }

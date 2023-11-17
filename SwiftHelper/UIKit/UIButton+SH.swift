@@ -13,11 +13,11 @@ public enum UIButtonEdgeInsetsStyle: Int {
     case top, bottom, left, right
 }
 
-public extension UIButton {
+public extension SwiftHelperWrapper where Base: UIButton {
 
     func setEdgeInsetsStyle(_ style: UIButtonEdgeInsetsStyle, imageTitleSpace space:CGFloat) {
-        guard let titleLabel = self.titleLabel else { return }
-        guard let imageView = self.imageView else { return }
+        guard let titleLabel = base.titleLabel else { return }
+        guard let imageView = base.imageView else { return }
         let imageWidth = imageView.frame.size.width
         let imageHeight = imageView.frame.size.height
         let labelWidth = titleLabel.intrinsicContentSize.width
@@ -44,8 +44,8 @@ public extension UIButton {
             break
         }
         
-        self.titleEdgeInsets = labelEdgeInsets
-        self.imageEdgeInsets = imageEdgeInsets
+        base.titleEdgeInsets = labelEdgeInsets
+        base.imageEdgeInsets = imageEdgeInsets
     }
    
 }

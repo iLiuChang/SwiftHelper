@@ -8,10 +8,12 @@
 
 import UIKit
 
-public extension String {
+extension String: SwiftHelperCompatibleValue {}
+public extension SwiftHelperWrapper where Base == String {
+    
     subscript (safe i: Int) -> Character? {
-        if (0..<count).contains(i) {
-            return self[self.index(self.startIndex, offsetBy: i)]
+        if (0..<base.count).contains(i) {
+            return base[base.index(base.startIndex, offsetBy: i)]
         }
         return nil
     }
@@ -24,64 +26,59 @@ public extension String {
     }
     
     subscript (safe r: Range<Int>) -> String? {
-        if r.lowerBound < 0 || r.upperBound > self.count {
+        if r.lowerBound < 0 || r.upperBound > base.count {
             return nil
         }
         
-        let substring = self[index(startIndex, offsetBy: r.lowerBound)..<index(startIndex, offsetBy: r.upperBound)]
+        let substring = base[base.index(base.startIndex, offsetBy: r.lowerBound)..<base.index(base.startIndex, offsetBy: r.upperBound)]
         return String(substring)
     }
 
     var isNumber: Bool {
-        if NumberFormatter().number(from: self) != nil {
+        if NumberFormatter().number(from: base) != nil {
             return true
         }
         return false
     }
     
-    mutating func removeLastCharacter() {
-        guard self.count > 0 else {
-            return
+    func removeLastCharacter() -> String {
+        guard base.count > 0 else {
+            return base
         }
-        let range = self.index(self.endIndex, offsetBy: -1) ..< self.endIndex
-        self = self.replacingCharacters(in: range, with: "")
+        let range = base.index(base.endIndex, offsetBy: -1) ..< base.endIndex
+        return base.replacingCharacters(in: range, with: "")
     }
     
-    func contains(of str: String, options: NSString.CompareOptions) -> Bool {
-        return self.range(of: str, options: options) != nil
+    func contains(of str: String, options: String.CompareOptions) -> Bool {
+        return base.range(of: str, options: options) != nil
     }
     
     func contains(of str: String) -> Bool {
         return self.contains(of: str, options: .caseInsensitive)
     }
-        
-    /// Remove whitespaces and newlines
-    mutating func trim() {
-        self = self.trim()
-    }
-    
+            
     /// Remove whitespaces and newlines
     func trim() -> String {
-        return self.trimmingCharacters(in: .whitespacesAndNewlines)
+        return base.trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
     /// Separation (remove whitespaces and newlines)
     func split(separator: String) -> [String] {
-        return self.components(separatedBy: separator).filter {
-            !$0.trim().isEmpty
+        return base.components(separatedBy: separator).filter {
+            !$0.sh.trim().isEmpty
         }
     }
     
     /// Separation (remove whitespaces and newlines)
     func split(characters: CharacterSet) -> [String] {
-        return self.components(separatedBy: characters).filter {
-            !$0.trim().isEmpty
+        return base.components(separatedBy: characters).filter {
+            !$0.sh.trim().isEmpty
         }
     }
     
     /// Get text displayable size
     func size(for font: UIFont, size: CGSize) -> CGSize {
-        let boundingBox = self.boundingRect(with: size, options: [.usesLineFragmentOrigin,.usesFontLeading], attributes: [NSAttributedString.Key.font: font], context: nil)
+        let boundingBox = base.boundingRect(with: size, options: [.usesLineFragmentOrigin,.usesFontLeading], attributes: [NSAttributedString.Key.font: font], context: nil)
         return CGSize(width: boundingBox.width, height: boundingBox.height)
     }
     
@@ -98,16 +95,16 @@ public extension String {
     }
 }
 
-public extension String {
+public extension SwiftHelperWrapper where Base == String {
     func base64Decoding() -> String? {
-        guard let data = Data(base64Encoded: self, options: .ignoreUnknownCharacters) else {
+        guard let data = Data(base64Encoded: base, options: .ignoreUnknownCharacters) else {
             return nil
         }
         return String(data: data, encoding: .utf8)
     }
     
     func base64Encoded() -> String? {
-        guard let data = data(using: .utf8) else {
+        guard let data = base.data(using: .utf8) else {
             return nil
         }
         return data.base64EncodedString()

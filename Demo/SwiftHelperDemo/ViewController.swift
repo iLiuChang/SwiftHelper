@@ -15,27 +15,20 @@ class ViewController: UIViewController {
 
         let v = UIButton.init()
         v.backgroundColor = UIColor.orange
-        v.topBorderWidth = 2
-        v.leftBorderWidth = 2
-        v.rightBorderWidth = 2
-        v.bottomBorderWidth = 2
+        v.sh.topBorderWidth = 2
+        v.sh.leftBorderWidth = 2
+        v.sh.rightBorderWidth = 2
+        v.sh.bottomBorderWidth = 2
         self.view.addSubview(v)
         v.frame = CGRect(x: 20, y: 100, width: 40, height: 30)
     
-        v.addEvent(for: .touchUpInside) { _ in
+        v.sh.addEvent(for: .touchUpInside) { _ in
             print("touchUpInside")
         }
-        v.addEvent(for: .touchDown) { _ in
+        v.sh.addEvent(for: .touchDown) { _ in
             print("touchDown")
         }
-        2.delay {
-            UIAlertController(title: "remove event", message: nil, preferredStyle: UIAlertController.Style.alert)
-                .action(title: "cancel")
-                .action(title: "sure") { _ in
-                    v.removeEvent(for: .touchUpInside)
-                }
-                .show(in: self)
-        }
+          
     }
     
     @objc func didSelectButton() {

@@ -52,10 +52,10 @@ public extension UIColor {
         self.init(red:red, green:green, blue:blue, alpha:alpha)
     }
     
-    convenience init(rgbValue: UInt32) {
+    convenience init(rgbValue: UInt32, alpha: CGFloat = 1.0) {
         let red = CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0
         let green = CGFloat((rgbValue & 0xFF00) >> 8) / 255.0
         let blue = CGFloat(rgbValue & 0xFF) / 255.0
-        self.init(red:red, green:green, blue:blue, alpha:1.0)
+        self.init(red:red, green:green, blue:blue, alpha:alpha)
     }
 }
